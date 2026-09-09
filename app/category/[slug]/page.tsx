@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getCategoryBySlug, getArticlesByCategory } from '@/lib/db';
+import JsonLd from '@/components/JsonLd';
 
 interface PageProps {
   params: Promise<{
@@ -16,13 +17,20 @@ export async function generateMetadata({ params }: PageProps) {
   const category = getCategoryBySlug(slug);
   if (!category) return {};
 
-  const title = `${category.name} News`;
-  const description = `Latest news, analysis and reports in ${category.name}.`;
+  const title = `${category.name} News & Analysis`;
+  const description = `Latest ${category.name.toLowerCase()} news, market insights, expert financial analysis, and investigative reports on Financial Journal.`;
   const url = `${SITE_URL}/category/${category.slug}`;
 
   return {
     title,
     description,
+    keywords: [
+      `${category.name} news`,
+      `${category.name} market analysis`,
+      'business news',
+      'Financial Journal',
+      category.name,
+    ],
     alternates: { canonical: url },
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
@@ -30,11 +38,22 @@ export async function generateMetadata({ params }: PageProps) {
       url,
       siteName: SITE_NAME,
       type: 'website',
+      images: [
+        {
+          url: `${SITE_URL}/images/img-home.webp`,
+          width: 1200,
+          height: 630,
+          alt: `${category.name} News - ${SITE_NAME}`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${title} | ${SITE_NAME}`,
       description,
+      images: [`${SITE_URL}/images/img-home.webp`],
+      creator: '@Finjournal24',
+      site: '@Finjournal24',
     },
   };
 }
@@ -51,8 +70,56 @@ export default async function CategoryPage({ params }: PageProps) {
   const heroArticle = articles[0];
   const listArticles = articles.slice(1);
 
+  const categoryUrl = `${SITE_URL}/category/${category.slug}`;
+
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${category.name} News - ${SITE_NAME}`,
+    description: `Latest ${category.name.toLowerCase()} news, market insights, and reports on Financial Journal.`,
+    url: categoryUrl,
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/img-home.webp`,
+      },
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: articles.slice(0, 15).map((art, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: `${SITE_URL}/${art.categorySlug}/${art.slug}`,
+        name: art.title,
+      })),
+    },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: category.name,
+        item: categoryUrl,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <JsonLd data={[collectionSchema, breadcrumbSchema]} />
       <div className="mt-6">
         
         {/* Breadcrumb */}

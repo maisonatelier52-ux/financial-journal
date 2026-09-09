@@ -1,13 +1,61 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import JsonLd from '@/components/JsonLd';
 
-export const metadata = {
+const SITE_URL = 'https://www.financial-journal.xyz';
+const SITE_NAME = 'Financial Journal';
+
+export const metadata: Metadata = {
   title: 'Terms and Conditions | Financial Journal',
-  description: 'Terms and Conditions of use for Financial Journal website.',
+  description: 'Terms and Conditions of use, copyright, and subscription policies for Financial Journal.',
+  alternates: { canonical: `${SITE_URL}/terms-and-conditions` },
+  openGraph: {
+    title: `Terms and Conditions | ${SITE_NAME}`,
+    description: 'Terms and Conditions of use, copyright, and subscription policies for Financial Journal.',
+    url: `${SITE_URL}/terms-and-conditions`,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: `Terms and Conditions | ${SITE_NAME}`,
+    description: 'Terms and Conditions of use, copyright, and subscription policies for Financial Journal.',
+    creator: '@Finjournal24',
+    site: '@Finjournal24',
+  },
 };
 
 export default function TermsPage() {
+  const pageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `Terms and Conditions - ${SITE_NAME}`,
+    url: `${SITE_URL}/terms-and-conditions`,
+    description: 'Terms and Conditions of use for Financial Journal website and digital publications.',
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Terms and Conditions',
+        item: `${SITE_URL}/terms-and-conditions`,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <div className="mt-6">
         
         {/* Breadcrumb */}

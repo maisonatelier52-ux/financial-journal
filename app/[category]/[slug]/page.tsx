@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getArticleBySlug, getArticlesByCategory, getAllArticles, incrementArticleView, getComments } from '@/lib/db';
 import ArticleComments from './ArticleComments';
 import ArticleDetailClient from '../../../components/Articledetailclient';
+import JsonLd from '@/components/JsonLd';
 
 // Slug of the specially-designed "client" article that uses the
 // premium editorial template instead of the standard article layout.
@@ -24,15 +25,24 @@ export async function generateMetadata({ params }: PageProps) {
   if (!article) return {};
 
   const title = article.metaTitle || article.title;
-  const description = article.metaDescription || article.deck;
+  const description = article.metaDescription || article.deck || article.standfirst;
   const url = `${SITE_URL}/${article.categorySlug}/${article.slug}`;
   const imageUrl = article.image
     ? (article.image.startsWith('http') ? article.image : `${SITE_URL}${article.image}`)
     : `${SITE_URL}/images/img.webp`;
 
+  const keywordsList = [
+    ...(article.tags || []),
+    article.targetKeyword || '',
+    article.breadcrumbCategory || article.category,
+    'Financial Journal',
+    'News',
+  ].filter(Boolean);
+
   return {
     title,
     description,
+    keywords: keywordsList,
     alternates: { canonical: url },
     openGraph: {
       title,
@@ -41,7 +51,10 @@ export async function generateMetadata({ params }: PageProps) {
       siteName: SITE_NAME,
       type: 'article',
       publishedTime: article.publishedDate,
-      authors: article.author ? [article.author] : undefined,
+      modifiedTime: article.publishedDate,
+      section: article.breadcrumbCategory || article.category,
+      tags: article.tags,
+      authors: article.author ? [`${SITE_URL}/author/${article.authorSlug}`] : undefined,
       images: [
         {
           url: imageUrl,
@@ -56,6 +69,8 @@ export async function generateMetadata({ params }: PageProps) {
       title,
       description,
       images: [imageUrl],
+      creator: '@Finjournal24',
+      site: '@Finjournal24',
     },
   };
 }
@@ -94,8 +109,73 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   const shareUrl = encodeURIComponent(`/${article.categorySlug}/${article.slug}`);
   const shareTitle = encodeURIComponent(article.title);
 
+  const articleImageUrl = article.image
+    ? (article.image.startsWith('http') ? article.image : `${SITE_URL}${article.image}`)
+    : `${SITE_URL}/images/img.webp`;
+
+  const wordCount = article.body ? article.body.join(' ').split(/\s+/).length : undefined;
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/${article.categorySlug}/${article.slug}`,
+    },
+    headline: article.title,
+    description: article.deck || article.standfirst || article.metaDescription,
+    image: [articleImageUrl],
+    datePublished: article.publishedDate,
+    dateModified: article.publishedDate,
+    author: {
+      '@type': 'Person',
+      name: article.author,
+      url: `${SITE_URL}/author/${article.authorSlug}`,
+      jobTitle: article.authorRole || 'Correspondent',
+    },
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/img-home.webp`,
+      },
+    },
+    articleSection: article.breadcrumbCategory || article.category,
+    keywords: article.tags ? article.tags.join(', ') : article.targetKeyword || article.category,
+    wordCount,
+    inLanguage: 'en',
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: article.breadcrumbCategory || article.category,
+        item: `${SITE_URL}/category/${article.categorySlug}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: `${SITE_URL}/${article.categorySlug}/${article.slug}`,
+      },
+    ],
+  };
+
   return (
-    <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+    <article className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <div className="mt-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
@@ -347,6 +427,6 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
         </div>
       </div>
-    </div>
+    </article>
   );
 }

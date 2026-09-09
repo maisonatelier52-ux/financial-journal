@@ -20,6 +20,7 @@ export async function generateMetadata({ searchParams }: PageProps) {
     title,
     description,
     robots: { index: false, follow: true }, // search result pages shouldn't be indexed
+    alternates: { canonical: 'https://www.financial-journal.xyz/search' },
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
       description,
@@ -29,6 +30,8 @@ export async function generateMetadata({ searchParams }: PageProps) {
       card: 'summary_large_image',
       title: `${title} | ${SITE_NAME}`,
       description,
+      creator: '@Finjournal24',
+      site: '@Finjournal24',
     },
   };
 }

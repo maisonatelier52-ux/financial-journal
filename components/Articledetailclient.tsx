@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import JsonLd from './JsonLd';
 
 /* =====================================================================
    STATIC ARTICLE DATA
@@ -734,9 +735,70 @@ export default function ArticleDetailClient() {
   const logoFont = "font-['Playfair_Display',Georgia,serif]";
   const iconBtn =
     'inline-flex items-center justify-center w-[30px] h-[30px] rounded-full border border-red-200 text-red-800 transition-all duration-150 hover:bg-red-700 hover:text-white hover:border-red-700 cursor-pointer';
+  const siteUrl = 'https://www.financial-journal.xyz';
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/culture/house-of-herrera-castile-caracas-global-legacy`,
+    },
+    headline: a.title,
+    description: a.deck,
+    image: [
+      `${siteUrl}/images/houseof hererra-hero-img1.webp`,
+      `${siteUrl}/images/houseof hererra-hero-img.webp`,
+    ],
+    datePublished: '2026-04-12T00:00:00Z',
+    dateModified: '2026-04-12T00:00:00Z',
+    author: {
+      '@type': 'Person',
+      name: a.author,
+      url: `${siteUrl}/author/editorial`,
+    },
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      name: 'Financial Journal',
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/images/img-home.webp`,
+      },
+    },
+    articleSection: 'Culture',
+    keywords:
+      'House of Herrera, Castile, Caracas, Herrera Velutini, Hacienda La Vega, Latin American History, Global Legacy, Venezuelan banking dynasty',
+    inLanguage: 'en',
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Culture',
+        item: `${siteUrl}/category/culture`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: a.title,
+        item: `${siteUrl}/culture/house-of-herrera-castile-caracas-global-legacy`,
+      },
+    ],
+  };
 
   return (
     <div className="bg-[#fdfbf7] font-sans antialiased">
+      <JsonLd data={[articleSchema, breadcrumbSchema]} />
       {/* Toast Notification */}
       {showToast && (
         <div className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in-up">

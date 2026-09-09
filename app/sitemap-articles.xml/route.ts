@@ -5,20 +5,23 @@ export async function GET() {
   const baseUrl = 'https://www.financial-journal.xyz';
   const articles = getAllArticles();
 
-  const urls = articles.map(art => `
-  <url>
+  const urls = articles.map(art => `  <url>
     <loc>${baseUrl}/${art.categorySlug}/${art.slug}</loc>
     <lastmod>${new Date(art.publishedDate || Date.now()).toISOString()}</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>`).join('');
+    <priority>0.9</priority>
+  </url>`).join('\n');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${urls}
+${urls}
 </urlset>`;
 
   return new NextResponse(xml, {
-    headers: { 'Content-Type': 'application/xml' },
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+    },
   });
 }
+

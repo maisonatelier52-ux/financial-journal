@@ -1,13 +1,61 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import JsonLd from '@/components/JsonLd';
 
-export const metadata = {
+const SITE_URL = 'https://www.financial-journal.xyz';
+const SITE_NAME = 'Financial Journal';
+
+export const metadata: Metadata = {
   title: 'Privacy Policy | Financial Journal',
-  description: 'Privacy Policy and data protection guidelines for Financial Journal.',
+  description: 'Privacy Policy and data protection guidelines for Financial Journal readers and subscribers.',
+  alternates: { canonical: `${SITE_URL}/privacy-policy` },
+  openGraph: {
+    title: `Privacy Policy | ${SITE_NAME}`,
+    description: 'Privacy Policy and data protection guidelines for Financial Journal readers and subscribers.',
+    url: `${SITE_URL}/privacy-policy`,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: `Privacy Policy | ${SITE_NAME}`,
+    description: 'Privacy Policy and data protection guidelines for Financial Journal readers and subscribers.',
+    creator: '@Finjournal24',
+    site: '@Finjournal24',
+  },
 };
 
 export default function PrivacyPolicyPage() {
+  const pageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `Privacy Policy - ${SITE_NAME}`,
+    url: `${SITE_URL}/privacy-policy`,
+    description: 'Privacy Policy and data protection guidelines for Financial Journal.',
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Privacy Policy',
+        item: `${SITE_URL}/privacy-policy`,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <div className="mt-6">
         
         {/* Breadcrumb */}

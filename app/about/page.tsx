@@ -1,13 +1,83 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import JsonLd from '@/components/JsonLd';
 
-export const metadata = {
-  title: 'About Us | Financial Journal',
-  description: 'Learn about Financial Journal, our history, mission, and editorial independence.',
+const SITE_URL = 'https://www.financial-journal.xyz';
+const SITE_NAME = 'Financial Journal';
+
+export const metadata: Metadata = {
+  title: 'About Financial Journal | Mission & Editorial Independence',
+  description:
+    'Learn about Financial Journal, our newsroom mission, journalistic ethics, global correspondents, and editorial independence.',
+  alternates: { canonical: `${SITE_URL}/about` },
+  openGraph: {
+    title: `About Us | ${SITE_NAME}`,
+    description:
+      'Learn about Financial Journal, our newsroom mission, journalistic ethics, global correspondents, and editorial independence.',
+    url: `${SITE_URL}/about`,
+    siteName: SITE_NAME,
+    type: 'website',
+    images: [
+      {
+        url: `${SITE_URL}/images/img-home.webp`,
+        width: 1200,
+        height: 630,
+        alt: `About ${SITE_NAME}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `About Us | ${SITE_NAME}`,
+    description:
+      'Learn about Financial Journal, our newsroom mission, journalistic ethics, global correspondents, and editorial independence.',
+    images: [`${SITE_URL}/images/img-home.webp`],
+    creator: '@Finjournal24',
+    site: '@Finjournal24',
+  },
 };
 
 export default function AboutPage() {
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: `About ${SITE_NAME}`,
+    url: `${SITE_URL}/about`,
+    description:
+      'Financial Journal is an independent news publication delivering rigorous analysis on global economics, markets, politics, and technology.',
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/img-home.webp`,
+      },
+    },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About Us',
+        item: `${SITE_URL}/about`,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <JsonLd data={[aboutSchema, breadcrumbSchema]} />
       <div className="mt-6">
         
         {/* Breadcrumb */}

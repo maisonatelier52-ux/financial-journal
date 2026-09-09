@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAuthorBySlug, getArticlesByAuthor, getAllAuthors, getAllArticles } from '@/lib/db';
+import JsonLd from '@/components/JsonLd';
 
 interface PageProps {
   params: Promise<{
@@ -16,13 +17,17 @@ export async function generateMetadata({ params }: PageProps) {
   const author = getAuthorBySlug(slug);
   if (!author) return {};
 
-  const title = `${author.name} - Author Profile`;
-  const description = `Articles and reporting by ${author.name}, ${author.role}.`;
+  const title = `${author.name} — ${author.role} at Financial Journal`;
+  const description = `Read news articles, investigative reporting, and market analysis by ${author.name}, ${author.role} at Financial Journal.`;
   const url = `${SITE_URL}/author/${author.slug}`;
+  const avatarUrl = author.avatar
+    ? (author.avatar.startsWith('http') ? author.avatar : `${SITE_URL}${author.avatar}`)
+    : `${SITE_URL}/images/author.webp`;
 
   return {
     title,
     description,
+    keywords: [author.name, author.role, 'Financial Journal journalist', 'business reporting'],
     alternates: { canonical: url },
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
@@ -30,13 +35,15 @@ export async function generateMetadata({ params }: PageProps) {
       url,
       siteName: SITE_NAME,
       type: 'profile',
-      images: author.avatar ? [{ url: author.avatar, alt: author.name }] : undefined,
+      images: [{ url: avatarUrl, width: 400, height: 400, alt: author.name }],
     },
     twitter: {
       card: 'summary',
       title: `${title} | ${SITE_NAME}`,
       description,
-      images: author.avatar ? [author.avatar] : undefined,
+      images: [avatarUrl],
+      creator: '@Finjournal24',
+      site: '@Finjournal24',
     },
   };
 }
@@ -57,8 +64,59 @@ export default async function AuthorPage({ params }: PageProps) {
     ? new Date(articles[0].publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     : 'Apr 29, 2026';
 
+  const authorUrl = `${SITE_URL}/author/${author.slug}`;
+  const avatarUrl = author.avatar
+    ? (author.avatar.startsWith('http') ? author.avatar : `${SITE_URL}${author.avatar}`)
+    : `${SITE_URL}/images/author.webp`;
+
+  const profileSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url: authorUrl,
+    name: `${author.name} - Author Profile`,
+    mainEntity: {
+      '@type': 'Person',
+      name: author.name,
+      jobTitle: author.role,
+      worksFor: {
+        '@type': 'NewsMediaOrganization',
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      image: avatarUrl,
+      url: authorUrl,
+      description: `Journalist and ${author.role} at Financial Journal covering financial and market developments.`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Our Team',
+        item: `${SITE_URL}/our-team`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: author.name,
+        item: authorUrl,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <JsonLd data={[profileSchema, breadcrumbSchema]} />
       <div className="mt-6">
         
         {/* Breadcrumb */}

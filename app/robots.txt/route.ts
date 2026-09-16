@@ -9,7 +9,7 @@ Disallow: /login
 Disallow: /signup
 
 # Host
-Host: https://www.financial-journal.xyz
+Host: www.financial-journal.xyz
 
 # Sitemaps
 Sitemap: https://www.financial-journal.xyz/sitemap.xml

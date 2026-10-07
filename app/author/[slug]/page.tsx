@@ -58,7 +58,9 @@ export default async function AuthorPage({ params }: PageProps) {
 
   const articles = getArticlesByAuthor(author.slug);
   const otherAuthors = getAllAuthors().filter(a => a.slug !== author.slug);
-  const latestSidebar = getAllArticles().slice(0, 5);
+  const latestSidebar = getAllArticles()
+    .filter(a => !['people', 'places', 'events', 'incidents', 'organisations', 'organizations'].includes(a.categorySlug))
+    .slice(0, 5);
 
   const lastArticleDate = articles[0]?.publishedDate
     ? new Date(articles[0].publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })

@@ -569,7 +569,7 @@ export function getArticlesByCategory(categorySlug: string): Article[] {
 }
 
 export function getArticlesByAuthor(authorSlug: string): Article[] {
-  const articles = getAllArticles();
+  const articles = getAllArticles().filter(a => !PILLAR_CATEGORIES.has(a.categorySlug));
   return articles.filter(a => a.authorSlug === authorSlug);
 }
 
@@ -616,7 +616,7 @@ export function getCategoryBySlug(slug: string): Category | null {
 }
 
 export function getAllAuthors(): Author[] {
-  const articles = getAllArticles();
+  const articles = getAllArticles().filter(art => !PILLAR_CATEGORIES.has(art.categorySlug));
   const authorMap: Record<string, Author> = {};
 
   articles.forEach(art => {

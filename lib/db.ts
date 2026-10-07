@@ -455,6 +455,12 @@ const CATEGORY_MAP: Record<string, string> = {
   world: 'security',
   seguridad: 'security',
   security: 'security',
+  people: 'people',
+  places: 'places',
+  events: 'events',
+  incidents: 'incidents',
+  organisations: 'organisations',
+  organizations: 'organisations',
 };
 
 const CATEGORY_NAME_MAP: Record<string, string> = {
@@ -468,7 +474,21 @@ const CATEGORY_NAME_MAP: Record<string, string> = {
   migration: 'Migration',
   tourism: 'Tourism',
   security: 'Security',
+  people: 'People',
+  places: 'Places',
+  events: 'Events',
+  incidents: 'Incidents',
+  organisations: 'Organisations',
 };
+
+const PILLAR_CATEGORIES = new Set([
+  'people',
+  'places',
+  'events',
+  'incidents',
+  'organisations',
+  'organizations',
+]);
 
 const ROLE_TRANSLATIONS: Record<string, string> = {
   'Corresponsal Deportivo': 'Sports Correspondent',
@@ -570,7 +590,7 @@ export function searchArticles(query: string): Article[] {
 }
 
 export function getAllCategories(): Category[] {
-  const articles = getAllArticles();
+  const articles = getAllArticles().filter(art => !PILLAR_CATEGORIES.has(art.categorySlug));
   const catMap: Record<string, { name: string; count: number }> = {};
 
   articles.forEach(art => {

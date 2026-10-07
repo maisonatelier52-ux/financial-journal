@@ -27,9 +27,11 @@ export default function HomePage() {
     usedSlugs.add(fixedTopNews.slug);
   }
 
+  const PILLAR_CATEGORIES = new Set(['people', 'places', 'events', 'incidents', 'organisations', 'organizations']);
+
   // Helper to pick N unused articles (with fallback to other unused articles if category is exhausted)
   const getUnused = (count: number, categoryFilter?: string) => {
-    let list = articles.filter(a => !usedSlugs.has(a.slug));
+    let list = articles.filter(a => !usedSlugs.has(a.slug) && !PILLAR_CATEGORIES.has(a.categorySlug));
     if (categoryFilter) {
       const catList = list.filter(
         a => (a.categorySlug || a.category || '').toLowerCase() === categoryFilter.toLowerCase()

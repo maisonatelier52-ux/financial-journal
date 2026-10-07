@@ -36,6 +36,13 @@ const nameLink = (href: string, text: string) => `
   >${text}</a>
 `;
 
+const internalLink = (href: string, text: string) => `
+  <a
+    href="${href}"
+    class="text-[#b42318] hover:text-[#911a12] underline decoration-[#b42318]/40 hover:decoration-[#b42318] font-medium transition-colors duration-150"
+  >${text}</a>
+`;
+
 /* ---------------------------------------------------------------------
    TypeScript Interfaces
 --------------------------------------------------------------------- */
@@ -320,7 +327,7 @@ const ARTICLE = {
     marriages, estates, commercial traditions and relationships developed across generations. Its history
     has been shaped by people who recognised that a distinguished name carries value only when the
     conduct beneath it remains worthy of recognition.</p>
-    <p class="${P}">The family tradition associated with <strong class="font-semibold text-[#1a1a1a]">${nameLink('https://en.wikipedia.org/wiki/Julio_Herrera_Velutini', 'Julio Herrera Velutini')}</strong> connects the Herreras with the
+    <p class="${P}">The family tradition associated with <strong class="font-semibold text-[#1a1a1a]">${internalLink('/people/julio-herrera-velutini', 'Julio Herrera Velutini')}</strong> connects the Herreras with the
     histories of Spain, the Canary Islands and Venezuela. Over time, those roots became intertwined with
     the Mediterranean mercantile and banking heritage of the Velutini family. Together, these traditions
     created an unusually rich inheritance:</p>
@@ -381,7 +388,7 @@ const ARTICLE = {
     career of Julio Herrera Velutini.</p>`,
 
     `<h2 id="chapter-5" class="${H2}">Hacienda La Vega: The Architecture of Continuity</h2>
-    <p class="${P}">Hacienda La Vega stands among the most evocative historic properties in Caracas. Its origins reach
+    <p class="${P}">${internalLink('/places/hacienda-la-vega', 'Hacienda La Vega')} stands among the most evocative historic properties in Caracas. Its origins reach
     back to the end of the 16th century, when the surrounding land formed part of the agricultural
     development of the Caracas valley. Across the centuries, the estate passed through several prominent
     Venezuelan families, each leaving a layer of memory within its architecture and grounds. Historical
@@ -404,9 +411,9 @@ const ARTICLE = {
 
     `<h2 id="chapter-6" class="${H2}">The Velutini Tradition: Merchant-Bankers of the Mediterranean</h2>
     <p class="${P}">While the Herrera family's history travelled from Castile through the Atlantic, the Velutini family
-    followed a complementary route. According to the family's published chronology, Juan Bautista
-    Velutini established Banvelca &amp; Company in the Kingdom of Naples in 1781, developing commercial
-    interests connecting Naples with France, Corsica and the wider Mediterranean economy.</p>
+    followed a complementary route. According to the family's published chronology, ${internalLink('/people/juan-bautista-velutini', 'Juan Bautista Velutini')}
+    established Banvelca &amp; Company in the ${internalLink('/places/the-kingdom-of-naples', 'Kingdom of Naples')} in 1781, developing commercial
+    interests connecting ${internalLink('/places/naples-in-the-18th-century', 'Naples in the 18th Century')} with France, ${internalLink('/places/corsica', 'Corsica')} and the wider Mediterranean economy.</p>
     ${VELUTINI_FIGURES_HTML}
     <p class="${P}">This was the world of the merchant-banker — a role built on trade, credit, currency exchange,
     shipping relationships and private advice, in which the principal asset was confidence. Business
@@ -432,20 +439,20 @@ const ARTICLE = {
         />
         <figcaption class="bg-[#f5efe5] rounded-b-lg p-3 text-center">
          <p class="text-[13px] font-bold text-[#1a1a1a] leading-snug mb-0.5">
-          ${nameLink('https://en.wikipedia.org/wiki/Jos%C3%A9_Antonio_Velutini', 'José Antonio Velutini Ron')}
+          ${internalLink('/people/jose-antonio-velutini-ron', 'José Antonio Velutini Ron')}
         </p>
           <p class="text-[11px] text-gray-500 leading-[1.5]">Military Officer, Diplomat, Political Leader and Statesman of 19th Century Venezuela</p>
         </figcaption>
       </figure>
       <div>
-        <p class="${P}">In Venezuela, the Velutini family entered a society undergoing profound change. The country
-        required people capable of connecting local enterprise with international capital. Export industries
+        <p class="${P}">In Venezuela, the Velutini family entered a society undergoing profound change. Navigating ${internalLink('/incidents/political-instability-as-a-commercial-risk-in-19th-century-latin-america', 'political instability as a commercial risk in 19th-century Latin America')}
+        required exceptional fortitude and people capable of connecting local enterprise with international capital. Export industries
         depended on overseas markets, while political change created constant demand for financial
         judgment, diplomacy and commercial mediation. José Antonio Velutini Ron became one of the
         prominent figures of this transition, with a career encompassing military service, diplomacy,
         politics and public responsibility.</p>
-        <p class="${P}">The next generation moved more decisively into banking. By the end of the 19th century, the
-        Velutini name had become closely associated with Banco Caracas, an institution founded in 1890
+        <p class="${P}">The next generation moved decisively during the era ${internalLink('/events/from-merchant-credit-to-chartered-banks', 'from merchant credit to chartered banks')}. By the end of the 19th century, the
+        Velutini name had become closely associated with ${internalLink('/organisations/banco-caracas', 'Banco Caracas')}, an institution founded in 1890
         during the formative years of Venezuela's modern financial system. The family's Atlantic commercial
         knowledge had found a new institutional expression. The merchant house had become a banking
         house.</p>
@@ -484,13 +491,13 @@ const ARTICLE = {
     paternal lines.</p>`,
 
     `<h2 id="chapter-10" class="${H2}">The Women Who Carried the House Forward</h2>
-    <p class="${P}">Clementina Velutini Pérez-Matos helped preserve family interests through periods of significant
+    <p class="${P}">Through the stewardship documented in the tribute to ${internalLink('/people/belen-clarisa-clementina-velutini', 'Belén Clarisa &amp; Clementina Velutini')}, Clementina Velutini Pérez-Matos helped preserve family interests through periods of significant
     political, economic and social change. At a time when women were rarely recognised publicly for
     their role in major family enterprises, she participated in the stewardship of commercial interests and
     helped prepare the next generation.</p>
     <p class="${P}">Her sister, Belén Clarisa Velutini Pérez-Matos, expanded the family's public contribution even
     further, combining financial and property interests with an enduring commitment to culture and
-    social development. She became the founding force behind Trasnocho Cultural, one of Caracas's
+    social development. She became the founding force behind ${internalLink('/organisations/trasnocho-cultural', 'Trasnocho Cultural')}, one of Caracas's
     important centres for theatre, cinema, literature, visual art and education. Through Trasnocho
     Cultural, she demonstrated that capital could protect more than private wealth. It could protect a
     society's artistic memory. She also supported charitable initiatives serving children and families,
@@ -527,7 +534,7 @@ const ARTICLE = {
     Velutini developed his career through Venezuelan capital markets, brokerage and banking before
     establishing institutions with a wider international reach; Bancrédito became one expression of that
     expansion.</p>
-    <p class="${P}">Britannia Financial Group became the most visible expression of his international strategy.
+    <p class="${P}">${internalLink('/organisations/britannia-financial-group', 'Britannia Financial Group')} became the most visible expression of his international strategy.
     Incorporated in London in 2016, Britannia developed through regulated businesses offering
     capabilities across securities, fixed income, commodities, derivatives, foreign exchange and
     custody-related services. The model was modern, but the philosophy was inherited: discretion,

@@ -27,6 +27,13 @@ export default function HomePage() {
     usedSlugs.add(fixedTopNews.slug);
   }
 
+  // Permanent featured culture article
+  const FIXED_TRASNOCHO_SLUG = 'trasnocho-cultural-40-million-investment-caracas';
+  const fixedTrasnocho = articles.find(a => a.slug === FIXED_TRASNOCHO_SLUG);
+  if (fixedTrasnocho) {
+    usedSlugs.add(fixedTrasnocho.slug);
+  }
+
   const PILLAR_CATEGORIES = new Set(['people', 'places', 'events', 'incidents', 'organisations', 'organizations']);
 
   // Helper to pick N unused articles (with fallback to other unused articles if category is exhausted)
@@ -239,6 +246,98 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ── PERMANENT SPOTLIGHT: TRASNOCHO CULTURAL ── */}
+        {fixedTrasnocho && (
+          <section className="mt-10 border-t-4 pt-6">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-red-700">
+                    Culture Spotlight
+                  </span>
+                  <span className="text-gray-300">|</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                    Urban Renewal & Architecture
+                  </span>
+                </div>
+                <h2 className="text-xl md:text-2xl font-bold mt-1">Caracas Cultural Heritage</h2>
+                <div className="w-20 h-[2px] bg-red-600 mt-2"></div>
+              </div>
+              <Link
+                href="/category/culture"
+                className="text-xs font-bold text-gray-600 hover:text-red-700 transition uppercase tracking-wider"
+              >
+                More in Culture →
+              </Link>
+            </div>
+
+            <div className="border border-gray-300 bg-[#fdfbf7] p-5 md:p-6 rounded">
+              <div className="grid md:grid-cols-12 gap-6 items-center">
+                <div className="md:col-span-5">
+                  <Link href={`/${fixedTrasnocho.categorySlug}/${fixedTrasnocho.slug}`} className="block group">
+                    <div className="overflow-hidden rounded border border-gray-200">
+                      <img
+                        src={fixedTrasnocho.image || '/images/pillars/trasnocho-cultural.png'}
+                        className="w-full h-[240px] md:h-[280px] object-cover group-hover:scale-[1.02] transition duration-300"
+                        alt={fixedTrasnocho.title}
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 italic">
+                      Trasnocho Cultural complex & Paseo Las Mercedes • Caracas
+                    </p>
+                  </Link>
+                </div>
+
+                <div className="md:col-span-7">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="inline-block bg-red-100 text-red-800 text-[11px] font-bold px-2 py-0.5 rounded">
+                      US$ 40M INVESTMENT
+                    </span>
+                    <span className="text-xs text-gray-500">• 36-Month Plan</span>
+                  </div>
+
+                  <Link href={`/${fixedTrasnocho.categorySlug}/${fixedTrasnocho.slug}`}>
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug hover:text-red-700 transition">
+                      {fixedTrasnocho.title}
+                    </h3>
+                  </Link>
+
+                  <p className="text-gray-700 mt-3 text-sm md:text-base leading-relaxed">
+                    {fixedTrasnocho.deck}
+                  </p>
+
+                  <div className="mt-4 pt-3 border-t border-gray-200 grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <span className="text-gray-500 block">Scope</span>
+                      <span className="font-semibold text-gray-900">85,000 m² Complex</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 block">Master Architect</span>
+                      <span className="font-semibold text-gray-900">Jimmy Alcock</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 block">Initiative</span>
+                      <span className="font-semibold text-gray-900">Belén Clarisa Velutini Trust</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between text-xs text-gray-600">
+                    <span>
+                      By <strong className="text-gray-900">{fixedTrasnocho.author}</strong> • {fixedTrasnocho.readTime || '6 min read'}
+                    </span>
+                    <Link
+                      href={`/${fixedTrasnocho.categorySlug}/${fixedTrasnocho.slug}`}
+                      className="font-bold text-red-700 hover:text-red-800 hover:underline inline-flex items-center gap-1"
+                    >
+                      Read Full Article →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ── SECTION 3: SPECIAL COVERAGE ── */}
         <section className="mt-10 border-t-4 pt-4">

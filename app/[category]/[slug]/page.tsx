@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { getArticleBySlug, getArticlesByCategory, getAllArticles, incrementArticleView, getComments } from '@/lib/db';
 import ArticleComments from './ArticleComments';
 import ArticleDetailClient from '../../../components/Articledetailclient';
+import TrasnochoDetailClient from '@/components/TrasnochoDetailClient';
 import JsonLd from '@/components/JsonLd';
 
 // Slug of the specially-designed "client" article that uses the
 // premium editorial template instead of the standard article layout.
 const CLIENT_TEMPLATE_SLUG = 'house-of-herrera-castile-caracas-global-legacy';
+const TRASNOCHO_CLIENT_SLUG = 'trasnocho-cultural-40-million-investment-caracas';
 
 const SITE_URL = 'https://www.financial-journal.xyz';
 const SITE_NAME = 'Financial Journal';
@@ -89,6 +91,20 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   // Premium client-article template: culture category + this specific slug
   if (category === 'culture' && slug === CLIENT_TEMPLATE_SLUG) {
     return <ArticleDetailClient />;
+  }
+
+  // Premium Trasnocho Cultural feature: culture category + trasnocho-cultural-40-million-investment-caracas
+  if (category === 'culture' && slug === TRASNOCHO_CLIENT_SLUG) {
+    const relatedCulture = getArticlesByCategory('culture')
+      .filter(a => a.slug !== article.slug)
+      .slice(0, 4);
+    const initialComments = getComments(article.slug);
+    return (
+      <TrasnochoDetailClient
+        relatedArticles={relatedCulture}
+        initialComments={initialComments}
+      />
+    );
   }
 
   const relatedArticles = getArticlesByCategory(article.categorySlug)

@@ -75,9 +75,9 @@ export default function HomePage() {
   }));
 
   // ── Section 4: Latest News ──
-  const ultimasCol1 = getUnused(8);
+  const ultimasCol1 = getUnused(7);
   const ultimasCol2Main = getUnused(1)[0];
-  const ultimasCol2List = getUnused(4);
+  const ultimasCol2List = getUnused(5);
 
   // ── Section 5: Highlights ──
   const destacadosList = getUnused(3);

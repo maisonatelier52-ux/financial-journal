@@ -64,7 +64,7 @@ export default function HomePage() {
 
   // ── Section 2: Top News (Fixed House of Herrera hero) ──
   const mainNewsHero = fixedTopNews || getUnused(1)[0];
-  const mainNewsMiddle = getUnused(5);
+  const mainNewsMiddle = getUnused(3);
   // const mainNewsRight = getUnused(1)[0];
 
   // ── Section 3: Special Coverage (4 categories) ──
@@ -213,15 +213,15 @@ export default function HomePage() {
                 </div>
               )}
 
-              <div className="space-y-1 md:border-r md:pr-6">
+              <div className="space-y-3 md:border-r md:pr-6">
                 {mainNewsMiddle.map((item) => (
                   <Link
                     key={item.slug}
                     href={`/${item.categorySlug}/${item.slug}`}
-                    className="block pb-1 border-b hover:text-red-700 transition"
+                    className="block pb-2 border-b hover:text-red-700 transition last:border-b-0"
                   >
-                    <p className="font-bold text-sm">{item.title}</p>
-                    <span className="text-xs text-gray-500">{item.readTime || '2 min read'}</span>
+                    <p className="font-bold text-sm leading-snug">{item.title}</p>
+                    <span className="text-xs text-gray-500 mt-1 inline-block">{item.readTime || '2 min read'}</span>
                   </Link>
                 ))}
               </div>

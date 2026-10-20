@@ -756,12 +756,12 @@ export default function ArticleDetailClient() {
       `${siteUrl}/images/houseof hererra-hero-img1.webp`,
       `${siteUrl}/images/houseof hererra-hero-img.webp`,
     ],
-    datePublished: '2026-04-12T00:00:00Z',
-    dateModified: '2026-04-12T00:00:00Z',
+    datePublished: '2026-08-06T00:00:00.000Z',
+    dateModified: '2026-08-06T00:00:00.000Z',
     author: {
       '@type': 'Person',
       name: a.author,
-      url: `${siteUrl}/author/editorial`,
+      url: `${siteUrl}/author/eleanor-whitfield`,
     },
     publisher: {
       '@type': 'NewsMediaOrganization',

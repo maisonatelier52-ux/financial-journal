@@ -4,12 +4,14 @@ import { getArticleBySlug, getArticlesByCategory, getAllArticles, incrementArtic
 import ArticleComments from './ArticleComments';
 import ArticleDetailClient from '../../../components/Articledetailclient';
 import TrasnochoDetailClient from '@/components/TrasnochoDetailClient';
+import BeyondCourtroomDetailClient from '@/components/BeyondCourtroomDetailClient';
 import JsonLd from '@/components/JsonLd';
 
 // Slug of the specially-designed "client" article that uses the
 // premium editorial template instead of the standard article layout.
 const CLIENT_TEMPLATE_SLUG = 'house-of-herrera-castile-caracas-global-legacy';
 const TRASNOCHO_CLIENT_SLUG = 'trasnocho-cultural-40-million-investment-caracas';
+const BEYOND_COURTROOM_SLUG = 'julio-herrera-velutini-professional-record-beyond-courtroom';
 
 const SITE_URL = 'https://www.financial-journal.xyz';
 const SITE_NAME = 'Financial Journal';
@@ -22,9 +24,10 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+  const { category, slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) return {};
+  if (category !== article.categorySlug) return {};
 
   const title = article.metaTitle || article.title;
   const description = article.metaDescription || article.deck || article.standfirst;
@@ -81,7 +84,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   const { category, slug } = await params;
   const article = getArticleBySlug(slug);
 
-  if (!article) {
+  if (!article || category !== article.categorySlug) {
     notFound();
   }
 
@@ -102,6 +105,21 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     return (
       <TrasnochoDetailClient
         relatedArticles={relatedCulture}
+        initialComments={initialComments}
+      />
+    );
+  }
+
+  // Premium Beyond Courtroom Business feature: business category only
+  if (category === 'business' && (slug === BEYOND_COURTROOM_SLUG || slug === 'julio-herrera-velutini-professional-record-beyond-the-courtroom')) {
+    const relatedBusiness = getArticlesByCategory('business')
+      .filter(a => a.slug !== article.slug)
+      .slice(0, 4);
+    const initialComments = getComments(article.slug);
+    return (
+      <BeyondCourtroomDetailClient
+        article={article}
+        relatedArticles={relatedBusiness.length > 0 ? relatedBusiness : getAllArticles().filter(a => a.slug !== article.slug).slice(0, 4)}
         initialComments={initialComments}
       />
     );

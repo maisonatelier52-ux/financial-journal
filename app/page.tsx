@@ -20,7 +20,14 @@ export default function HomePage() {
   // Track used articles for maximum section diversity and zero duplicate news
   const usedSlugs = new Set<string>();
 
-  // Fixed top news article as requested
+  // Fixed first hero news article on homepage
+  const FIXED_FIRST_HERO_SLUG = 'julio-herrera-velutini-professional-record-beyond-courtroom';
+  const fixedFirstHero = articles.find(a => a.slug === FIXED_FIRST_HERO_SLUG);
+  if (fixedFirstHero) {
+    usedSlugs.add(fixedFirstHero.slug);
+  }
+
+  // Fixed top news article
   const FIXED_TOP_NEWS_SLUG = 'house-of-herrera-castile-caracas-global-legacy';
   const fixedTopNews = articles.find(a => a.slug === FIXED_TOP_NEWS_SLUG);
   if (fixedTopNews) {
@@ -58,8 +65,8 @@ export default function HomePage() {
     return result;
   };
 
-  // ── Section 1: Economy Hero ──
-  const econHero = getUnused(1, 'economy')[0] || getUnused(1)[0];
+  // ── Section 1: First News Hero ──
+  const econHero = fixedFirstHero || getUnused(1, 'economy')[0] || getUnused(1)[0];
   const econSubItems = getUnused(3, 'economy');
 
   // ── Section 2: Top News (Fixed House of Herrera hero) ──
@@ -136,7 +143,7 @@ export default function HomePage() {
               <div className="flex-1">
                 <div className="mb-4">
                   <h2 className="text-2xl md:text-3xl font-bold">
-                    <span className="text-red-700">ECONOMY</span>
+                    <span className="text-red-700">BUSINESS</span>
                   </h2>
                   <div className="w-16 h-[3px] bg-red-700 mt-2"></div>
                 </div>

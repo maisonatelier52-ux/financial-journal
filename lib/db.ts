@@ -95,6 +95,7 @@
 // };
 
 // const CATEGORY_NAME_MAP: Record<string, string> = {
+//   business: 'Business',
 //   politics: 'Politics',
 //   economy: 'Economy',
 //   technology: 'Technology',
@@ -461,9 +462,11 @@ const CATEGORY_MAP: Record<string, string> = {
   incidents: 'incidents',
   organisations: 'organisations',
   organizations: 'organisations',
+  business: 'business',
 };
 
 const CATEGORY_NAME_MAP: Record<string, string> = {
+  business: 'Business',
   politics: 'Politics',
   economy: 'Economy',
   technology: 'Technology',

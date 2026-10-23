@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import JsonLd from './JsonLd';
 import ArticleComments from '../app/[category]/[slug]/ArticleComments';
 import { CommentItem, Article } from '@/lib/db';
@@ -277,8 +277,6 @@ export default function BeyondCourtroomDetailClient({
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [emailInput, setEmailInput] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [speechSynthesisAvailable, setSpeechSynthesisAvailable] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
 
@@ -454,15 +452,6 @@ export default function BeyondCourtroomDetailClient({
   };
 
   const handlePrint = () => window.print();
-
-  const handleSubscribe = (e: FormEvent) => {
-    e.preventDefault();
-    if (emailInput.trim()) {
-      setSubscribed(true);
-      setEmailInput('');
-      notify('Thank you for subscribing to Financial Journal!', 4000);
-    }
-  };
 
   /* ---- structured data ---- */
   const articleSchema = {
@@ -747,7 +736,7 @@ export default function BeyondCourtroomDetailClient({
       </section>
 
       {/* =====================================================================
-          BODY: contents rail | article | portrait + subscribe
+          BODY: contents rail | article | portrait
       ====================================================================== */}
       <div className="mx-auto max-w-[1280px] px-4 py-12 md:px-8 md:py-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[190px_minmax(0,1fr)_300px] lg:gap-14">
@@ -766,8 +755,8 @@ export default function BeyondCourtroomDetailClient({
                       onClick={() => scrollToSection(s.id)}
                       aria-current={active ? 'location' : undefined}
                       className={`-ml-px block w-full cursor-pointer border-l-2 py-2 pl-4 text-left text-[13.5px] leading-snug transition-colors ${active
-                        ? 'border-[#C8102E] font-semibold text-[#0D1B2A]'
-                        : 'border-transparent text-[#55636F] hover:text-[#0D1B2A]'
+                          ? 'border-[#C8102E] font-semibold text-[#0D1B2A]'
+                          : 'border-transparent text-[#55636F] hover:text-[#0D1B2A]'
                         }`}
                     >
                       {s.title}
@@ -782,7 +771,7 @@ export default function BeyondCourtroomDetailClient({
           {/* Article column */}
           <article ref={articleRef} className="min-w-0">
             {/* Lede */}
-            <p className="mb-8 text-[1.35rem] leading-[1.62] text-[#0D1B2A] sm:text-[1.5rem]">
+            <p className="mb-8 text-[1.35rem] leading-[1.62] text-[#0D1B2A] sm:text-[1.5rem] first-letter:float-left first-letter:pr-3.5 first-letter:pt-1 first-letter:font-['Playfair_Display',Georgia,serif] first-letter:text-[4.2rem] first-letter:font-bold first-letter:leading-[0.8] first-letter:text-[#b42318]">
               On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register. The appointment places a current professional role at the centre of his biography and provides a documented sign of continuity in his financial-services career.
               <Cite ids={[9]} label="[9]" />
             </p>
@@ -1029,8 +1018,6 @@ export default function BeyondCourtroomDetailClient({
               </div>
               <figcaption className="mt-5 text-sm font-semibold text-[#0D1B2A]">Julio Herrera Velutini</figcaption>
             </figure>
-
-
           </aside>
         </div>
       </div>

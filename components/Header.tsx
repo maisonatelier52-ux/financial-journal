@@ -204,16 +204,13 @@ export default function Header({ categories = [], currentLang = 'en' }: HeaderPr
             </nav>
 
             {user?.isSubscribed ? (
-              <span className="bg-emerald-50 border border-emerald-600 text-emerald-700 px-3.5 py-1 rounded-md font-semibold text-sm flex items-center gap-1.5 ml-auto md:ml-0">
-                <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                </svg>
+              <span className="border border-red-600 text-red-600 px-4 py-1 rounded-md font-semibold text-sm ml-auto md:ml-0 select-none cursor-default">
                 Subscribed
               </span>
             ) : (
               <button
                 onClick={() => setIsSubscribeOpen(true)}
-                className="border border-red-600 text-red-600 px-4 py-1 rounded-md font-semibold text-sm hover:bg-red-600 hover:text-white transition-colors duration-200 ml-auto md:ml-0"
+                className="border border-red-600 text-red-600 px-4 py-1 rounded-md font-semibold text-sm hover:bg-red-600 hover:text-white transition-colors duration-200 ml-auto md:ml-0 cursor-pointer"
               >
                 Subscribe
               </button>

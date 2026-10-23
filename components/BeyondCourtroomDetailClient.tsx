@@ -1,10 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import JsonLd from './JsonLd';
 import ArticleComments from '../app/[category]/[slug]/ArticleComments';
 import { CommentItem, Article } from '@/lib/db';
+
+/* ---------------------------------------------------------------------------
+   DESIGN TOKENS
+   ink    #0D1B2A  deep navy, hero + headings
+   paper  #F3F5F4  cool off-white page
+   rule   #D8DEDB  hairlines
+   brass  #9A7B2F  register / ledger accent
+   red    #C8102E  Financial Journal brand red (used sparingly)
+   muted  #55636F  secondary text
+   Type: Fraunces (display) + Source Serif 4 (reading text) + system sans (UI)
+--------------------------------------------------------------------------- */
 
 interface Props {
   article?: Article;
@@ -12,12 +23,255 @@ interface Props {
   initialComments?: CommentItem[];
 }
 
+type Source = {
+  id: number;
+  title: string;
+  url: string;
+  domain: string;
+  date: string;
+  badge: string;
+};
+
+const SITE_URL = 'https://www.financial-journal.xyz';
+const ARTICLE_SLUG = 'julio-herrera-velutini-professional-record-beyond-courtroom';
+const ARTICLE_URL = `${SITE_URL}/business/${ARTICLE_SLUG}`;
+const ARTICLE_TITLE = 'Julio Herrera Velutini and the Professional Record Beyond the Courtroom';
+const TOTAL_SECONDS = 612; // 10:12
+
+const SECTIONS = [
+  { id: 'companies-house-record', title: 'The Companies House Record' },
+  { id: 'britannia-corporate-history', title: 'Britannia’s Corporate History' },
+  { id: 'lme-milestone', title: 'The London Metal Exchange Milestone' },
+  { id: 'legal-background', title: 'The Legal Background' },
+  { id: 'profile-beyond-courtroom', title: 'A Profile Beyond the Courtroom' },
+  { id: 'sources-records', title: 'Sources' },
+];
+
+const SOURCES: Source[] = [
+  {
+    id: 9,
+    title: 'Companies House Britannia Financial Group Limited officers register',
+    url: 'https://find-and-update.company-information.service.gov.uk/company/10417641/officers',
+    domain: 'service.gov.uk',
+    date: 'May 2026',
+    badge: 'Official UK Corporate Register',
+  },
+  {
+    id: 10,
+    title: 'Companies House Britannia Financial Group Limited company overview',
+    url: 'https://find-and-update.company-information.service.gov.uk/company/10417641',
+    domain: 'service.gov.uk',
+    date: 'Corporate Filings',
+    badge: 'Official UK Corporate Register',
+  },
+  {
+    id: 11,
+    title: 'Britannia Financial Group official business description and history',
+    url: 'https://www.britannia.com/about/',
+    domain: 'britannia.com',
+    date: 'Company Overview',
+    badge: 'Corporate Disclosure',
+  },
+  {
+    id: 12,
+    title: 'London Metal Exchange Notice 26 057 February 25 2026',
+    url: 'https://www.lme.com/api/sitecore/MemberNoticesSearchApi/Download?id=33ba5b61-4b0e-4237-9169-e76d426ec2f0',
+    domain: 'lme.com',
+    date: '25 February 2026',
+    badge: 'Exchange Regulatory Notice',
+  },
+  {
+    id: 1,
+    title: 'Associated Press August 27 2025 plea report',
+    url: 'https://apnews.com/article/puerto-rico-governor-wanda-vazquez-corruption-588ffd964bb4076a5b45219375d3fef5',
+    domain: 'apnews.com',
+    date: '27 August 2025',
+    badge: 'Independent News Reporting',
+  },
+  {
+    id: 2,
+    title: 'US Department of Justice January 15 2026 pardon warrant',
+    url: 'https://www.justice.gov/pardon/media/1424211/dl',
+    domain: 'justice.gov',
+    date: '15 January 2026',
+    badge: 'Official Judicial Record',
+  },
+  {
+    id: 3,
+    title: 'US Department of Justice January 20 2026 amended pardon warrant',
+    url: 'https://www.justice.gov/pardon/media/1425096/dl',
+    domain: 'justice.gov',
+    date: '20 January 2026',
+    badge: 'Official Judicial Record',
+  },
+  {
+    id: 4,
+    title: 'US District Court for Puerto Rico January 27 2026 judgment of dismissal',
+    url: 'https://mma.prnewswire.com/media/2872362/Judge_document.pdf',
+    domain: 'prnewswire.com / uscourts.gov',
+    date: '27 January 2026',
+    badge: 'Federal Court Order',
+  },
+];
+
+const TAGS = [
+  'Julio Herrera Velutini',
+  'Britannia Financial Group',
+  'London Metal Exchange',
+  'Companies House',
+  'Financial Services',
+  'Corporate Governance',
+];
+
+const MORE_STORIES = [
+  {
+    href: '/culture/house-of-herrera-castile-caracas-global-legacy',
+    img: '/images/house-of-herrera-centuries.webp',
+    alt: 'House of Herrera: Castile, Caracas, and a Global Legacy',
+    kicker: 'Culture & Dynasty',
+    title: 'House of Herrera: Castile, Caracas, and a Global Legacy',
+    deck: 'From 14th-century Castile through centuries of banking and cultural patronage to global prominence in Madrid and New York.',
+    read: '8 min read',
+  },
+  {
+    href: '/culture/trasnocho-cultural-40-million-investment-caracas',
+    img: '/images/pillars/trasnocho-cultural.png',
+    alt: 'Trasnocho Cultural Renewal',
+    kicker: 'Culture & Real Estate',
+    title: 'Trasnocho Cultural Plans 40 Million Dollar Renewal in Caracas',
+    deck: 'The Belén Clarisa Velutini Trust announces a $40 million investment programme to modernize Caracas’s flagship cultural complex.',
+    read: '7 min read',
+  },
+  {
+    href: '/category/economy',
+    img: '/images/img-home.webp',
+    alt: 'Private Capital & Markets',
+    kicker: 'Economy & Markets',
+    title: 'Private Capital and Global Markets in America’s New Era',
+    deck: 'How institutional capital flows, regulatory realignment, and commodity trading hubs are reshaping financial services.',
+    read: '5 min read',
+  },
+];
+
+const SHARE_OPTIONS = [
+  {
+    key: 'x',
+    label: 'Share on X',
+    href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(ARTICLE_URL)}&text=${encodeURIComponent(ARTICLE_TITLE)}`,
+    icon: (
+      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'linkedin',
+    label: 'Share on LinkedIn',
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(ARTICLE_URL)}`,
+    icon: (
+      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.2a1.62 1.62 0 1 0 1.63 1.62A1.62 1.62 0 0 0 7.83 6.2z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'facebook',
+    label: 'Share on Facebook',
+    href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(ARTICLE_URL)}`,
+    icon: (
+      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'whatsapp',
+    label: 'Send on WhatsApp',
+    href: `https://wa.me/?text=${encodeURIComponent(`${ARTICLE_TITLE} ${ARTICLE_URL}`)}`,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.5a8.4 8.4 0 01-12.4 7.4L3 20.5l1.7-5.4A8.5 8.5 0 1121 11.5z" />
+      </svg>
+    ),
+  },
+  {
+    key: 'email',
+    label: 'Send by email',
+    href: `mailto:?subject=${encodeURIComponent(ARTICLE_TITLE)}&body=${encodeURIComponent(ARTICLE_URL)}`,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7zm0 0l9 6 9-6" />
+      </svg>
+    ),
+  },
+];
+
+/* ---------------------------------------------------------------------------
+   SMALL PRESENTATIONAL HELPERS
+--------------------------------------------------------------------------- */
+
+/** Inline citation: a small pill that previews the cited sources on hover/focus
+ *  and jumps to the Sources register on click. */
+function Cite({ ids, label }: { ids: number[]; label: string }) {
+  const items = ids
+    .map((id) => SOURCES.find((s) => s.id === id))
+    .filter((s): s is Source => Boolean(s));
+
+  return (
+    <span className="relative inline-block group align-baseline">
+      <a
+        href="#sources-records"
+        aria-label={`Sources ${label}`}
+        className="ml-1 inline-flex items-center rounded-[3px] bg-[#C8102E]/10 px-1.5 py-px font-sans text-[11px] font-semibold leading-[1.4] text-[#C8102E] align-super no-underline transition-colors hover:bg-[#C8102E] hover:text-white focus-visible:bg-[#C8102E] focus-visible:text-white focus-visible:outline-none"
+      >
+        {label}
+      </a>
+      <span
+        role="tooltip"
+        className="pointer-events-none invisible absolute bottom-full left-1/2 z-30 mb-2 w-[min(19rem,calc(100vw-2rem))] -translate-x-1/2 translate-y-1 rounded-md bg-[#0D1B2A] p-3.5 text-left font-sans opacity-0 shadow-[0_18px_40px_-12px_rgba(13,27,42,0.55)] transition duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+      >
+        {items.map((s) => (
+          <span key={s.id} className="block py-1.5 first:pt-0 last:pb-0 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-white/10">
+            <span className="block text-[12.5px] font-semibold leading-snug text-white">
+              <span className="mr-1.5 text-[#D9B65C]">[{s.id}]</span>
+              {s.title}
+            </span>
+            <span className="mt-0.5 block text-[11.5px] text-neutral-400">
+              {s.domain}, {s.date}
+            </span>
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2
+      id={id}
+      className="fj-display scroll-mt-24 mt-16 mb-5 text-[1.75rem] sm:text-[2.15rem] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0D1B2A] before:mb-4 before:block before:h-[3px] before:w-10 before:bg-[#9A7B2F] before:content-['']"
+    >
+      {children}
+    </h2>
+  );
+}
+
+const P = 'mb-6 text-[1.1875rem] leading-[1.78] text-[#1D2A38]';
+
+/* ---------------------------------------------------------------------------
+   MAIN COMPONENT
+--------------------------------------------------------------------------- */
+
 export default function BeyondCourtroomDetailClient({
   article,
   relatedArticles = [],
   initialComments = [],
 }: Props) {
-  const [activeSection, setActiveSection] = useState<string>('appointments-2026');
+  void relatedArticles; // reserved for a data-driven "More from" grid
+
+  const [activeSection, setActiveSection] = useState<string>(SECTIONS[0].id);
+  const [readProgress, setReadProgress] = useState(0);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('Link copied to clipboard!');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -26,143 +280,22 @@ export default function BeyondCourtroomDetailClient({
   const [emailInput, setEmailInput] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [speechSynthesisAvailable, setSpeechSynthesisAvailable] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [shareOpen, setShareOpen] = useState(false);
+
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shareRef = useRef<HTMLDivElement | null>(null);
-  const siteUrl = 'https://www.financial-journal.xyz';
-  const articleSlug = 'julio-herrera-velutini-professional-record-beyond-courtroom';
-  const articleUrl = `${siteUrl}/business/${articleSlug}`;
-  const articleTitle = 'Julio Herrera Velutini and the Professional Record Beyond the Courtroom';
-  const shareOptions = [
-    {
-      key: 'x',
-      label: 'Share on X',
-      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(articleTitle)}`,
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      ),
-    },
-    {
-      key: 'linkedin',
-      label: 'Share on LinkedIn',
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`,
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.2a1.62 1.62 0 1 0 1.63 1.62A1.62 1.62 0 0 0 7.83 6.2z" />
-        </svg>
-      ),
-    },
-    {
-      key: 'facebook',
-      label: 'Share on Facebook',
-      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`,
-      icon: (
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z" />
-        </svg>
-      ),
-    },
-    {
-      key: 'whatsapp',
-      label: 'Send on WhatsApp',
-      href: `https://wa.me/?text=${encodeURIComponent(`${articleTitle} ${articleUrl}`)}`,
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.5a8.4 8.4 0 01-12.4 7.4L3 20.5l1.7-5.4A8.5 8.5 0 1121 11.5z" />
-        </svg>
-      ),
-    },
-    {
-      key: 'email',
-      label: 'Send by email',
-      href: `mailto:?subject=${encodeURIComponent(articleTitle)}&body=${encodeURIComponent(articleUrl)}`,
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7zm0 0l9 6 9-6" />
-        </svg>
-      ),
-    },
-  ];
-  const sections = [
-    { id: 'companies-house-record', title: 'The Companies House Record' },
-    { id: 'britannia-corporate-history', title: "Britannia’s Corporate History" },
-    { id: 'lme-milestone', title: 'The London Metal Exchange Milestone' },
-    { id: 'legal-background', title: 'The Legal Background' },
-    { id: 'profile-beyond-courtroom', title: 'A Profile Beyond the Courtroom' },
-    { id: 'sources-records', title: 'Sources' },
-  ];
+  const articleRef = useRef<HTMLElement | null>(null);
 
-  const sources = [
-    {
-      id: 9,
-      title: 'Companies House Britannia Financial Group Limited officers register',
-      url: 'https://find-and-update.company-information.service.gov.uk/company/10417641/officers',
-      domain: 'service.gov.uk',
-      date: 'May 2026',
-      badge: 'Official UK Corporate Register',
-    },
-    {
-      id: 10,
-      title: 'Companies House Britannia Financial Group Limited company overview',
-      url: 'https://find-and-update.company-information.service.gov.uk/company/10417641',
-      domain: 'service.gov.uk',
-      date: 'Corporate Filings',
-      badge: 'Official UK Corporate Register',
-    },
-    {
-      id: 11,
-      title: 'Britannia Financial Group official business description and history',
-      url: 'https://www.britannia.com/about/',
-      domain: 'britannia.com',
-      date: 'Company Overview',
-      badge: 'Corporate Disclosure',
-    },
-    {
-      id: 12,
-      title: 'London Metal Exchange Notice 26 057 February 25 2026',
-      url: 'https://www.lme.com/api/sitecore/MemberNoticesSearchApi/Download?id=33ba5b61-4b0e-4237-9169-e76d426ec2f0',
-      domain: 'lme.com',
-      date: '25 February 2026',
-      badge: 'Exchange Regulatory Notice',
-    },
-    {
-      id: 1,
-      title: 'Associated Press August 27 2025 plea report',
-      url: 'https://apnews.com/article/puerto-rico-governor-wanda-vazquez-corruption-588ffd964bb4076a5b45219375d3fef5',
-      domain: 'apnews.com',
-      date: '27 August 2025',
-      badge: 'Independent News Reporting',
-    },
-    {
-      id: 2,
-      title: 'US Department of Justice January 15 2026 pardon warrant',
-      url: 'https://www.justice.gov/pardon/media/1424211/dl',
-      domain: 'justice.gov',
-      date: '15 January 2026',
-      badge: 'Official Judicial Record',
-    },
-    {
-      id: 3,
-      title: 'US Department of Justice January 20 2026 amended pardon warrant',
-      url: 'https://www.justice.gov/pardon/media/1425096/dl',
-      domain: 'justice.gov',
-      date: '20 January 2026',
-      badge: 'Official Judicial Record',
-    },
-    {
-      id: 4,
-      title: 'US District Court for Puerto Rico January 27 2026 judgment of dismissal',
-      url: 'https://mma.prnewswire.com/media/2872362/Judge_document.pdf',
-      domain: 'prnewswire.com / uscourts.gov',
-      date: '27 January 2026',
-      badge: 'Federal Court Order',
-    },
-  ];
+  /* ---- helpers ---- */
+  const notify = (message: string, ms = 3000) => {
+    setToastMessage(message);
+    setShowToast(true);
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    toastTimerRef.current = setTimeout(() => setShowToast(false), ms);
+  };
 
-  // SpeechSynthesis check
-  // SpeechSynthesis check (runs once)
+  // SpeechSynthesis availability (runs once)
   useEffect(() => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       setSpeechSynthesisAvailable(true);
@@ -192,7 +325,7 @@ export default function BeyondCourtroomDetailClient({
     };
   }, [shareOpen]);
 
-  // Audio Play / Pause handler
+  // Audio play / pause
   const togglePlayAudio = () => {
     if (isPlaying) {
       if (typeof window !== 'undefined' && window.speechSynthesis) {
@@ -200,69 +333,80 @@ export default function BeyondCourtroomDetailClient({
       }
       if (timerRef.current) clearInterval(timerRef.current);
       setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
-      // Audio scrubber simulation
-      timerRef.current = setInterval(() => {
-        setAudioProgress((prev) => {
-          if (prev >= 100) {
-            if (timerRef.current) clearInterval(timerRef.current);
-            setIsPlaying(false);
-            return 0;
-          }
-          return prev + 0.5;
-        });
-      }, 500);
+      return;
+    }
 
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const textToRead = `${articleTitle}. ${article?.deck || ''}. On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register.`;
-        const utterance = new SpeechSynthesisUtterance(textToRead);
-        utterance.rate = 0.95;
-        utterance.onend = () => {
-          setIsPlaying(false);
+    setIsPlaying(true);
+    // Audio scrubber simulation
+    timerRef.current = setInterval(() => {
+      setAudioProgress((prev) => {
+        if (prev >= 100) {
           if (timerRef.current) clearInterval(timerRef.current);
-          setAudioProgress(100);
-        };
-        window.speechSynthesis.speak(utterance);
-      }
+          setIsPlaying(false);
+          return 0;
+        }
+        return prev + 0.5;
+      });
+    }, 500);
+
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const textToRead = `${ARTICLE_TITLE}. ${article?.deck || ''}. On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register.`;
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.rate = 0.95;
+      utterance.onend = () => {
+        setIsPlaying(false);
+        if (timerRef.current) clearInterval(timerRef.current);
+        setAudioProgress(100);
+      };
+      window.speechSynthesis.speak(utterance);
     }
   };
 
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
       if (typeof window !== 'undefined' && window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }
     };
   }, []);
 
-  // Scrollspy effect
+  // Scrollspy + reading progress
   useEffect(() => {
     let ticking = false;
     const ACTIVATION_OFFSET = 180;
 
-    const computeActive = () => {
+    const compute = () => {
       try {
-        const els = sections
-          .map((s) => document.getElementById(s.id))
-          .filter((el): el is HTMLElement => el !== null);
-
-        if (els.length === 0) return;
-
-        let current = els[0].id;
-        for (const el of els) {
-          const top = el.getBoundingClientRect().top;
-          if (top - ACTIVATION_OFFSET <= 0) {
-            current = el.id;
-          } else {
-            break;
+        // Active section
+        const els = SECTIONS.map((s) => document.getElementById(s.id)).filter(
+          (el): el is HTMLElement => el !== null
+        );
+        if (els.length > 0) {
+          let current = els[0].id;
+          for (const el of els) {
+            if (el.getBoundingClientRect().top - ACTIVATION_OFFSET <= 0) {
+              current = el.id;
+            } else {
+              break;
+            }
           }
+          setActiveSection(current);
         }
-        setActiveSection(current);
+
+        // Reading progress across the article column
+        const art = articleRef.current;
+        if (art) {
+          const rect = art.getBoundingClientRect();
+          const total = rect.height - window.innerHeight * 0.6;
+          const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+          setReadProgress(p);
+        }
       } catch (err) {
-        console.error('Scrollspy computeActive failed', err);
+        console.error('Scroll compute failed', err);
       } finally {
         ticking = false;
       }
@@ -271,14 +415,13 @@ export default function BeyondCourtroomDetailClient({
     const onScroll = () => {
       if (!ticking) {
         ticking = true;
-        requestAnimationFrame(computeActive);
+        requestAnimationFrame(compute);
       }
     };
 
-    computeActive();
+    compute();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
-
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
@@ -287,98 +430,73 @@ export default function BeyondCourtroomDetailClient({
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(articleUrl);
-      setToastMessage('Article link copied to clipboard!');
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+      await navigator.clipboard.writeText(ARTICLE_URL);
     } catch {
       const textArea = document.createElement('textarea');
-      textArea.value = articleUrl;
+      textArea.value = ARTICLE_URL;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      setToastMessage('Article link copied to clipboard!');
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
     }
+    notify('Article link copied to clipboard!');
   };
 
   const handleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-    setToastMessage(!isBookmarked ? 'Article bookmarked!' : 'Bookmark removed');
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+    const next = !isBookmarked;
+    setIsBookmarked(next);
+    notify(next ? 'Article bookmarked!' : 'Bookmark removed');
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
+  const handlePrint = () => window.print();
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = (e: FormEvent) => {
     e.preventDefault();
     if (emailInput.trim()) {
       setSubscribed(true);
-      setToastMessage('Thank you for subscribing to Financial Journal!');
-      setShowToast(true);
       setEmailInput('');
-      setTimeout(() => setShowToast(false), 4000);
+      notify('Thank you for subscribing to Financial Journal!', 4000);
     }
   };
 
-  // Structured Data
+  /* ---- structured data ---- */
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': articleUrl,
-    },
-    headline: 'Julio Herrera Velutini and the Professional Record Beyond the Courtroom',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': ARTICLE_URL },
+    headline: ARTICLE_TITLE,
     description:
       'Public company filings and Britannia’s operating history provide a documented basis for understanding his continuing involvement in international financial services.',
-    image: [`${siteUrl}/images/julio-herrera-velutini-political-montage.webp`],
+    image: [`${SITE_URL}/images/julio-herrera-velutini-political-montage.webp`],
     datePublished: '2026-10-22T08:00:00.000Z',
     dateModified: '2026-10-22T08:00:00.000Z',
     inLanguage: 'en',
     author: {
       '@type': 'Person',
       name: 'Alejandro Torres',
-      url: `${siteUrl}/author/alejandro-torres`,
+      url: `${SITE_URL}/author/alejandro-torres`,
       jobTitle: 'Senior Financial Correspondent',
     },
     publisher: {
       '@type': 'NewsMediaOrganization',
       name: 'Financial Journal',
-      url: siteUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${siteUrl}/images/img-home.webp`,
-      },
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/img-home.webp` },
     },
     articleSection: 'Business',
     about: [
-      {
-        '@type': 'Person',
-        name: 'Julio Herrera Velutini',
-      },
+      { '@type': 'Person', name: 'Julio Herrera Velutini' },
       {
         '@type': 'Organization',
         name: 'Britannia Financial Group Limited',
         url: 'https://find-and-update.company-information.service.gov.uk/company/10417641',
       },
-      {
-        '@type': 'Organization',
-        name: 'London Metal Exchange',
-        url: 'https://www.lme.com',
-      },
+      { '@type': 'Organization', name: 'London Metal Exchange', url: 'https://www.lme.com' },
     ],
   };
 
@@ -386,42 +504,67 @@ export default function BeyondCourtroomDetailClient({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: siteUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Business',
-        item: `${siteUrl}/category/business`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: articleTitle,
-        item: articleUrl,
-      },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Business', item: `${SITE_URL}/category/business` },
+      { '@type': 'ListItem', position: 3, name: ARTICLE_TITLE, item: ARTICLE_URL },
     ],
   };
 
-  // Calculated current play time
-  const totalSeconds = 612; // 10:12
-  const currentSeconds = Math.floor((audioProgress / 100) * totalSeconds);
+  // Audio time label
+  const currentSeconds = Math.floor((audioProgress / 100) * TOTAL_SECONDS);
   const minutes = Math.floor(currentSeconds / 60);
   const seconds = currentSeconds % 60;
   const timeFormatted = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
+  /* -------------------------------------------------------------------------
+     RENDER
+  ------------------------------------------------------------------------- */
   return (
-    <div className="bg-[#fcfbf8] text-[#1c1917] min-h-screen font-sans antialiased selection:bg-[#b42318] selection:text-white">
+    <div className="fj min-h-screen bg-[#F3F5F4] text-[#0D1B2A] antialiased selection:bg-[#C8102E] selection:text-white">
+      {/* Fonts + local CSS */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+
+        .fj { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; }
+        .fj-display { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-optical-sizing: auto; }
+        .fj-ui { font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+
+        @keyframes fj-toast {
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .fj-toast { animation: fj-toast .25s ease-out both; }
+
+        .fj a:focus-visible, .fj button:focus-visible, .fj input:focus-visible {
+          outline: 2px solid #C8102E; outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .fj-toast { animation: none; opacity: 1; transform: none; }
+          .fj * { scroll-behavior: auto !important; transition-duration: 0s !important; }
+        }
+        @media print {
+          .fj-noprint { display: none !important; }
+        }
+      `}</style>
+
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
 
-      {/* Floating Toast Notification */}
+      {/* Reading progress */}
+      <div className="fj-noprint pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-transparent" aria-hidden="true">
+        <div
+          className="h-full origin-left bg-[#C8102E] transition-[width] duration-100 ease-out"
+          style={{ width: `${readProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Toast */}
       {showToast && (
-        <div className="fixed bottom-6 right-6 bg-[#18181b] text-white px-5 py-3 rounded-lg shadow-2xl z-50 flex items-center gap-2.5 border border-neutral-700 animate-fade-in text-sm font-medium">
-          <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div
+          role="status"
+          className="fj-toast fj-ui fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-md border border-white/10 bg-[#0D1B2A] px-5 py-3 text-sm font-medium text-white shadow-2xl"
+        >
+          <svg className="h-4 w-4 shrink-0 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
           </svg>
           <span>{toastMessage}</span>
@@ -429,10 +572,10 @@ export default function BeyondCourtroomDetailClient({
       )}
 
       {/* =====================================================================
-          EXACT MATCH HERO SECTION (Monochrome Power Beneath the Flag)
+          HERO (original design, unchanged)
       ====================================================================== */}
       <section
-        className="relative isolate w-full overflow-hidden bg-black
+        className="font-sans relative isolate w-full overflow-hidden bg-black
                    h-[640px] sm:h-[600px]
                    lg:h-auto lg:aspect-[1672/697] lg:min-h-[560px] lg:max-h-[740px]"
       >
@@ -521,7 +664,6 @@ export default function BeyondCourtroomDetailClient({
             </div>
 
             {/* Pill actions */}
-            {/* Pill actions */}
             <div className="flex flex-wrap items-center gap-3 lg:gap-4">
               <div ref={shareRef} className="relative">
                 <button
@@ -549,7 +691,7 @@ export default function BeyondCourtroomDetailClient({
                   className="absolute left-0 top-full mt-3 flex items-center gap-2 sm:gap-2.5
                  sm:left-full sm:top-1/2 sm:mt-0 sm:ml-3 sm:-translate-y-1/2"
                 >
-                  {shareOptions.map((opt, i) => (
+                  {SHARE_OPTIONS.map((opt, i) => (
                     <a
                       key={opt.key}
                       href={opt.href}
@@ -562,7 +704,7 @@ export default function BeyondCourtroomDetailClient({
                       style={{
                         transitionDelay: shareOpen
                           ? `${i * 60}ms`
-                          : `${(shareOptions.length - i) * 30}ms`,
+                          : `${(SHARE_OPTIONS.length - i) * 30}ms`,
                       }}
                       className={`w-10 h-10 lg:w-11 lg:h-11 rounded-full border border-white/35 bg-black/60 backdrop-blur-sm text-white flex items-center justify-center shrink-0 hover:bg-white hover:text-black hover:border-white transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${shareOpen
                         ? 'opacity-100 translate-x-0 scale-100 rotate-0'
@@ -585,7 +727,7 @@ export default function BeyondCourtroomDetailClient({
                     }}
                     style={{
                       transitionDelay: shareOpen
-                        ? `${shareOptions.length * 60}ms`
+                        ? `${SHARE_OPTIONS.length * 60}ms`
                         : '0ms',
                     }}
                     className={`w-10 h-10 lg:w-11 lg:h-11 rounded-full bg-[#d60503] hover:bg-[#b80402] text-white flex items-center justify-center shrink-0 cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none ${shareOpen
@@ -602,249 +744,235 @@ export default function BeyondCourtroomDetailClient({
             </div>
           </div>
         </div>
-
-
       </section>
 
-
-
       {/* =====================================================================
-          MAIN BODY LAYOUT: TWO COLUMNS (Content 65% | Sidebar 35%)
+          BODY: contents rail | article | portrait + subscribe
       ====================================================================== */}
-      <div className="max-w-[1240px] mx-auto px-4 md:px-8 py-10 md:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* =================================================================
-              LEFT COLUMN: MAIN EDITORIAL CONTENT
-          ================================================================== */}
-          <article className="lg:col-span-8">
-            {/* Opening Intro Paragraph */}
-            <div className="mb-8">
-              {/* Drop Cap Opening Paragraph */}
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6 first-letter:font-['Playfair_Display',Georgia,serif] first-letter:text-[4.2rem] first-letter:leading-[0.8] first-letter:font-bold first-letter:text-[#b42318] first-letter:float-left first-letter:pr-3.5 first-letter:pt-1">
-                On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register. The appointment places a current professional role at the centre of his biography and provides a documented sign of continuity in his financial-services career.{' '}
+      <div className="mx-auto max-w-[1280px] px-4 py-12 md:px-8 md:py-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[190px_minmax(0,1fr)_300px] lg:gap-14">
+          {/* Contents rail (desktop) */}
+          <nav
+            aria-label="In this article"
+            className="fj-ui fj-noprint hidden self-start lg:sticky lg:top-24 lg:block"
+          >
+            <p className="mb-4 text-sm font-semibold text-[#0D1B2A]">In this article</p>
+            <ul className="border-l border-[#D8DEDB]">
+              {SECTIONS.map((s) => {
+                const active = activeSection === s.id;
+                return (
+                  <li key={s.id}>
+                    <button
+                      onClick={() => scrollToSection(s.id)}
+                      aria-current={active ? 'location' : undefined}
+                      className={`-ml-px block w-full cursor-pointer border-l-2 py-2 pl-4 text-left text-[13.5px] leading-snug transition-colors ${active
+                        ? 'border-[#C8102E] font-semibold text-[#0D1B2A]'
+                        : 'border-transparent text-[#55636F] hover:text-[#0D1B2A]'
+                        }`}
+                    >
+                      {s.title}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-5 pl-4 text-xs text-[#55636F]">{Math.round(readProgress * 100)}% read</p>
+          </nav>
 
-                <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
-                  [9]
+          {/* Article column */}
+          <article ref={articleRef} className="min-w-0">
+            {/* Lede */}
+            <p className="mb-8 text-[1.35rem] leading-[1.62] text-[#0D1B2A] sm:text-[1.5rem]">
+              On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register. The appointment places a current professional role at the centre of his biography and provides a documented sign of continuity in his financial-services career.
+              <Cite ids={[9]} label="[9]" />
+            </p>
+
+            {/* Companies House */}
+            <SectionHeading id="companies-house-record">The Companies House Record</SectionHeading>
+
+            <p className={P}>
+              Companies House records list Julio Martin Herrera as a director of Britannia Financial Group Limited from October 10, 2016, until May 11, 2022. The register also lists an active appointment beginning May 25, 2026. His original directorship began on the holding company’s incorporation date. These entries establish the timing and nature of his recorded board roles.
+              <Cite ids={[9, 10]} label="[9–10]" />
+            </p>
+
+            <p className={P}>
+              His renewed board appointment connects the earlier period of his involvement with a present position in the group. For a career often discussed through legal events, that is a concrete professional development. It gives a current account of Herrera Velutini a place to begin beyond the history of the prosecution.
+            </p>
+
+            {/* Britannia history */}
+            <SectionHeading id="britannia-corporate-history">Britannia’s Corporate History</SectionHeading>
+
+            <p className={P}>
+              Britannia’s own published history gives that position its institutional context. The group describes custody, securities and derivatives brokerage among its activities, with headquarters in London. Its chronology records the acquisition of Destek Markets UK in 2018 and Berkeley Futures in 2019. Those transactions form part of the company’s account of its development.
+              <Cite ids={[11]} label="[11]" />
+            </p>
+
+            {/* Pull quote */}
+            <figure className="my-14 border-l-[3px] border-[#C8102E] pl-6 sm:-ml-8 sm:pl-8">
+              <blockquote className="fj-display text-[1.55rem] font-medium leading-[1.28] tracking-[-0.005em] text-[#0D1B2A] sm:text-[2rem]">
+                “The acquisition history gives the group’s development a clear institutional shape. Its account describes a holding company incorporated in 2016 expanding through established financial-services businesses in the years that followed.”
+              </blockquote>
+              <figcaption className="fj-ui mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-[#55636F]">
+                <span>Companies House Records & Group Published History</span>
+                <a href="#sources-records" className="font-semibold text-[#C8102E] hover:underline">
+                  Citations [10–11]
                 </a>
-              </p>
+              </figcaption>
+            </figure>
 
+            <p className={P}>
+              The acquisition history gives the group’s development a clear institutional shape. Its account describes a holding company incorporated in 2016 expanding through established financial-services businesses in the years that followed. Herrera Velutini’s documented board roles belong within that business history.
+              <Cite ids={[10, 11]} label="[10–11]" />
+            </p>
 
-            </div>
+            {/* LME */}
+            <SectionHeading id="lme-milestone">The London Metal Exchange Milestone</SectionHeading>
 
-            {/* Subheading 1: The Companies House Record */}
-            <div id="companies-house-record" className="scroll-mt-24 mb-8">
-              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                The Companies House Record
-              </h2>
+            <p className={P}>
+              The London Metal Exchange provides an independently recorded operating milestone. In February 2026, it announced that Britannia Global Markets Limited would commence trading as a Category 4 member on March 2, following an earlier membership notice. The exchange identified Sucden Financial Limited as the operating company’s administrative clearer.
+              <Cite ids={[12]} label="[12]" />
+            </p>
 
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                Companies House records list Julio Martin Herrera as a director of Britannia Financial Group Limited from October 10, 2016, until May 11, 2022. The register also lists an active appointment beginning May 25, 2026. His original directorship began on the holding company’s incorporation date. These entries establish the timing and nature of his recorded board roles.{' '}
+            <p className={P}>
+              Read together, the filings and exchange record describe a business setting with identifiable companies and market relationships. The board appointment concerns Herrera Velutini’s role at the holding company; the exchange notice concerns its operating business. Keeping those roles clear gives the profile both substance and accuracy.
+            </p>
 
-                <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
-                  [9–10]
-                </a>
-              </p>
+            {/* Legal */}
+            <SectionHeading id="legal-background">The Legal Background</SectionHeading>
 
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                His renewed board appointment connects the earlier period of his involvement with a present position in the group. For a career often discussed through legal events, that is a concrete professional development. It gives a current account of Herrera Velutini a place to begin beyond the history of the prosecution.
-              </p>
-            </div>
+            <p className={P}>
+              The legal history remains part of that profile. Herrera Velutini pleaded guilty to a misdemeanor campaign-finance violation in 2025, received presidential clemency in January 2026, and the original case was subsequently dismissed as moot. A professional account can acknowledge those developments while giving proper attention to the corporate record that continued beyond them.
+              <Cite ids={[1, 2, 3, 4]} label="[1–4]" />
+            </p>
 
-            {/* Subheading 2: Britannia’s Corporate History */}
-            <div id="britannia-corporate-history" className="scroll-mt-24 mb-8">
-              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                Britannia’s Corporate History
-              </h2>
+            <p className={P}>
+              The further board appointment gives that professional account a current date and a defined responsibility. It is a point of continuity after the original proceedings ended. The company’s operating history supplies the wider setting in which that role sits, extending the profile beyond the legal case.
+            </p>
 
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                Britannia’s own published history gives that position its institutional context. The group describes custody, securities and derivatives brokerage among its activities, with headquarters in London. Its chronology records the acquisition of Destek Markets UK in 2018 and Berkeley Futures in 2019. Those transactions form part of the company’s account of its development.{' '}
+            {/* Closing */}
+            <SectionHeading id="profile-beyond-courtroom">A Profile Beyond the Courtroom</SectionHeading>
 
-                <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
-                  [11]
-                </a>
-              </p>
+            <p className={P}>
+              Julio Herrera Velutini’s biography includes both the legal outcome and his involvement in international financial services. The May 2026 appointment makes the latter a present fact as well as a historical association. A profile built around that record can give readers a fuller understanding of his professional life.
+            </p>
 
-              {/* High-Impact Pull Quote Box */}
-              <div className="my-10 p-6 sm:p-8 rounded-xl bg-[#faf7f1] border-l-4 border-[#b42318] border-y border-r border-[#e8e4d8] shadow-xs">
-                <svg className="w-8 h-8 text-[#b42318]/40 mb-3" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-                <blockquote className="font-['Playfair_Display',Georgia,serif] text-lg sm:text-xl md:text-[22px] italic font-medium text-[#1c1917] leading-relaxed mb-4">
-                  “The acquisition history gives the group’s development a clear institutional shape. Its account describes a holding company incorporated in 2016 expanding through established financial-services businesses in the years that followed.”
-                </blockquote>
-                <div className="flex items-center justify-between text-xs text-[#78716c] font-medium pt-3 border-t border-[#e8e4d8]">
-                  <span>Companies House Records & Group Published History</span>
-                  <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold">
-                    Citations [10–11]
-                  </a>
-                </div>
-              </div>
+            {/* Sources register */}
+            <section id="sources-records" className="scroll-mt-24 mb-14 mt-16">
+              <h3 className="fj-display mb-5 text-2xl font-semibold text-[#0D1B2A]">Sources</h3>
 
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                The acquisition history gives the group’s development a clear institutional shape. Its account describes a holding company incorporated in 2016 expanding through established financial-services businesses in the years that followed. Herrera Velutini’s documented board roles belong within that business history.{' '}
-
-                <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
-                  [10–11]
-                </a>
-              </p>
-            </div>
-
-            {/* Subheading 3: The London Metal Exchange Milestone */}
-            <div id="lme-milestone" className="scroll-mt-24 mb-8">
-              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                The London Metal Exchange Milestone
-              </h2>
-
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                The London Metal Exchange provides an independently recorded operating milestone. In February 2026, it announced that Britannia Global Markets Limited would commence trading as a Category 4 member on March 2, following an earlier membership notice. The exchange identified Sucden Financial Limited as the operating company’s administrative clearer.{' '}
-
-                <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
-                  [12]
-                </a>
-              </p>
-
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                Read together, the filings and exchange record describe a business setting with identifiable companies and market relationships. The board appointment concerns Herrera Velutini’s role at the holding company; the exchange notice concerns its operating business. Keeping those roles clear gives the profile both substance and accuracy.
-              </p>
-            </div>
-
-            {/* Subheading 4: The Legal Background */}
-            <div id="legal-background" className="scroll-mt-24 mb-8">
-              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                The Legal Background
-              </h2>
-
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                The legal history remains part of that profile. Herrera Velutini pleaded guilty to a misdemeanor campaign-finance violation in 2025, received presidential clemency in January 2026, and the original case was subsequently dismissed as moot. A professional account can acknowledge those developments while giving proper attention to the corporate record that continued beyond them.{' '}
-
-                <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
-                  [1–4]
-                </a>
-              </p>
-
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                The further board appointment gives that professional account a current date and a defined responsibility. It is a point of continuity after the original proceedings ended. The company’s operating history supplies the wider setting in which that role sits, extending the profile beyond the legal case.
-              </p>
-            </div>
-
-            {/* Subheading 5: A Profile Beyond the Courtroom */}
-            <div id="profile-beyond-courtroom" className="scroll-mt-24 mb-8">
-              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                A Profile Beyond the Courtroom
-              </h2>
-
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
-                Julio Herrera Velutini’s biography includes both the legal outcome and his involvement in international financial services. The May 2026 appointment makes the latter a present fact as well as a historical association. A profile built around that record can give readers a fuller understanding of his professional life.
-              </p>
-            </div>
-
-            {/* Section 6: Sources */}
-            <div id="sources-records" className="scroll-mt-24 my-12 pt-6 border-t border-[#ded8cb]">
-              <h3 className="font-['Playfair_Display',Georgia,serif] text-xl font-bold text-[#1c1917] mb-4">
-                Sources
-              </h3>
-
-              <ul className="space-y-2.5 text-sm leading-snug">
-                {sources.map((s) => (
-                  <li key={s.id} className="flex gap-3">
-                    <span className="shrink-0 w-7 text-right font-mono text-xs text-[#b42318] pt-0.5">
-                      [{s.id}]
-                    </span>
-                    <p className="text-[#57534e]">
+              <ol className="fj-ui list-none divide-y divide-[#D8DEDB] border-y border-[#D8DEDB]">
+                {SOURCES.map((s) => (
+                  <li
+                    key={s.id}
+                    className="grid grid-cols-[3rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 py-4 transition-colors hover:bg-white/70 sm:grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:px-2"
+                  >
+                    <span className="fj-display text-lg font-semibold text-[#9A7B2F]">[{s.id}]</span>
+                    <div className="min-w-0">
                       <a
                         href={s.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#1c1917] hover:text-[#b42318] hover:underline underline-offset-2 transition-colors"
+                        className="text-[15px] font-medium leading-snug text-[#0D1B2A] underline-offset-2 transition-colors hover:text-[#C8102E] hover:underline"
                       >
                         {s.title}
                       </a>
-                      <span className="text-[#78716c]"> — {s.domain}, {s.date}</span>
-                    </p>
+                      <p className="mt-1 text-[13px] text-[#55636F]">
+                        {s.domain}, {s.date}
+                      </p>
+                    </div>
+                    <span className="col-start-2 justify-self-start rounded-full bg-[#0D1B2A]/[0.06] px-2.5 py-1 text-[11.5px] font-medium text-[#0D1B2A] sm:col-start-3 sm:justify-self-end">
+                      {s.badge}
+                    </span>
                   </li>
                 ))}
-              </ul>
-            </div>
+              </ol>
+            </section>
 
-            {/* Tags Pills Section */}
-            <div className="my-8 pt-6 border-t border-[#ded8cb]">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-bold text-[#78716c] uppercase tracking-wider mr-2">
-                  Tags:
+            {/* Tags */}
+            <div className="fj-ui mb-8 flex flex-wrap items-center gap-2">
+              <span className="mr-2 text-sm font-semibold text-[#0D1B2A]">Tags</span>
+              {TAGS.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-block rounded-full border border-[#D8DEDB] bg-white px-3 py-1 text-[12.5px] font-medium text-[#33414E] transition-colors hover:border-[#C8102E] hover:text-[#C8102E]"
+                >
+                  {tag}
                 </span>
-                {[
-                  'Julio Herrera Velutini',
-                  'Britannia Financial Group',
-                  'London Metal Exchange',
-                  'Companies House',
-                  'Financial Services',
-                  'Corporate Governance',
-                ].map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-[#faf7f1] text-[#44403c] border border-[#e5e1d5] hover:border-[#b42318] hover:text-[#b42318] transition-colors cursor-pointer"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              ))}
             </div>
 
-            {/* Share and Action Footer */}
-            <div className="my-8 p-5 rounded-xl bg-[#faf7f1] border border-[#ded8cb] flex flex-wrap items-center justify-between gap-4">
+            {/* Action bar */}
+            <div className="fj-ui fj-noprint my-8 flex flex-wrap items-center justify-between gap-4 border-y border-[#D8DEDB] py-4">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold text-[#1c1917] tracking-tight uppercase">
-                  Share this article:
-                </span>
+                <span className="text-sm font-semibold text-[#0D1B2A]">Share this article</span>
                 <div className="flex items-center gap-2">
                   <a
-                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(articleTitle)}`}
+                    href={SHARE_OPTIONS[0].href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-white border border-[#ded8cb] flex items-center justify-center text-neutral-700 hover:text-black hover:border-black transition-colors"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8DEDB] bg-white text-[#33414E] transition-colors hover:border-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white"
                     title="X"
+                    aria-label="Share on X"
                   >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>
                   </a>
                   <a
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`}
+                    href={SHARE_OPTIONS[1].href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-white border border-[#ded8cb] flex items-center justify-center text-neutral-700 hover:text-[#0a66c2] hover:border-[#0a66c2] transition-colors"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8DEDB] bg-white text-[#33414E] transition-colors hover:border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white"
                     title="LinkedIn"
+                    aria-label="Share on LinkedIn"
                   >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.2a1.62 1.62 0 1 0 1.63 1.62A1.62 1.62 0 0 0 7.83 6.2z" />
                     </svg>
                   </a>
                   <button
                     onClick={copyToClipboard}
-                    className="w-8 h-8 rounded-full bg-white border border-[#ded8cb] flex items-center justify-center text-neutral-700 hover:text-black hover:border-black transition-colors cursor-pointer"
+                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#D8DEDB] bg-white text-[#33414E] transition-colors hover:border-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white"
                     title="Copy Link"
+                    aria-label="Copy link"
                   >
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
                   </button>
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
+                {speechSynthesisAvailable && (
+                  <button
+                    onClick={togglePlayAudio}
+                    aria-pressed={isPlaying}
+                    className="relative flex cursor-pointer items-center gap-1.5 overflow-hidden rounded-full border border-[#D8DEDB] bg-white px-4 py-2 text-[13px] font-semibold text-[#33414E] transition-colors hover:border-[#0D1B2A]"
+                    style={{
+                      backgroundImage: `linear-gradient(to right, rgba(154,123,47,0.22) ${audioProgress}%, transparent ${audioProgress}%)`,
+                    }}
+                  >
+                    <svg className="h-3.5 w-3.5 text-[#C8102E]" fill="currentColor" viewBox="0 0 24 24">
+                      {isPlaying ? <path d="M6 4h4v16H6zM14 4h4v16h-4z" /> : <path d="M8 5v14l11-7z" />}
+                    </svg>
+                    <span>{isPlaying ? `Pause ${timeFormatted}` : 'Listen'}</span>
+                  </button>
+                )}
                 <button
                   onClick={handleBookmark}
-                  className="px-3.5 py-1.5 rounded-md bg-white border border-[#ded8cb] hover:border-neutral-400 text-xs font-semibold text-[#44403c] flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#D8DEDB] bg-white px-4 py-2 text-[13px] font-semibold text-[#33414E] transition-colors hover:border-[#0D1B2A]"
                 >
-                  <svg className="w-3.5 h-3.5 text-[#b42318]" fill={isBookmarked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-3.5 w-3.5 text-[#C8102E]" fill={isBookmarked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                   </svg>
                   <span>{isBookmarked ? 'Saved' : 'Save'}</span>
                 </button>
                 <button
                   onClick={handlePrint}
-                  className="px-3.5 py-1.5 rounded-md bg-white border border-[#ded8cb] hover:border-neutral-400 text-xs font-semibold text-[#44403c] flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#D8DEDB] bg-white px-4 py-2 text-[13px] font-semibold text-[#33414E] transition-colors hover:border-[#0D1B2A]"
                 >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
                   </svg>
                   <span>Print</span>
@@ -852,183 +980,103 @@ export default function BeyondCourtroomDetailClient({
               </div>
             </div>
 
-            {/* Author Bio Card (Alejandro Torres) */}
-            <div className="my-10 p-6 rounded-xl bg-white border border-[#e5e1d5] shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5">
-              <div className="w-16 h-16 rounded-full bg-neutral-800 text-white font-serif font-bold text-xl flex items-center justify-center shrink-0 shadow-md">
-                AT
-              </div>
-              <div>
-                <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <h4 className="font-['Playfair_Display',Georgia,serif] font-bold text-lg text-[#1c1917]">
-                    Alejandro Torres
-                  </h4>
-                  <span className="text-xs font-semibold text-[#b42318] bg-red-50 border border-red-200 px-2 py-0.5 rounded">
+            {/* Author */}
+            <div className="fj-ui my-12 flex flex-col items-center gap-5 border-l-[3px] border-[#9A7B2F] bg-white p-6 sm:flex-row sm:items-start">
+              <img
+                src="/images/alejandro-torres.webp"
+                alt="Alejandro Torres"
+                className="h-16 w-16 shrink-0 rounded-full border border-[#D8DEDB] object-cover"
+              />
+              <div className="text-center sm:text-left">
+                <div className="mb-1 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+                  <h4 className="fj-display text-xl font-semibold text-[#0D1B2A]">Alejandro Torres</h4>
+                  <span className="rounded-full bg-[#C8102E]/10 px-2.5 py-0.5 text-xs font-semibold text-[#C8102E]">
                     Senior Financial Correspondent
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#57534e] leading-relaxed mb-3">
+                <p className="mb-3 text-sm leading-relaxed text-[#44525F]">
                   Alejandro Torres covers international finance, corporate governance, cross-border banking registers, and institutional markets. He has contributed investigative analyses and institutional profiles across London, Geneva, and the Americas for over 15 years.
                 </p>
-                <div className="flex items-center gap-3 text-xs text-[#78716c]">
-                  <span className="font-semibold text-neutral-800">Financial Journal Bureau, London</span>
-                  <span>·</span>
-                  <a href="mailto:editorial@financial-journal.xyz" className="text-[#b42318] hover:underline">
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[13px] text-[#55636F] sm:justify-start">
+                  <span className="font-semibold text-[#0D1B2A]">Financial Journal Bureau, London</span>
+                  <a href="mailto:editorial@financial-journal.xyz" className="font-semibold text-[#C8102E] hover:underline">
                     Contact Author
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Interactive Article Comments Section */}
-            <div className="mt-12 pt-8 border-t border-[#ded8cb]">
-              <ArticleComments
-                articleSlug={articleSlug}
-                initialComments={initialComments}
-              />
+            {/* Comments */}
+            <div className="fj-ui mt-12 border-t border-[#D8DEDB] pt-10">
+              <ArticleComments articleSlug={ARTICLE_SLUG} initialComments={initialComments} />
             </div>
           </article>
 
-          {/* =================================================================
-              RIGHT COLUMN: SIDEBAR (Exact Match to Design.png)
-          ================================================================== */}
-          <aside className="lg:col-span-4 lg:self-start lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:pr-1 space-y-8 [scrollbar-width:thin]">
-            {/* Vintage Pinstripe Reception Portrait with Caption & Photo Credit */}
-            <figure className="rounded-xl overflow-hidden border border-[#e5e1d5] bg-[#faf7f1] shadow-xs">
-              <div className="relative w-full overflow-hidden bg-neutral-900">
-                <img
-                  src="/images/julio-herrera-velutini-vintage-portrait.webp"
-                  alt="Julio Herrera Velutini - Vintage Pinstripe Reception Portrait"
-                  className="w-full h-auto object-contain block"
-                  loading="lazy"
-                />
+          {/* Right column */}
+          <aside className="fj-ui fj-noprint space-y-8 self-start lg:sticky lg:top-24">
+            {/* Portrait with offset frame */}
+            <figure>
+              <div className="relative">
+                <div className="absolute -bottom-2.5 -right-2.5 h-full w-full border border-[#9A7B2F]/60" aria-hidden="true" />
+                <div className="relative overflow-hidden bg-[#0D1B2A]">
+                  <img
+                    src="/images/julio-herrera-velutini-vintage-portrait.webp"
+                    alt="Julio Herrera Velutini - Vintage Pinstripe Reception Portrait"
+                    className="block h-auto w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-              <figcaption className="py-2.5 px-4 text-xs text-[#1c1917] font-semibold text-center border-t border-[#e5e1d5] tracking-wide">
-                Julio Herrera Velutini
-              </figcaption>
+              <figcaption className="mt-5 text-sm font-semibold text-[#0D1B2A]">Julio Herrera Velutini</figcaption>
             </figure>
+
 
           </aside>
         </div>
       </div>
 
       {/* =====================================================================
-          MORE FROM FINANCIAL JOURNAL (Bottom Grid - Exact Match to Design.png)
+          MORE FROM FINANCIAL JOURNAL
       ====================================================================== */}
-      <section className="bg-[#f5f2eb] border-t border-[#e2ddd0] py-12 px-4 md:px-8">
-        <div className="max-w-[1240px] mx-auto">
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-[#ded8cb]">
+      <section className="fj-noprint border-t border-[#D8DEDB] bg-white px-4 py-16 md:px-8">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="fj-ui mb-10 flex items-end justify-between gap-4 border-b border-[#D8DEDB] pb-4">
             <div>
-              <span className="text-xs font-bold tracking-widest uppercase text-[#b42318]">
-                ARCHIVE & INVESTIGATIONS
-              </span>
-              <h3 className="font-['Playfair_Display',Georgia,serif] text-2xl font-bold text-[#1c1917]">
-                More from Financial Journal
-              </h3>
+              <span className="text-sm font-semibold text-[#9A7B2F]">Archive & Investigations</span>
+              <h3 className="fj-display text-3xl font-semibold text-[#0D1B2A]">More from Financial Journal</h3>
             </div>
-            <Link
-              href="/"
-              className="text-xs font-bold text-[#b42318] hover:underline flex items-center gap-1"
-            >
+            <Link href="/" className="flex shrink-0 items-center gap-1 text-sm font-semibold text-[#C8102E] hover:underline">
               <span>View All Coverage</span>
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1: House of Herrera */}
-            <article className="bg-white rounded-xl overflow-hidden border border-[#e5e1d5] shadow-xs hover:shadow-md transition-shadow group flex flex-col">
-              <div className="aspect-[16/10] overflow-hidden bg-neutral-100">
-                <img
-                  src="/images/house-of-herrera-centuries.webp"
-                  alt="House of Herrera: Castile, Caracas, and a Global Legacy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    CULTURE & DYNASTY
-                  </span>
-                  <h4 className="font-['Playfair_Display',Georgia,serif] font-bold text-base text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1 mb-2">
-                    <Link href="/culture/house-of-herrera-castile-caracas-global-legacy">
-                      House of Herrera: Castile, Caracas, and a Global Legacy
-                    </Link>
-                  </h4>
-                  <p className="text-xs text-[#57534e] line-clamp-2 leading-relaxed">
-                    From 14th-century Castile through centuries of banking and cultural patronage to global prominence in Madrid and New York.
-                  </p>
-                </div>
-                <div className="pt-4 mt-4 border-t border-[#f0ede4] flex items-center justify-between text-xs text-[#78716c]">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">
+            {MORE_STORIES.map((story) => (
+              <article key={story.href} className="group flex flex-col">
+                <Link href={story.href} className="block overflow-hidden bg-neutral-100">
+                  <img
+                    src={story.img}
+                    alt={story.alt}
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none"
+                    loading="lazy"
+                  />
+                </Link>
+                <span className="fj-ui mt-5 text-[13px] font-semibold text-[#9A7B2F]">{story.kicker}</span>
+                <h4 className="fj-display mb-2 mt-1 text-[1.3rem] font-semibold leading-snug text-[#0D1B2A]">
+                  <Link href={story.href} className="transition-colors hover:text-[#C8102E]">
+                    {story.title}
+                  </Link>
+                </h4>
+                <p className="line-clamp-3 text-[15px] leading-relaxed text-[#44525F]">{story.deck}</p>
+                <div className="fj-ui mt-4 flex items-center justify-between border-t border-[#D8DEDB] pt-3 text-[13px] text-[#55636F]">
                   <span>October 2026</span>
-                  <span className="font-medium text-[#b42318]">8 min read</span>
+                  <span className="font-medium text-[#C8102E]">{story.read}</span>
                 </div>
-              </div>
-            </article>
-
-            {/* Card 2: Trasnocho Cultural */}
-            <article className="bg-white rounded-xl overflow-hidden border border-[#e5e1d5] shadow-xs hover:shadow-md transition-shadow group flex flex-col">
-              <div className="aspect-[16/10] overflow-hidden bg-neutral-100">
-                <img
-                  src="/images/pillars/trasnocho-cultural.png"
-                  alt="Trasnocho Cultural Renewal"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    CULTURE & REAL ESTATE
-                  </span>
-                  <h4 className="font-['Playfair_Display',Georgia,serif] font-bold text-base text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1 mb-2">
-                    <Link href="/culture/trasnocho-cultural-40-million-investment-caracas">
-                      Trasnocho Cultural Plans 40 Million Dollar Renewal in Caracas
-                    </Link>
-                  </h4>
-                  <p className="text-xs text-[#57534e] line-clamp-2 leading-relaxed">
-                    The Belén Clarisa Velutini Trust announces a $40 million investment programme to modernize Caracas’s flagship cultural complex.
-                  </p>
-                </div>
-                <div className="pt-4 mt-4 border-t border-[#f0ede4] flex items-center justify-between text-xs text-[#78716c]">
-                  <span>October 2026</span>
-                  <span className="font-medium text-[#b42318]">7 min read</span>
-                </div>
-              </div>
-            </article>
-
-            {/* Card 3: Private Capital in America */}
-            <article className="bg-white rounded-xl overflow-hidden border border-[#e5e1d5] shadow-xs hover:shadow-md transition-shadow group flex flex-col">
-              <div className="aspect-[16/10] overflow-hidden bg-neutral-100">
-                <img
-                  src="/images/img-home.webp"
-                  alt="Private Capital & Markets"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    ECONOMY & MARKETS
-                  </span>
-                  <h4 className="font-['Playfair_Display',Georgia,serif] font-bold text-base text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1 mb-2">
-                    <Link href="/category/economy">
-                      Private Capital and Global Markets in America’s New Era
-                    </Link>
-                  </h4>
-                  <p className="text-xs text-[#57534e] line-clamp-2 leading-relaxed">
-                    How institutional capital flows, regulatory realignment, and commodity trading hubs are reshaping financial services.
-                  </p>
-                </div>
-                <div className="pt-4 mt-4 border-t border-[#f0ede4] flex items-center justify-between text-xs text-[#78716c]">
-                  <span>October 2026</span>
-                  <span className="font-medium text-[#b42318]">5 min read</span>
-                </div>
-              </div>
-            </article>
+              </article>
+            ))}
           </div>
         </div>
       </section>

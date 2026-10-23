@@ -49,7 +49,7 @@ const SECTIONS = [
 
 const SOURCES: Source[] = [
   {
-    id: 9,
+    id: 1,
     title: 'Companies House Britannia Financial Group Limited officers register',
     url: 'https://find-and-update.company-information.service.gov.uk/company/10417641/officers',
     domain: 'service.gov.uk',
@@ -57,7 +57,7 @@ const SOURCES: Source[] = [
     badge: 'Official UK Corporate Register',
   },
   {
-    id: 10,
+    id: 2,
     title: 'Companies House Britannia Financial Group Limited company overview',
     url: 'https://find-and-update.company-information.service.gov.uk/company/10417641',
     domain: 'service.gov.uk',
@@ -65,7 +65,7 @@ const SOURCES: Source[] = [
     badge: 'Official UK Corporate Register',
   },
   {
-    id: 11,
+    id: 3,
     title: 'Britannia Financial Group official business description and history',
     url: 'https://www.britannia.com/about/',
     domain: 'britannia.com',
@@ -73,7 +73,7 @@ const SOURCES: Source[] = [
     badge: 'Corporate Disclosure',
   },
   {
-    id: 12,
+    id: 4,
     title: 'London Metal Exchange Notice 26 057 February 25 2026',
     url: 'https://www.lme.com/api/sitecore/MemberNoticesSearchApi/Download?id=33ba5b61-4b0e-4237-9169-e76d426ec2f0',
     domain: 'lme.com',
@@ -81,7 +81,7 @@ const SOURCES: Source[] = [
     badge: 'Exchange Regulatory Notice',
   },
   {
-    id: 1,
+    id: 5,
     title: 'Associated Press August 27 2025 plea report',
     url: 'https://apnews.com/article/puerto-rico-governor-wanda-vazquez-corruption-588ffd964bb4076a5b45219375d3fef5',
     domain: 'apnews.com',
@@ -89,7 +89,7 @@ const SOURCES: Source[] = [
     badge: 'Independent News Reporting',
   },
   {
-    id: 2,
+    id: 6,
     title: 'US Department of Justice January 15 2026 pardon warrant',
     url: 'https://www.justice.gov/pardon/media/1424211/dl',
     domain: 'justice.gov',
@@ -97,7 +97,7 @@ const SOURCES: Source[] = [
     badge: 'Official Judicial Record',
   },
   {
-    id: 3,
+    id: 7,
     title: 'US Department of Justice January 20 2026 amended pardon warrant',
     url: 'https://www.justice.gov/pardon/media/1425096/dl',
     domain: 'justice.gov',
@@ -105,7 +105,7 @@ const SOURCES: Source[] = [
     badge: 'Official Judicial Record',
   },
   {
-    id: 4,
+    id: 8,
     title: 'US District Court for Puerto Rico January 27 2026 judgment of dismissal',
     url: 'https://mma.prnewswire.com/media/2872362/Judge_document.pdf',
     domain: 'prnewswire.com / uscourts.gov',
@@ -771,7 +771,7 @@ export default function BeyondCourtroomDetailClient({
             {/* Lede */}
             <p className="mb-8 text-[1.35rem] leading-[1.62] text-[#0D1B2A] sm:text-[1.5rem] first-letter:float-left first-letter:pr-3.5 first-letter:pt-1 first-letter:font-['Playfair_Display',Georgia,serif] first-letter:text-[4.2rem] first-letter:font-bold first-letter:leading-[0.8] first-letter:text-[#b42318]">
               On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register. The appointment places a current professional role at the centre of his biography and provides a documented sign of continuity in his financial-services career.
-              <Cite ids={[9]} label="[9]" />
+              <Cite ids={[1]} label="[1]" />
             </p>
 
             {/* Companies House */}
@@ -779,7 +779,7 @@ export default function BeyondCourtroomDetailClient({
 
             <p className={P}>
               Companies House records list Julio Martin Herrera as a director of Britannia Financial Group Limited from October 10, 2016, until May 11, 2022. The register also lists an active appointment beginning May 25, 2026. His original directorship began on the holding company’s incorporation date. These entries establish the timing and nature of his recorded board roles.
-              <Cite ids={[9, 10]} label="[9–10]" />
+              <Cite ids={[1, 2]} label="[1–2]" />
             </p>
 
             <p className={P}>
@@ -791,7 +791,7 @@ export default function BeyondCourtroomDetailClient({
 
             <p className={P}>
               Britannia’s own published history gives that position its institutional context. The group describes custody, securities and derivatives brokerage among its activities, with headquarters in London. Its chronology records the acquisition of Destek Markets UK in 2018 and Berkeley Futures in 2019. Those transactions form part of the company’s account of its development.
-              <Cite ids={[11]} label="[11]" />
+              <Cite ids={[3]} label="[3]" />
             </p>
 
             {/* Pull quote */}
@@ -802,14 +802,14 @@ export default function BeyondCourtroomDetailClient({
               <figcaption className="fj-ui mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-[#55636F]">
                 <span>Companies House Records & Group Published History</span>
                 <a href="#sources-records" className="font-semibold text-[#C8102E] hover:underline">
-                  Citations [10–11]
+                  Citations [2–3]
                 </a>
               </figcaption>
             </figure>
 
             <p className={P}>
               The acquisition history gives the group’s development a clear institutional shape. Its account describes a holding company incorporated in 2016 expanding through established financial-services businesses in the years that followed. Herrera Velutini’s documented board roles belong within that business history.
-              <Cite ids={[10, 11]} label="[10–11]" />
+              <Cite ids={[2, 3]} label="[2–3]" />
             </p>
 
             {/* LME */}
@@ -817,7 +817,7 @@ export default function BeyondCourtroomDetailClient({
 
             <p className={P}>
               The London Metal Exchange provides an independently recorded operating milestone. In February 2026, it announced that Britannia Global Markets Limited would commence trading as a Category 4 member on March 2, following an earlier membership notice. The exchange identified Sucden Financial Limited as the operating company’s administrative clearer.
-              <Cite ids={[12]} label="[12]" />
+              <Cite ids={[4]} label="[4]" />
             </p>
 
             <p className={P}>
@@ -829,7 +829,7 @@ export default function BeyondCourtroomDetailClient({
 
             <p className={P}>
               The legal history remains part of that profile. Herrera Velutini pleaded guilty to a misdemeanor campaign-finance violation in 2025, received presidential clemency in January 2026, and the original case was subsequently dismissed as moot. A professional account can acknowledge those developments while giving proper attention to the corporate record that continued beyond them.
-              <Cite ids={[1, 2, 3, 4]} label="[1–4]" />
+              <Cite ids={[5, 6, 7, 8]} label="[5–8]" />
             </p>
 
             <p className={P}>

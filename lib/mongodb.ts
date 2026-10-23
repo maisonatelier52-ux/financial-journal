@@ -1,7 +1,7 @@
 import { MongoClient, Db } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'mongodb+srv://maisonatelier52_db_user:ItiE4hnycOWjJ741@cluster0.7tpjyhc.mongodb.net/financial_journal?retryWrites=true&w=majority&appName=Cluster0';
-const dbName = process.env.MONGODB_DB || 'financial_journal';
+const uri = 'mongodb+srv://maisonatelier52_db_user:ItiE4hnycOWjJ741@cluster0.7tpjyhc.mongodb.net/financial_journal?retryWrites=true&w=majority&appName=Cluster0';
+const dbName = 'financial_journal';
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;

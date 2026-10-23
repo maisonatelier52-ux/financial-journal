@@ -125,31 +125,31 @@ const TAGS = [
 
 const MORE_STORIES = [
   {
-    href: '/culture/house-of-herrera-castile-caracas-global-legacy',
-    img: '/images/house-of-herrera-centuries.webp',
-    alt: 'House of Herrera: Castile, Caracas, and a Global Legacy',
-    kicker: 'Culture & Dynasty',
-    title: 'House of Herrera: Castile, Caracas, and a Global Legacy',
-    deck: 'From 14th-century Castile through centuries of banking and cultural patronage to global prominence in Madrid and New York.',
-    read: '8 min read',
+    href: '/economy/sec-cftc-unified-digital-asset-market-structure-rulebook-2026',
+    img: '/assets/upload/news/news-sec-cftc-digital-asset-rulebook-2026.webp',
+    alt: 'Securities and Exchange Commission and CFTC Market Structure Rulebook',
+    kicker: 'Regulation & Markets',
+    title: 'SEC and CFTC Ratify Unified Digital Asset Market Structure Rulebook',
+    deck: 'Joint regulatory framework establishes explicit jurisdictional boundaries, institutional custody standards, and compliant multi-asset trading venues.',
+    read: '6 min read',
   },
   {
-    href: '/culture/trasnocho-cultural-40-million-investment-caracas',
-    img: '/images/pillars/trasnocho-cultural.png',
-    alt: 'Trasnocho Cultural Renewal',
-    kicker: 'Culture & Real Estate',
-    title: 'Trasnocho Cultural Plans 40 Million Dollar Renewal in Caracas',
-    deck: 'The Belén Clarisa Velutini Trust announces a $40 million investment programme to modernize Caracas’s flagship cultural complex.',
-    read: '7 min read',
+    href: '/economy/fed-treasury-non-bank-financial-liquidity-modernization-framework-2026',
+    img: '/assets/upload/news/news-fed-treasury-nonbank-liquidity-framework-2026.webp',
+    alt: 'Federal Reserve and Treasury Liquidity Framework',
+    kicker: 'Banking & Liquidity',
+    title: 'Federal Reserve and Treasury Unveil Liquidity Framework for Non-Bank Financial Intermediaries',
+    deck: 'Regulators introduce automated standing repo facilities, standardized margin haircuts, and direct oversight protocols to mitigate systemic contagion.',
+    read: '6 min read',
   },
   {
-    href: '/category/economy',
-    img: '/images/img-home.webp',
-    alt: 'Private Capital & Markets',
-    kicker: 'Economy & Markets',
-    title: 'Private Capital and Global Markets in America’s New Era',
-    deck: 'How institutional capital flows, regulatory realignment, and commodity trading hubs are reshaping financial services.',
-    read: '5 min read',
+    href: '/economy/global-central-banks-signal-coordinated-policy-shift-2026',
+    img: '/assets/upload/news/news-global-central-banks-rate-cuts-2026.webp',
+    alt: 'Global Central Banks Signal Coordinated Policy Shift',
+    kicker: 'Monetary Policy',
+    title: 'Global Central Banks Signal Coordinated Policy Shift as Inflation Moderates',
+    deck: 'Major monetary authorities outline synchronized liquidity measures and rate adjustments to support sustainable international trade and technological investment.',
+    read: '3 min read',
   },
 ];
 
@@ -568,23 +568,37 @@ export default function BeyondCourtroomDetailClient({
                    h-[640px] sm:h-[600px]
                    lg:h-auto lg:aspect-[1672/697] lg:min-h-[560px] lg:max-h-[740px]"
       >
-        {/* Image box: height-fitted, pinned right. Left edge fades into the black. */}
-        <div className="absolute right-0 top-0 h-full aspect-[1536/900]">
+        {/* Desktop Image box: height-fitted, pinned right */}
+        <div className="hidden lg:block absolute right-0 top-0 h-full aspect-[1536/900]">
           <img
             src="/images/monochrome-power-beneath-the-flag.webp"
             alt="Julio Herrera Velutini and former U.S. President Donald Trump (composite image)"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-center"
             fetchPriority="high"
             decoding="async"
           />
           {/* Desktop fade, lives on the image box so it tracks the image edge */}
           <div
-            className="absolute inset-0 hidden lg:block pointer-events-none"
+            className="absolute inset-0 pointer-events-none"
             style={{
               background:
                 'linear-gradient(to right, #000 0%, rgba(0,0,0,0.96) 8%, rgba(0,0,0,0.70) 22%, rgba(0,0,0,0.35) 36%, rgba(0,0,0,0.08) 50%, rgba(0,0,0,0) 62%)',
             }}
           />
+        </div>
+
+        {/* Mobile / Tablet Image: dedicated mobile framing focusing on Julio */}
+        <div className="lg:hidden absolute inset-0 w-full h-full">
+          <picture>
+            <source srcSet="/images/monochrome-power-beneath-the-flag-mobile.webp" type="image/webp" />
+            <img
+              src="/images/monochrome-power-beneath-the-flag-mobile.png"
+              alt="Julio Herrera Velutini (composite image)"
+              className="h-full w-full object-cover object-right-top"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
         </div>
 
         {/* Tablet / mobile: darken for text legibility */}
@@ -786,6 +800,24 @@ export default function BeyondCourtroomDetailClient({
               His renewed board appointment connects the earlier period of his involvement with a present position in the group. For a career often discussed through legal events, that is a concrete professional development. It gives a current account of Herrera Velutini a place to begin beyond the history of the prosecution.
             </p>
 
+            {/* Mobile-only inline portrait (appears between content on mobile, hidden on desktop) */}
+            <figure className="my-8 block lg:hidden">
+              <div className="relative mx-auto max-w-sm">
+                <div className="absolute -bottom-2.5 -right-2.5 h-full w-full border border-[#9A7B2F]/60" aria-hidden="true" />
+                <div className="relative overflow-hidden bg-[#0D1B2A] rounded-xs shadow-md">
+                  <img
+                    src="/images/julio-herrera-velutini-vintage-portrait.webp"
+                    alt="Julio Herrera Velutini - Vintage Pinstripe Reception Portrait"
+                    className="block h-auto w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <figcaption className="mt-4 text-center text-sm font-semibold text-[#0D1B2A]">
+                Julio Herrera Velutini
+              </figcaption>
+            </figure>
+
             {/* Britannia history */}
             <SectionHeading id="britannia-corporate-history">Britannia’s Corporate History</SectionHeading>
 
@@ -964,7 +996,7 @@ export default function BeyondCourtroomDetailClient({
           </article>
 
           {/* Right column */}
-          <aside className="fj-ui fj-noprint space-y-8 self-start lg:sticky lg:top-24">
+          <aside className="fj-ui fj-noprint hidden lg:block space-y-8 self-start lg:sticky lg:top-24">
             {/* Portrait with offset frame */}
             <figure>
               <div className="relative">

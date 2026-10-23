@@ -644,7 +644,7 @@ export function getAuthorBySlug(slug: string): Author | null {
   return authors.find(a => a.slug === slug) || null;
 }
 
-// ── Views Storage ─────────────────────────────────────────────────────────────
+// ── Views Storage (MongoDB with local fallback) ───────────────────────────────
 function getViewsMap(): Record<string, number> {
   try {
     if (!fs.existsSync(VIEWS_PATH)) return {};
@@ -655,14 +655,45 @@ function getViewsMap(): Record<string, number> {
   }
 }
 
-export function incrementArticleView(slug: string): number {
+export async function incrementArticleView(slug: string): Promise<number> {
+  // Update local file fallback
+  let localCount = 0;
   try {
     const viewsMap = getViewsMap();
     viewsMap[slug] = (viewsMap[slug] || 0) + 1;
     fs.writeFileSync(VIEWS_PATH, JSON.stringify(viewsMap, null, 2), 'utf-8');
-    return viewsMap[slug];
+    localCount = viewsMap[slug];
   } catch (err) {
-    console.error('Failed to increment view count:', err);
+    console.error('Local view count update error:', err);
+  }
+
+  // Update MongoDB asynchronously & atomically
+  try {
+    const { getDb } = await import('@/lib/mongodb');
+    const db = await getDb();
+    const result = await db.collection('views').findOneAndUpdate(
+      { slug },
+      {
+        $inc: { count: 1 },
+        $set: { updatedAt: new Date().toISOString() }
+      },
+      { upsert: true, returnDocument: 'after' }
+    );
+    return result?.count || localCount;
+  } catch (err) {
+    console.error('MongoDB incrementArticleView error:', err);
+    return localCount;
+  }
+}
+
+export async function getArticleViewsFromMongo(slug: string): Promise<number> {
+  try {
+    const { getDb } = await import('@/lib/mongodb');
+    const db = await getDb();
+    const record = await db.collection('views').findOne({ slug });
+    return record?.count || 0;
+  } catch (err) {
+    console.error('MongoDB getArticleViewsFromMongo error:', err);
     return 0;
   }
 }

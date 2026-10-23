@@ -10,12 +10,24 @@ interface Props {
 }
 
 export default function ArticleComments({ articleSlug, initialComments }: Props) {
-  const [comments, setComments] = useState<CommentItem[]>(initialComments);
+  const [comments, setComments] = useState<CommentItem[]>(initialComments || []);
   const [user, setUser] = useState<{ username: string; email: string } | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [content, setContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Fetch comments from MongoDB API on mount
+  useEffect(() => {
+    fetch(`/api/comments?slug=${encodeURIComponent(articleSlug)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.comments && Array.isArray(data.comments)) {
+          setComments(data.comments);
+        }
+      })
+      .catch(err => console.error('Failed to load comments:', err));
+  }, [articleSlug]);
 
   useEffect(() => {
     fetch('/api/auth/me')
@@ -54,7 +66,7 @@ export default function ArticleComments({ articleSlug, initialComments }: Props)
       const data = await res.json();
 
       if (res.ok && data.success) {
-        setComments([data.comment, ...comments]);
+        setComments(prev => [data.comment, ...prev]);
         setContent('');
         setMsg({ type: 'success', text: 'Your comment has been posted successfully!' });
       } else {

@@ -28,23 +28,40 @@ export async function GET(req: NextRequest) {
     const subscribers = await getAllSubscribers();
     const autoSettings = await getAutoNewsletterSettings();
 
-    // Latest 12 articles for preview
-    const latestArticles = (articlesData as any[]).slice(0, 12).map((a) => ({
-      title: a.title,
-      category: a.category,
-      categorySlug: a.categorySlug,
-      slug: a.slug,
-      summary: a.summary || '',
-      readTime: a.readTime || '3 min read',
-      image: a.image || '/images/img1.webp',
-      publishedAt: a.publishedAt || 'Today',
-    }));
+    // Map all articles with full date metadata and client/pillar classification
+    const allArticles = (articlesData as any[]).map((a) => {
+      const isClientArticle = Boolean(
+        a.isPillar ||
+        a.isClient ||
+        a.categorySlug === 'pillars' ||
+        a.slug?.includes('julio-') ||
+        a.slug?.includes('herrera-velutini')
+      );
+
+      return {
+        title: a.title,
+        category: a.category,
+        categorySlug: a.categorySlug,
+        slug: a.slug,
+        summary: a.summary || '',
+        readTime: a.readTime || '3 min read',
+        image: a.image || '/images/img1.webp',
+        publishedAt: a.publishedAt || a.publishedDate || 'Today',
+        publishedDate: a.publishedDate || a.publishedAt || '2026-10-01',
+        isClientArticle,
+      };
+    });
+
+    const clientArticles = allArticles.filter((a) => a.isClientArticle);
+    const generalNews = allArticles.filter((a) => !a.isClientArticle);
 
     return NextResponse.json({
       admin: user.username,
       totalSubscribers: subscribers.length,
       subscribers: subscribers.map((s) => ({ email: s.email, createdAt: s.createdAt })),
-      latestArticles,
+      allArticles,
+      clientArticles,
+      generalNews,
       templates: TEMPLATE_OPTIONS,
       siteUrl: autoSettings.siteUrl || currentSiteUrl,
       autoSettings,

@@ -63,7 +63,10 @@ export function getArticleUrl(siteUrl: string, categorySlug: string, slug: strin
 }
 
 /**
- * Format image URL to guarantee full absolute URL for email clients
+ * Format image URL to guarantee full absolute URL for email clients.
+ * Automatically points to standard JPG versions in /images/newsletter/
+ * because many desktop and mobile email clients (especially older Outlook,
+ * Apple Mail, and Gmail web proxies) block or fail to render modern WebP or massive 4MB PNGs.
  */
 export function getAbsoluteImageUrl(siteUrl: string, imagePath?: string): string {
   if (!imagePath) return '';
@@ -72,11 +75,93 @@ export function getAbsoluteImageUrl(siteUrl: string, imagePath?: string): string
   }
   const base = siteUrl.replace(/\/+$/, '');
   const cleanImg = imagePath.replace(/^\/+/, '');
+
+  // Extract base filename without extension
+  const match = cleanImg.match(/([^/]+)\.(webp|png|jpg|jpeg)$/i);
+  if (match) {
+    const filenameNoExt = match[1];
+    return `${base}/images/newsletter/${filenameNoExt}.jpg`;
+  }
+
   return `${base}/${cleanImg}`;
 }
 
 export interface BuildOptions {
-  includeImages?: boolean; // When true, renders images below selected articles
+  includeImages?: boolean;
+}
+
+/**
+ * Common Dark-Mode override CSS to inject into email headers.
+ * This forces email clients (Apple Mail, Outlook iOS/Android, Gmail Dark Mode)
+ * to maintain the intended light/exact color palette instead of inverting colors.
+ */
+const DARK_MODE_PROTECTION_HEAD = `
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <style type="text/css">
+    :root {
+      color-scheme: light !important;
+      supported-color-schemes: light !important;
+    }
+    /* Stop iOS/Apple Mail auto inverted dark mode */
+    @media (prefers-color-scheme: dark) {
+      body, .email-body { background-color: #f1f3f5 !important; color: #111827 !important; }
+      .email-container { background-color: #ffffff !important; }
+      .dark-header { background-color: #0f172a !important; color: #ffffff !important; }
+      .crimson-header { background-color: #b91c1c !important; color: #ffffff !important; }
+      .broadsheet-card { background-color: #ffffff !important; color: #1c1917 !important; }
+      .story-card { background-color: #ffffff !important; }
+      .sub-bar { background-color: #f8fafc !important; }
+      .footer-bar { background-color: #f8fafc !important; color: #64748b !important; }
+      h1, h2, h3 { color: inherit !important; }
+      p { color: inherit !important; }
+      a { color: inherit !important; }
+      .btn-red { background-color: #dc2626 !important; color: #ffffff !important; }
+      .tag-red { color: #dc2626 !important; }
+    }
+    /* Stop Samsung / Outlook Web dark inversion */
+    [data-ogsc] body, [data-ogsc] .email-body { background-color: #f1f3f5 !important; }
+    [data-ogsc] .email-container { background-color: #ffffff !important; }
+    [data-ogsb] .dark-header { background-color: #0f172a !important; }
+    [data-ogsb] .crimson-header { background-color: #b91c1c !important; }
+    [data-ogsb] .btn-red { background-color: #dc2626 !important; color: #ffffff !important; }
+  </style>
+`;
+
+/**
+ * Generate plain text alternative to guarantee 100% spam filter compliance
+ */
+export function buildNewsletterPlainText(
+  subject: string,
+  editionTitle: string,
+  articles: NewsletterArticle[],
+  siteUrl: string
+): string {
+  const lines: string[] = [];
+  lines.push(`FINANCIAL JOURNAL`);
+  lines.push(`Exclusive Intelligence & Global Markets`);
+  lines.push(`${editionTitle.toUpperCase()}`);
+  lines.push(`----------------------------------------`);
+  lines.push(``);
+
+  articles.forEach((art, i) => {
+    const url = getArticleUrl(siteUrl, art.categorySlug, art.slug);
+    lines.push(`${i + 1}. [${art.category.toUpperCase()}] ${art.title}`);
+    if (art.summary) {
+      lines.push(`   ${art.summary}`);
+    }
+    lines.push(`   Read article: ${url}`);
+    lines.push(``);
+  });
+
+  lines.push(`----------------------------------------`);
+  lines.push(`Financial Journal Editorial Desk`);
+  lines.push(`You are receiving this intelligence dispatch because you subscribed at ${siteUrl}.`);
+  lines.push(`To manage your subscription or unsubscribe: ${siteUrl}`);
+  lines.push(`Privacy Policy: ${siteUrl}/privacy-policy`);
+  lines.push(`(c) ${new Date().getFullYear()} Financial Journal. All rights reserved.`);
+
+  return lines.join('\n');
 }
 
 /**
@@ -108,11 +193,11 @@ export function buildNewsletterHtml(
         const imageUrl = getAbsoluteImageUrl(siteUrl, art.image);
         return `
         <tr>
-          <td style="padding: ${idx === 0 ? '0 0 24px 0' : '24px 0'}; ${!isLast ? 'border-bottom: 1px solid #e5e7eb;' : ''}">
+          <td class="story-card" style="padding: ${idx === 0 ? '0 0 24px 0' : '24px 0'}; ${!isLast ? 'border-bottom: 1px solid #e5e7eb;' : ''}; background-color: #ffffff;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
                 <td>
-                  <span style="display: inline-block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
+                  <span class="tag-red" style="display: inline-block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
                     ${art.category || 'MARKETS'}
                   </span>
                   <h2 style="margin: 0 0 10px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.35; font-weight: 700; color: #111827;">
@@ -139,7 +224,7 @@ export function buildNewsletterHtml(
                         </span>
                       </td>
                       <td>
-                        <a href="${url}" target="_blank" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; color: #dc2626; text-decoration: none;">
+                        <a href="${url}" target="_blank" class="tag-red" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; color: #dc2626; text-decoration: none;">
                           Read full article &rarr;
                         </a>
                       </td>
@@ -154,26 +239,25 @@ export function buildNewsletterHtml(
       .join('');
 
     return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
   <title>${subject}</title>
+  ${DARK_MODE_PROTECTION_HEAD}
 </head>
-<body style="margin: 0; padding: 0; background-color: #f1f3f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f1f3f5; table-layout: fixed;">
+<body class="email-body" style="margin: 0; padding: 0; background-color: #f1f3f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-body" style="background-color: #f1f3f5; table-layout: fixed;">
     <tr>
       <td align="center" style="padding: 24px 12px;">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 620px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container" style="max-width: 620px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
           <!-- Top Accent Bar -->
           <tr>
             <td height="5" style="background-color: #dc2626; line-height: 5px; font-size: 5px;">&nbsp;</td>
           </tr>
           <!-- Header -->
           <tr>
-            <td style="background-color: #0f172a; padding: 32px 28px; text-align: center;">
+            <td class="dark-header" style="background-color: #0f172a; padding: 32px 28px; text-align: center;">
               <h1 style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: 1px; text-transform: uppercase;">
                 FINANCIAL JOURNAL
               </h1>
@@ -184,7 +268,7 @@ export function buildNewsletterHtml(
           </tr>
           <!-- Sub Bar -->
           <tr>
-            <td style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 12px 28px;">
+            <td class="sub-bar" style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 12px 28px;">
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="left" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -199,7 +283,7 @@ export function buildNewsletterHtml(
           </tr>
           <!-- Content Articles -->
           <tr>
-            <td style="padding: 28px 28px 12px 28px; background-color: #ffffff;">
+            <td class="email-container" style="padding: 28px 28px 12px 28px; background-color: #ffffff;">
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 ${articlesMarkup}
               </table>
@@ -207,15 +291,15 @@ export function buildNewsletterHtml(
           </tr>
           <!-- CTA Button -->
           <tr>
-            <td align="center" style="padding: 12px 28px 32px 28px; background-color: #ffffff;">
-              <a href="${siteUrl}" target="_blank" style="display: inline-block; background-color: #dc2626; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
+            <td align="center" class="email-container" style="padding: 12px 28px 32px 28px; background-color: #ffffff;">
+              <a href="${siteUrl}" target="_blank" class="btn-red" style="display: inline-block; background-color: #dc2626; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;">
                 Visit Full Edition &rarr;
               </a>
             </td>
           </tr>
           <!-- Footer -->
           <tr>
-            <td style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 24px 28px; text-align: center;">
+            <td class="footer-bar" style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 24px 28px; text-align: center;">
               <p style="margin: 0 0 6px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 600; color: #334155;">
                 Financial Journal Editorial Desk
               </p>
@@ -244,7 +328,7 @@ export function buildNewsletterHtml(
         const imageUrl = getAbsoluteImageUrl(siteUrl, art.image);
         return `
         <tr>
-          <td style="padding: ${idx === 0 ? '0 0 20px 0' : '20px 0'}; ${!isLast ? 'border-bottom: 2px solid #e5e5e5;' : ''}">
+          <td class="broadsheet-card" style="padding: ${idx === 0 ? '0 0 20px 0' : '20px 0'}; ${!isLast ? 'border-bottom: 2px solid #e5e5e5;' : ''}; background-color: #ffffff;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
                 <td>
@@ -283,18 +367,17 @@ export function buildNewsletterHtml(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
   <title>${subject}</title>
+  ${DARK_MODE_PROTECTION_HEAD}
 </head>
-<body style="margin: 0; padding: 0; background-color: #fafaf9; font-family: Georgia, 'Times New Roman', serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; table-layout: fixed;">
+<body class="email-body" style="margin: 0; padding: 0; background-color: #fafaf9; font-family: Georgia, 'Times New Roman', serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-body" style="background-color: #fafaf9; table-layout: fixed;">
     <tr>
       <td align="center" style="padding: 24px 12px;">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 620px; background-color: #ffffff; border: 1px solid #d6d3d1;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container" style="max-width: 620px; background-color: #ffffff; border: 1px solid #d6d3d1;">
           <!-- Masthead -->
           <tr>
-            <td style="padding: 32px 28px 16px 28px; text-align: center; border-bottom: 3px double #1c1917;">
+            <td style="padding: 32px 28px 16px 28px; text-align: center; border-bottom: 3px double #1c1917; background-color: #ffffff;">
               <p style="margin: 0 0 4px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #78716c;">
                 The Independent Financial Daily
               </p>
@@ -309,7 +392,7 @@ export function buildNewsletterHtml(
           </tr>
           <!-- Body -->
           <tr>
-            <td style="padding: 24px 28px; background-color: #ffffff;">
+            <td class="email-container" style="padding: 24px 28px; background-color: #ffffff;">
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 ${articlesMarkup}
               </table>
@@ -317,7 +400,7 @@ export function buildNewsletterHtml(
           </tr>
           <!-- Broadsheet Footer -->
           <tr>
-            <td style="background-color: #f5f5f4; border-top: 2px solid #1c1917; padding: 20px 28px; text-align: center;">
+            <td class="footer-bar" style="background-color: #f5f5f4; border-top: 2px solid #1c1917; padding: 20px 28px; text-align: center;">
               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #1c1917;">
                 Published by Financial Journal Editorial Desk
               </p>
@@ -342,11 +425,11 @@ export function buildNewsletterHtml(
         const imageUrl = getAbsoluteImageUrl(siteUrl, art.image);
         return `
         <tr>
-          <td style="padding: 16px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+          <td class="story-card" style="padding: 16px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
                 <td>
-                  <span style="display: inline-block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
+                  <span class="tag-red" style="display: inline-block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
                     ${art.category}
                   </span>
                   <h3 style="margin: 0 0 10px 0; font-family: Georgia, serif; font-size: 19px; line-height: 1.35; font-weight: 700; color: #0f172a;">
@@ -383,14 +466,15 @@ export function buildNewsletterHtml(
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${subject}</title>
+  ${DARK_MODE_PROTECTION_HEAD}
 </head>
-<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc;">
+<body class="email-body" style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-body" style="background-color: #f8fafc;">
     <tr>
       <td align="center" style="padding: 24px 12px;">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 620px; background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container" style="max-width: 620px; background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
           <tr>
-            <td style="background-color: #0f172a; padding: 32px 24px; text-align: center; border-bottom: 4px solid #dc2626;">
+            <td class="dark-header" style="background-color: #0f172a; padding: 32px 24px; text-align: center; border-bottom: 4px solid #dc2626;">
               <h1 style="margin: 0; font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: 1px;">
                 FINANCIAL JOURNAL
               </h1>
@@ -407,7 +491,7 @@ export function buildNewsletterHtml(
             </td>
           </tr>
           <tr>
-            <td style="background-color: #0f172a; padding: 24px; text-align: center; color: #94a3b8; font-size: 11px;">
+            <td class="dark-header" style="background-color: #0f172a; padding: 24px; text-align: center; color: #94a3b8; font-size: 11px;">
               <p style="margin: 0 0 6px 0; color: #ffffff; font-weight: 700; font-size: 12px;">Financial Journal Visual Desk</p>
               <p style="margin: 0;">&copy; ${new Date().getFullYear()} Financial Journal &bull; <a href="${siteUrl}" style="color: #f87171; text-decoration: none;">Visit Site</a></p>
             </td>
@@ -427,11 +511,11 @@ export function buildNewsletterHtml(
       const imageUrl = getAbsoluteImageUrl(siteUrl, art.image);
       return `
       <tr>
-        <td style="padding: 16px; background-color: #ffffff; border: 1px solid #fee2e2; border-left: 4px solid #dc2626; border-radius: 4px; margin-bottom: 16px;">
+        <td class="story-card" style="padding: 16px; background-color: #ffffff; border: 1px solid #fee2e2; border-left: 4px solid #dc2626; border-radius: 4px; margin-bottom: 16px;">
           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
               <td>
-                <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 0.8px;">
+                <span class="tag-red" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 0.8px;">
                   ${art.category}
                 </span>
                 <h3 style="margin: 4px 0 8px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 18px; line-height: 1.35; font-weight: 700; color: #111827;">
@@ -450,7 +534,7 @@ export function buildNewsletterHtml(
                     : ''
                 }
                 ${art.summary ? `<p style="margin: 0 0 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13.5px; line-height: 1.5; color: #4b5563;">${art.summary}</p>` : ''}
-                <a href="${url}" target="_blank" style="display: inline-block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; background-color: #dc2626; text-decoration: none; padding: 6px 14px; border-radius: 3px;">
+                <a href="${url}" target="_blank" class="btn-red" style="display: inline-block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; background-color: #dc2626; text-decoration: none; padding: 6px 14px; border-radius: 3px;">
                   Read Story &rarr;
                 </a>
               </td>
@@ -467,18 +551,17 @@ export function buildNewsletterHtml(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
   <title>${subject}</title>
+  ${DARK_MODE_PROTECTION_HEAD}
 </head>
-<body style="margin: 0; padding: 0; background-color: #fff5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fff5f5; table-layout: fixed;">
+<body class="email-body" style="margin: 0; padding: 0; background-color: #fff5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-body" style="background-color: #fff5f5; table-layout: fixed;">
     <tr>
       <td align="center" style="padding: 24px 12px;">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 620px; background-color: #ffffff; border: 1px solid #fecaca; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.05);">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container" style="max-width: 620px; background-color: #ffffff; border: 1px solid #fecaca; border-radius: 8px; overflow: hidden;">
           <!-- Crimson Header -->
           <tr>
-            <td style="background-color: #b91c1c; padding: 30px 24px; text-align: center;">
+            <td class="crimson-header" style="background-color: #b91c1c; padding: 30px 24px; text-align: center;">
               <h1 style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 26px; font-weight: 900; color: #ffffff; letter-spacing: 0.5px; text-transform: uppercase;">
                 FINANCIAL JOURNAL
               </h1>
@@ -489,7 +572,7 @@ export function buildNewsletterHtml(
           </tr>
           <!-- Body -->
           <tr>
-            <td style="padding: 24px 20px 12px 20px; background-color: #ffffff;">
+            <td class="email-container" style="padding: 24px 20px 12px 20px; background-color: #ffffff;">
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 ${articlesMarkup}
               </table>
@@ -497,7 +580,7 @@ export function buildNewsletterHtml(
           </tr>
           <!-- Footer -->
           <tr>
-            <td style="background-color: #fef2f2; border-top: 1px solid #fee2e2; padding: 20px; text-align: center;">
+            <td class="footer-bar" style="background-color: #fef2f2; border-top: 1px solid #fee2e2; padding: 20px; text-align: center;">
               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #991b1b;">
                 Financial Journal Executive Desk
               </p>
@@ -527,20 +610,19 @@ export async function sendWelcomeEmail(toEmail: string, username?: string): Prom
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
   <title>Welcome to Financial Journal</title>
+  ${DARK_MODE_PROTECTION_HEAD}
 </head>
-<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc;">
+<body class="email-body" style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-body" style="background-color: #f8fafc;">
     <tr>
       <td align="center" style="padding: 24px 12px;">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container" style="max-width: 600px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
           <tr>
             <td height="5" style="background-color: #dc2626;">&nbsp;</td>
           </tr>
           <tr>
-            <td style="background-color: #0f172a; padding: 28px 24px; text-align: center;">
+            <td class="dark-header" style="background-color: #0f172a; padding: 28px 24px; text-align: center;">
               <h1 style="margin: 0; font-family: Georgia, serif; font-size: 26px; color: #ffffff; letter-spacing: 0.5px;">
                 FINANCIAL JOURNAL
               </h1>
@@ -550,32 +632,32 @@ export async function sendWelcomeEmail(toEmail: string, username?: string): Prom
             </td>
           </tr>
           <tr>
-            <td style="padding: 32px 28px; line-height: 1.6; color: #1e293b;">
+            <td class="email-container" style="padding: 32px 28px; line-height: 1.6; color: #1e293b; background-color: #ffffff;">
               <h2 style="font-family: Georgia, serif; font-size: 20px; color: #0f172a; margin-top: 0;">
                 Welcome to the Briefing, ${displayName}
               </h2>
               <p style="font-size: 15px; color: #334155; margin: 16px 0;">
-                Thank you for subscribing to Financial Journal. You have joined an exclusive community of investors, business leaders, and policymakers who rely on our authoritative reporting, in-depth investigations, and global financial analysis.
+                Thank you for subscribing to Financial Journal. You have joined a dedicated community of investors, business leaders, and policymakers who rely on our reporting, in-depth investigations, and financial analysis.
               </p>
               
               <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b;">
-                <strong>What you will receive:</strong>
+                <strong>Included with your subscription:</strong>
                 <ul style="margin: 8px 0 0; padding-left: 20px;">
                   <li>Daily executive briefings covering markets, policy, and global deals</li>
                   <li>In-depth investigative reports from our editorial desk</li>
-                  <li>Exclusive perspectives on international banking and macroeconomic shifts</li>
+                  <li>Perspectives on international banking and macroeconomic shifts</li>
                 </ul>
               </div>
 
               <div style="text-align: center; margin: 28px 0;">
-                <a href="${siteUrl}" target="_blank" style="display: inline-block; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 12px 28px; font-weight: 700; font-size: 14px; border-radius: 4px;">
+                <a href="${siteUrl}" target="_blank" class="btn-red" style="display: inline-block; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 12px 28px; font-weight: 700; font-size: 14px; border-radius: 4px;">
                   Read Today's Edition &rarr;
                 </a>
               </div>
             </td>
           </tr>
           <tr>
-            <td style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 20px; text-align: center; font-size: 11px; color: #64748b;">
+            <td class="footer-bar" style="background-color: #f8fafc; border-top: 1px solid #e2e8f0; padding: 20px; text-align: center; font-size: 11px; color: #64748b;">
               <p style="margin: 0 0 6px;">&copy; ${new Date().getFullYear()} Financial Journal. All rights reserved.</p>
               <p style="margin: 0;">Sent by Financial Journal Editorial Desk &bull; <a href="${siteUrl}/privacy-policy" style="color: #dc2626; text-decoration: none;">Privacy Policy</a></p>
             </td>
@@ -588,12 +670,20 @@ export async function sendWelcomeEmail(toEmail: string, username?: string): Prom
 </html>
   `;
 
+  const plainText = `Welcome to Financial Journal, ${displayName}!\n\nThank you for subscribing to Financial Journal. You will receive our executive briefings, investigative reports, and market analyses.\n\nVisit today's edition: ${siteUrl}\n\n(c) ${new Date().getFullYear()} Financial Journal. All rights reserved.`;
+
   try {
     await mailTransporter.sendMail({
       from: `"Financial Journal Editorial" <${EMAIL_USER}>`,
       to: toEmail,
+      replyTo: EMAIL_USER,
       subject: 'Welcome to Financial Journal Newsletter',
+      text: plainText,
       html,
+      headers: {
+        'List-Unsubscribe': `<mailto:${EMAIL_USER}?subject=Unsubscribe>`,
+        'X-Entity-Ref-ID': `fj-welcome-${Date.now()}`,
+      },
     });
     return true;
   } catch (error) {
@@ -620,14 +710,24 @@ export async function sendNewsletterDigest(
   const errors: any[] = [];
 
   const html = buildNewsletterHtml(templateId, subject, editionTitle, articles, siteUrl, options);
+  const text = buildNewsletterPlainText(subject, editionTitle, articles, siteUrl);
 
   for (const recipient of recipients) {
     try {
       await mailTransporter.sendMail({
         from: `"Financial Journal Editorial" <${EMAIL_USER}>`,
         to: recipient,
+        replyTo: EMAIL_USER,
         subject,
+        text,
         html,
+        headers: {
+          'List-Unsubscribe': `<mailto:${EMAIL_USER}?subject=Unsubscribe>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+          'X-Auto-Response-Suppress': 'OOF, AutoReply',
+          'Precedence': 'bulk',
+          'Feedback-ID': 'newsletter:dispatch:financialjournal',
+        },
       });
       successCount++;
     } catch (err) {

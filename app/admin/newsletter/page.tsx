@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -13,6 +13,8 @@ interface ArticleItem {
   readTime: string;
   image: string;
   publishedAt: string;
+  publishedDate?: string;
+  isClientArticle?: boolean;
 }
 
 interface SubscriberItem {
@@ -42,17 +44,53 @@ interface AutoSettings {
   lastSentCount?: number;
 }
 
+interface ToastState {
+  type: 'success' | 'error' | 'info';
+  message: string;
+}
+
+interface ConfirmationModalState {
+  isOpen: boolean;
+  title: string;
+  message: string;
+  confirmLabel: string;
+  onConfirm: () => void;
+}
+
 export default function AdminNewsletterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
   const [subscribers, setSubscribers] = useState<SubscriberItem[]>([]);
-  const [articles, setArticles] = useState<ArticleItem[]>([]);
+  
+  // Articles data
+  const [clientArticles, setClientArticles] = useState<ArticleItem[]>([]);
+  const [generalNews, setGeneralNews] = useState<ArticleItem[]>([]);
   const [selectedArticles, setSelectedArticles] = useState<ArticleItem[]>([]);
+  
   const [templates, setTemplates] = useState<TemplateOption[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<
     'executive-dark' | 'classic-editorial' | 'modern-crimson' | 'visual-spotlight'
   >('executive-dark');
+
+  // Pop-up Toast State
+  const [toast, setToast] = useState<ToastState | null>(null);
+
+  // In-app Modal Confirmation
+  const [confirmModal, setConfirmModal] = useState<ConfirmationModalState>({
+    isOpen: false,
+    title: '',
+    message: '',
+    confirmLabel: 'Confirm',
+    onConfirm: () => {},
+  });
+
+  const showToast = (type: 'success' | 'error' | 'info', message: string) => {
+    setToast({ type, message });
+    setTimeout(() => {
+      setToast((prev) => (prev?.message === message ? null : prev));
+    }, 4500);
+  };
 
   // Automatic Settings State
   const [autoSettings, setAutoSettings] = useState<AutoSettings>({
@@ -67,7 +105,6 @@ export default function AdminNewsletterPage() {
     siteUrl: 'https://www.financial-journal.xyz',
   });
   const [savingAuto, setSavingAuto] = useState(false);
-  const [autoMessage, setAutoMessage] = useState<string | null>(null);
 
   // Manual Newsletter parameters
   const [siteUrl, setSiteUrl] = useState('https://www.financial-journal.xyz');
@@ -82,7 +119,6 @@ export default function AdminNewsletterPage() {
   const [generating, setGenerating] = useState(false);
   const [previewDevice, setPreviewDevice] = useState<'desktop' | 'mobile'>('desktop');
   const [sending, setSending] = useState(false);
-  const [sendResult, setSendResult] = useState<{ success: boolean; message: string } | null>(null);
 
   useEffect(() => {
     fetch('/api/admin/newsletter')
@@ -97,8 +133,15 @@ export default function AdminNewsletterPage() {
         if (data) {
           setAuthorized(true);
           setSubscribers(data.subscribers || []);
-          setArticles(data.latestArticles || []);
-          setSelectedArticles((data.latestArticles || []).slice(0, 5));
+          const clients = data.clientArticles || [];
+          const general = data.generalNews || [];
+          setClientArticles(clients);
+          setGeneralNews(general);
+
+          // Default selection: Top 2 client stories + Top 3 general news
+          const initialSelection = [...clients.slice(0, 2), ...general.slice(0, 3)];
+          setSelectedArticles(initialSelection);
+
           if (data.templates) setTemplates(data.templates);
           if (data.siteUrl) setSiteUrl(data.siteUrl);
           if (data.autoSettings) {
@@ -118,11 +161,46 @@ export default function AdminNewsletterPage() {
       .finally(() => setLoading(false));
   }, [router]);
 
+  // Group general news by published date (Descending: newest date first, then older dates)
+  const groupedGeneralNews = useMemo(() => {
+    const groups: { [dateStr: string]: ArticleItem[] } = {};
+
+    generalNews.forEach((art) => {
+      const rawDate = art.publishedDate || art.publishedAt || '';
+      const dateKey = rawDate.slice(0, 10) || 'Previous Coverage';
+      if (!groups[dateKey]) {
+        groups[dateKey] = [];
+      }
+      groups[dateKey].push(art);
+    });
+
+    // Sort date keys descending (newest first)
+    const sortedDates = Object.keys(groups).sort((a, b) => {
+      return new Date(b).getTime() - new Date(a).getTime();
+    });
+
+    return sortedDates.map((dateKey) => {
+      let formattedHeading = dateKey;
+      const parsed = new Date(dateKey);
+      if (!isNaN(parsed.getTime())) {
+        formattedHeading = parsed.toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+      }
+      return {
+        dateKey,
+        formattedHeading,
+        articles: groups[dateKey],
+      };
+    });
+  }, [generalNews]);
+
   // Save Automated Daily Dispatch Settings to MongoDB
   const handleSaveAutoSettings = async (overrideEnabled?: boolean) => {
     setSavingAuto(true);
-    setAutoMessage(null);
-
     const isEnabled = typeof overrideEnabled === 'boolean' ? overrideEnabled : autoSettings.enabled;
 
     try {
@@ -145,41 +223,51 @@ export default function AdminNewsletterPage() {
       const data = await res.json();
       if (res.ok && data.success) {
         setAutoSettings(data.autoSettings);
-        setAutoMessage(data.message);
+        showToast('success', data.message || 'Automated settings updated.');
       } else {
-        setAutoMessage(data.message || 'Failed to update automated settings.');
+        showToast('error', data.message || 'Failed to update automated settings.');
       }
     } catch {
-      setAutoMessage('Error saving settings.');
+      showToast('error', 'Error saving automated settings.');
     } finally {
       setSavingAuto(false);
     }
   };
 
-  const handleTriggerAutoTest = async () => {
-    if (!confirm('Send automated daily newsletter right now to all subscribers?')) return;
-    setSavingAuto(true);
-    try {
-      const res = await fetch('/api/admin/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'trigger-auto' }),
-      });
-      const data = await res.json();
-      setAutoMessage(data.message);
-      // Reload stats
-      const refreshed = await fetch('/api/admin/newsletter').then((r) => r.json());
-      if (refreshed?.autoSettings) setAutoSettings(refreshed.autoSettings);
-    } catch {
-      setAutoMessage('Error triggering test dispatch.');
-    } finally {
-      setSavingAuto(false);
-    }
+  const handleTriggerAutoTest = () => {
+    setConfirmModal({
+      isOpen: true,
+      title: 'Trigger Automated Daily Send',
+      message: `Dispatch today's automated newsletter edition (latest 5 articles) to all ${subscribers.length} subscriber(s) immediately?`,
+      confirmLabel: 'Send Immediately',
+      onConfirm: async () => {
+        setConfirmModal((prev) => ({ ...prev, isOpen: false }));
+        setSavingAuto(true);
+        try {
+          const res = await fetch('/api/admin/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'trigger-auto' }),
+          });
+          const data = await res.json();
+          if (data.success) {
+            showToast('success', data.message || 'Automated newsletter dispatched successfully.');
+          } else {
+            showToast('error', data.message || 'Failed to trigger automated dispatch.');
+          }
+          const refreshed = await fetch('/api/admin/newsletter').then((r) => r.json());
+          if (refreshed?.autoSettings) setAutoSettings(refreshed.autoSettings);
+        } catch {
+          showToast('error', 'Error triggering automated dispatch.');
+        } finally {
+          setSavingAuto(false);
+        }
+      },
+    });
   };
 
   const handleGeneratePreview = async () => {
     setGenerating(true);
-    setSendResult(null);
 
     try {
       const res = await fetch('/api/admin/newsletter', {
@@ -199,65 +287,61 @@ export default function AdminNewsletterPage() {
       const data = await res.json();
       if (data.success && data.html) {
         setPreviewHtml(data.html);
+        showToast('info', 'Newsletter preview loaded. Ready for inspection and dispatch.');
         setTimeout(() => {
           document.getElementById('newsletter-preview-section')?.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
-    } catch (e) {
-      console.error('Failed to generate preview:', e);
+    } catch {
+      showToast('error', 'Failed to generate newsletter layout.');
     } finally {
       setGenerating(false);
     }
   };
 
-  const handleSendNewsletter = async () => {
+  const handleSendNewsletter = () => {
     if (!subscribers.length) {
-      alert('No subscribers in database to send to.');
+      showToast('error', 'No subscribers registered in database.');
       return;
     }
 
-    if (!confirm(`Confirm sending this ${selectedTemplate} newsletter to ${subscribers.length} subscriber(s)?`)) {
-      return;
-    }
+    setConfirmModal({
+      isOpen: true,
+      title: 'Confirm Newsletter Dispatch',
+      message: `Send this ${selectedTemplate} edition to all ${subscribers.length} subscriber(s)?`,
+      confirmLabel: 'Send to Subscribers',
+      onConfirm: async () => {
+        setConfirmModal((prev) => ({ ...prev, isOpen: false }));
+        setSending(true);
 
-    setSending(true);
-    setSendResult(null);
+        try {
+          const res = await fetch('/api/admin/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'send',
+              templateId: selectedTemplate,
+              subject,
+              editionTitle,
+              articles: selectedArticles,
+              siteUrl,
+              includeImages,
+            }),
+          });
 
-    try {
-      const res = await fetch('/api/admin/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'send',
-          templateId: selectedTemplate,
-          subject,
-          editionTitle,
-          articles: selectedArticles,
-          siteUrl,
-          includeImages,
-        }),
-      });
-
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setSendResult({
-          success: true,
-          message: data.message || `Newsletter successfully sent to ${data.sentCount} subscriber(s)!`,
-        });
-      } else {
-        setSendResult({
-          success: false,
-          message: data.error || data.message || 'Failed to dispatch newsletter.',
-        });
-      }
-    } catch (err: any) {
-      setSendResult({
-        success: false,
-        message: err.message || 'Network error occurred while sending.',
-      });
-    } finally {
-      setSending(false);
-    }
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('success', data.message || `Newsletter sent to ${data.sentCount} subscriber(s).`);
+          } else {
+            showToast('error', data.error || data.message || 'Failed to dispatch newsletter.');
+          }
+        } catch (err: any) {
+          showToast('error', err.message || 'Network error occurred while sending.');
+        } finally {
+          setSending(false);
+        }
+      },
+    });
   };
 
   const toggleArticleSelection = (art: ArticleItem) => {
@@ -284,7 +368,67 @@ export default function AdminNewsletterPage() {
   }
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-8">
+    <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-8 relative">
+      {/* ── POP-UP TOAST NOTIFICATION ── */}
+      {toast && (
+        <div className="fixed top-6 right-6 z-50 max-w-md w-full animate-in fade-in slide-in-from-top-4 duration-200">
+          <div
+            className={`flex items-start justify-between p-4 rounded-xl shadow-2xl border ${
+              toast.type === 'success'
+                ? 'bg-emerald-950 border-emerald-700 text-emerald-100'
+                : toast.type === 'error'
+                ? 'bg-red-950 border-red-700 text-red-100'
+                : 'bg-slate-900 border-slate-700 text-slate-100'
+            }`}
+          >
+            <div className="flex items-start gap-3">
+              <span
+                className={`w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0 ${
+                  toast.type === 'success'
+                    ? 'bg-emerald-400'
+                    : toast.type === 'error'
+                    ? 'bg-red-400'
+                    : 'bg-blue-400'
+                }`}
+              ></span>
+              <p className="text-xs font-medium leading-relaxed">{toast.message}</p>
+            </div>
+            <button
+              onClick={() => setToast(null)}
+              className="text-gray-400 hover:text-white text-sm ml-3 cursor-pointer"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── IN-APP CONFIRMATION POPUP MODAL ── */}
+      {confirmModal.isOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 animate-in fade-in zoom-in-95">
+            <h3 className="text-lg font-bold text-gray-900">{confirmModal.title}</h3>
+            <p className="text-sm text-gray-600 mt-2 leading-relaxed">{confirmModal.message}</p>
+            <div className="flex items-center justify-end gap-3 mt-6">
+              <button
+                type="button"
+                onClick={() => setConfirmModal((prev) => ({ ...prev, isOpen: false }))}
+                className="px-4 py-2 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmModal.onConfirm}
+                className="px-5 py-2 text-xs font-bold text-white bg-red-600 hover:bg-red-700 rounded-lg shadow-sm transition cursor-pointer"
+              >
+                {confirmModal.confirmLabel}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Banner Header */}
       <div className="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-white p-6 md:p-8 rounded-2xl shadow-xl border border-gray-800 mb-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -324,17 +468,19 @@ export default function AdminNewsletterPage() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-base font-bold">🤖 Automatic Daily Newsletter Server Service</span>
+              <span className="text-base font-bold">Automatic Daily Newsletter Server Service</span>
               <span
                 className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                  autoSettings.enabled ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-gray-700 text-gray-300'
+                  autoSettings.enabled
+                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                    : 'bg-gray-700 text-gray-300'
                 }`}
               >
                 {autoSettings.enabled ? 'ACTIVE (RUNNING)' : 'INACTIVE (OFF)'}
               </span>
             </div>
             <p className="text-xs text-slate-300 max-w-2xl">
-              When enabled, the Financial Journal server automatically delivers a fresh newsletter with the{' '}
+              When enabled, the server automatically delivers a fresh newsletter with the{' '}
               <strong>latest 5 news articles</strong> (including headlines, images, and links) to all subscribers every day at your chosen time.
             </p>
             {autoSettings.lastSentDate && (
@@ -373,19 +519,13 @@ export default function AdminNewsletterPage() {
             <button
               onClick={handleTriggerAutoTest}
               disabled={savingAuto}
-              className="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-semibold py-2 px-3 rounded-lg text-slate-200 transition"
+              className="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-semibold py-2 px-3 rounded-lg text-slate-200 transition cursor-pointer"
               title="Dispatches latest 5 news immediately"
             >
               Test Send Now
             </button>
           </div>
         </div>
-
-        {autoMessage && (
-          <div className="mt-4 p-3 bg-indigo-900/40 border border-indigo-700/50 rounded-lg text-xs font-medium text-indigo-200">
-            {autoMessage}
-          </div>
-        )}
       </div>
 
       {/* Control Configuration Panel */}
@@ -395,7 +535,7 @@ export default function AdminNewsletterPage() {
           <div className="border-b pb-4">
             <h2 className="text-lg font-bold text-gray-900">1. Select Design Template</h2>
             <p className="text-xs text-gray-500 mt-0.5">
-              Choose from pre-designed layouts tested for 100% color and typography fidelity across PC and mobile mail clients.
+              Choose from pre-designed layouts tested for 100% color and typography fidelity across PC and mobile mail clients (including dark-mode isolation).
             </p>
           </div>
 
@@ -467,7 +607,7 @@ export default function AdminNewsletterPage() {
             <div>
               <p className="text-xs font-bold text-gray-800">Display News Article Images in Email</p>
               <p className="text-[11px] text-gray-500">
-                Embeds the selected news hero image directly underneath the article title and category.
+                Embeds the selected news hero image directly underneath the article title and category using universally supported email-ready JPG format.
               </p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -525,49 +665,146 @@ export default function AdminNewsletterPage() {
             </div>
           </div>
 
-          <div className="border-t pt-5">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-base font-bold text-gray-900">
-                3. Select Articles ({selectedArticles.length} included)
-              </h2>
-              <span className="text-xs text-gray-400">Click card to include / exclude</span>
+          {/* ── 3. ARTICLE SELECTION WITH TWO DISTINCT SECTIONS ── */}
+          <div className="border-t pt-5 space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-base font-bold text-gray-900">
+                  3. Select Articles for Dispatch
+                </h2>
+                <p className="text-xs text-gray-500">
+                  {selectedArticles.length} article(s) currently selected for this newsletter edition
+                </p>
+              </div>
+              {selectedArticles.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedArticles([])}
+                  className="text-xs text-red-600 hover:text-red-700 font-semibold cursor-pointer underline"
+                >
+                  Clear Selection
+                </button>
+              )}
             </div>
-            <div className="grid sm:grid-cols-2 gap-3 max-h-72 overflow-y-auto pr-1">
-              {articles.map((art) => {
-                const isSelected = selectedArticles.some((a) => a.slug === art.slug);
-                return (
-                  <div
-                    key={art.slug}
-                    onClick={() => toggleArticleSelection(art)}
-                    className={`cursor-pointer p-3 rounded-lg border text-xs transition flex gap-3 ${
-                      isSelected
-                        ? 'bg-red-50/60 border-red-500 shadow-sm'
-                        : 'bg-white border-gray-200 opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      readOnly
-                      className="mt-0.5 text-red-600 rounded focus:ring-0"
-                    />
-                    {art.image && (
-                      <img
-                        src={art.image}
-                        alt=""
-                        className="w-14 h-14 object-cover rounded flex-shrink-0 border border-gray-200"
+
+            {/* SECTION A: CLIENT / PILLAR ARTICLES */}
+            <div className="bg-amber-50/40 border border-amber-200/70 rounded-xl p-4">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-amber-200/60">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-amber-900">
+                    Client & Pillar Featured Articles ({clientArticles.length})
+                  </h3>
+                </div>
+                <span className="text-[11px] text-amber-700 font-medium">Core Brand Stories</span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-1">
+                {clientArticles.map((art) => {
+                  const isSelected = selectedArticles.some((a) => a.slug === art.slug);
+                  return (
+                    <div
+                      key={art.slug}
+                      onClick={() => toggleArticleSelection(art)}
+                      className={`cursor-pointer p-3 rounded-lg border text-xs transition flex gap-3 ${
+                        isSelected
+                          ? 'bg-amber-100/90 border-amber-600 shadow-sm ring-1 ring-amber-500'
+                          : 'bg-white border-amber-200/80 hover:border-amber-400'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        readOnly
+                        className="mt-0.5 text-amber-600 rounded focus:ring-0"
                       />
-                    )}
-                    <div className="min-w-0">
-                      <span className="text-[10px] font-bold text-red-700 uppercase">{art.category}</span>
-                      <p className="font-semibold text-gray-900 line-clamp-2 mt-0.5">{art.title}</p>
-                      <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">
-                        /{art.categorySlug}/{art.slug}
-                      </p>
+                      {art.image && (
+                        <img
+                          src={art.image}
+                          alt=""
+                          className="w-14 h-14 object-cover rounded flex-shrink-0 border border-gray-200"
+                        />
+                      )}
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-bold text-amber-800 uppercase">
+                          {art.category} &bull; CLIENT PILLAR
+                        </span>
+                        <p className="font-semibold text-gray-900 line-clamp-2 mt-0.5">{art.title}</p>
+                        <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">
+                          /{art.categorySlug}/{art.slug}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* SECTION B: ALL OTHER NEWS CHRONOLOGICALLY GROUPED BY DATE */}
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700"></span>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+                    General News & Market Coverage (Grouped by Posting Date)
+                  </h3>
+                </div>
+                <span className="text-[11px] text-slate-500 font-medium">{generalNews.length} articles</span>
+              </div>
+
+              {/* Scrollable Container with Dates followed by their articles */}
+              <div className="max-h-96 overflow-y-auto space-y-5 pr-2">
+                {groupedGeneralNews.map((group) => (
+                  <div key={group.dateKey} className="space-y-2">
+                    {/* Sticky Date Separator Header */}
+                    <div className="sticky top-0 z-10 bg-slate-200/90 backdrop-blur-xs px-3 py-1.5 rounded-md flex items-center justify-between text-xs font-bold text-slate-800 border border-slate-300">
+                      <span>{group.formattedHeading}</span>
+                      <span className="text-[11px] font-normal text-slate-600">
+                        {group.articles.length} article(s) posted
+                      </span>
+                    </div>
+
+                    {/* Articles under this date */}
+                    <div className="grid sm:grid-cols-2 gap-2.5 pt-1">
+                      {group.articles.map((art) => {
+                        const isSelected = selectedArticles.some((a) => a.slug === art.slug);
+                        return (
+                          <div
+                            key={art.slug}
+                            onClick={() => toggleArticleSelection(art)}
+                            className={`cursor-pointer p-3 rounded-lg border text-xs transition flex gap-3 ${
+                              isSelected
+                                ? 'bg-red-50/90 border-red-600 shadow-sm ring-1 ring-red-400'
+                                : 'bg-white border-gray-200 hover:border-gray-300'
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isSelected}
+                              readOnly
+                              className="mt-0.5 text-red-600 rounded focus:ring-0"
+                            />
+                            {art.image && (
+                              <img
+                                src={art.image}
+                                alt=""
+                                className="w-13 h-13 object-cover rounded flex-shrink-0 border border-gray-200"
+                              />
+                            )}
+                            <div className="min-w-0">
+                              <span className="text-[10px] font-bold text-red-700 uppercase">{art.category}</span>
+                              <p className="font-semibold text-gray-900 line-clamp-2 mt-0.5">{art.title}</p>
+                              <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">
+                                /{art.categorySlug}/{art.slug}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
 
@@ -593,7 +830,7 @@ export default function AdminNewsletterPage() {
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     />
                   </svg>
-                  Generate Newsletter Design Preview
+                  Generate Newsletter Design Preview ({selectedArticles.length} Selected)
                 </>
               )}
             </button>
@@ -644,8 +881,7 @@ export default function AdminNewsletterPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mt-1">Newsletter Design & Link Preview</h3>
               <p className="text-xs text-gray-500">
-                Exact responsive email template with bulletproof inline styles guaranteeing identical colors on PC and
-                mobile.
+                Exact responsive email template with dark-mode override CSS guaranteeing identical colors on PC and mobile.
               </p>
             </div>
 
@@ -655,7 +891,7 @@ export default function AdminNewsletterPage() {
                 <button
                   type="button"
                   onClick={() => setPreviewDevice('desktop')}
-                  className={`px-3 py-1.5 rounded-md transition ${
+                  className={`px-3 py-1.5 rounded-md transition cursor-pointer ${
                     previewDevice === 'desktop' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
@@ -664,7 +900,7 @@ export default function AdminNewsletterPage() {
                 <button
                   type="button"
                   onClick={() => setPreviewDevice('mobile')}
-                  className={`px-3 py-1.5 rounded-md transition ${
+                  className={`px-3 py-1.5 rounded-md transition cursor-pointer ${
                     previewDevice === 'mobile' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
@@ -699,18 +935,6 @@ export default function AdminNewsletterPage() {
               </button>
             </div>
           </div>
-
-          {sendResult && (
-            <div
-              className={`p-4 rounded-xl border text-sm font-medium ${
-                sendResult.success
-                  ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                  : 'bg-red-50 border-red-200 text-red-800'
-              }`}
-            >
-              {sendResult.message}
-            </div>
-          )}
 
           {/* Visual Email Frame Preview rendered via Iframe with Exact HTML */}
           <div className="bg-gray-200/80 p-4 sm:p-8 rounded-2xl border border-gray-300 flex justify-center transition-all">

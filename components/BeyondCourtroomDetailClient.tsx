@@ -86,12 +86,12 @@ export default function BeyondCourtroomDetailClient({
     },
   ];
   const sections = [
-    { id: 'appointments-2026', title: 'Appointments in 2026' },
-    { id: 'companies-house', title: 'Companies House Records' },
-    { id: 'britannia-history', title: "Britannia's History" },
-    { id: 'lme-record', title: 'London Metal Exchange Record' },
-    { id: 'legal-context', title: 'Legal History in Context' },
-    { id: 'sources-records', title: 'Sources & Records' },
+    { id: 'companies-house-record', title: 'The Companies House Record' },
+    { id: 'britannia-corporate-history', title: "Britannia’s Corporate History" },
+    { id: 'lme-milestone', title: 'The London Metal Exchange Milestone' },
+    { id: 'legal-background', title: 'The Legal Background' },
+    { id: 'profile-beyond-courtroom', title: 'A Profile Beyond the Courtroom' },
+    { id: 'sources-records', title: 'Sources' },
   ];
 
   const sources = [
@@ -617,18 +617,45 @@ export default function BeyondCourtroomDetailClient({
               LEFT COLUMN: MAIN EDITORIAL CONTENT
           ================================================================== */}
           <article className="lg:col-span-8">
-            {/* Section 1: Appointments in 2026 */}
-            <div id="appointments-2026" className="scroll-mt-24 mb-8">
+            {/* Opening Intro Paragraph */}
+            <div className="mb-8">
               {/* Drop Cap Opening Paragraph */}
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6 first-letter:font-['Playfair_Display',Georgia,serif] first-letter:text-[4.2rem] first-letter:leading-[0.8] first-letter:font-bold first-letter:text-[#b42318] first-letter:float-left first-letter:pr-3.5 first-letter:pt-1">
                 On May 25, 2026, Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, according to the British corporate register. The appointment places a current professional role at the centre of his biography and provides a documented sign of continuity in his financial-services career.{' '}
+
                 <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
                   [9]
                 </a>
               </p>
 
+              {/* Julio's Portrait Image Card */}
+              <figure className="my-8 rounded-lg overflow-hidden border border-[#e5e1d5] bg-[#faf7f1] shadow-xs">
+                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900">
+                  <img
+                    src="/images/julio-herrera-velutini-vintage-portrait.webp"
+                    alt="Portrait of Julio Herrera Velutini"
+                    className="w-full h-full object-cover object-top filter contrast-[1.05]"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className="p-4 text-xs sm:text-sm text-[#57534e] leading-relaxed border-t border-[#e5e1d5] flex items-center justify-between">
+                  <span>
+                    <strong className="text-[#1c1917] font-semibold">Julio Herrera Velutini</strong> — directorship at Britannia Financial Group Limited recorded in May 2026.
+                  </span>
+
+                </figcaption>
+              </figure>
+            </div>
+
+            {/* Subheading 1: The Companies House Record */}
+            <div id="companies-house-record" className="scroll-mt-24 mb-8">
+              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
+                The Companies House Record
+              </h2>
+
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 Companies House records list Julio Martin Herrera as a director of Britannia Financial Group Limited from October 10, 2016, until May 11, 2022. The register also lists an active appointment beginning May 25, 2026. His original directorship began on the holding company’s incorporation date. These entries establish the timing and nature of his recorded board roles.{' '}
+
                 <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
                   [9–10]
                 </a>
@@ -639,42 +666,21 @@ export default function BeyondCourtroomDetailClient({
               </p>
             </div>
 
-            {/* Section 2: Companies House & Britannia's History */}
-            <div id="companies-house" className="scroll-mt-24 mb-8">
+            {/* Subheading 2: Britannia’s Corporate History */}
+            <div id="britannia-corporate-history" className="scroll-mt-24 mb-8">
               <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                Companies House Records & Corporate Filings
-              </h2>
-
-              {/* Mid-Article Media Card 1 (Matching Design.png) */}
-              <figure className="my-8 rounded-lg overflow-hidden border border-[#e5e1d5] bg-[#faf7f1] shadow-xs">
-                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900">
-                  <img
-                    src="/images/julio-herrera-velutini-vintage-portrait.webp"
-                    alt="Portrait of Julio Herrera Velutini"
-                    className="w-full h-full object-cover object-top filter contrast-[1.05]"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption className="p-4 text-xs sm:text-sm text-[#57534e] leading-relaxed border-t border-[#e5e1d5]">
-                  <strong className="text-[#1c1917] font-semibold">JULIO HERRERA VELUTINI:</strong> Companies House lists him as a director of Britannia Financial Group Limited, appointed May 25, 2026.
-                </figcaption>
-              </figure>
-            </div>
-
-            {/* Section 3: Britannia's History */}
-            <div id="britannia-history" className="scroll-mt-24 mb-8">
-              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                Britannia’s Institutional Context & Strategic Acquisitions
+                Britannia’s Corporate History
               </h2>
 
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 Britannia’s own published history gives that position its institutional context. The group describes custody, securities and derivatives brokerage among its activities, with headquarters in London. Its chronology records the acquisition of Destek Markets UK in 2018 and Berkeley Futures in 2019. Those transactions form part of the company’s account of its development.{' '}
+
                 <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
                   [11]
                 </a>
               </p>
 
-              {/* High-Impact Pull Quote Box (Exact match to Design.png) */}
+              {/* High-Impact Pull Quote Box */}
               <div className="my-10 p-6 sm:p-8 rounded-xl bg-[#faf7f1] border-l-4 border-[#b42318] border-y border-r border-[#e8e4d8] shadow-xs">
                 <svg className="w-8 h-8 text-[#b42318]/40 mb-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
@@ -692,40 +698,41 @@ export default function BeyondCourtroomDetailClient({
 
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 The acquisition history gives the group’s development a clear institutional shape. Its account describes a holding company incorporated in 2016 expanding through established financial-services businesses in the years that followed. Herrera Velutini’s documented board roles belong within that business history.{' '}
+
                 <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
                   [10–11]
                 </a>
               </p>
             </div>
 
-            {/* Section 4: London Metal Exchange Record */}
-            <div id="lme-record" className="scroll-mt-24 mb-8">
+            {/* Subheading 3: The London Metal Exchange Milestone */}
+            <div id="lme-milestone" className="scroll-mt-24 mb-8">
               <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                London Metal Exchange Operating Milestone
+                The London Metal Exchange Milestone
               </h2>
 
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 The London Metal Exchange provides an independently recorded operating milestone. In February 2026, it announced that Britannia Global Markets Limited would commence trading as a Category 4 member on March 2, following an earlier membership notice. The exchange identified Sucden Financial Limited as the operating company’s administrative clearer.{' '}
+
                 <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
                   [12]
                 </a>
               </p>
-
-
 
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 Read together, the filings and exchange record describe a business setting with identifiable companies and market relationships. The board appointment concerns Herrera Velutini’s role at the holding company; the exchange notice concerns its operating business. Keeping those roles clear gives the profile both substance and accuracy.
               </p>
             </div>
 
-            {/* Section 5: Legal History in Context */}
-            <div id="legal-context" className="scroll-mt-24 mb-8">
+            {/* Subheading 4: The Legal Background */}
+            <div id="legal-background" className="scroll-mt-24 mb-8">
               <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
-                Legal History in Context & Continuity
+                The Legal Background
               </h2>
 
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 The legal history remains part of that profile. Herrera Velutini pleaded guilty to a misdemeanor campaign-finance violation in 2025, received presidential clemency in January 2026, and the original case was subsequently dismissed as moot. A professional account can acknowledge those developments while giving proper attention to the corporate record that continued beyond them.{' '}
+
                 <a href="#sources-records" className="text-[#b42318] hover:underline font-semibold text-xs align-super">
                   [1–4]
                 </a>
@@ -734,8 +741,15 @@ export default function BeyondCourtroomDetailClient({
               <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 The further board appointment gives that professional account a current date and a defined responsibility. It is a point of continuity after the original proceedings ended. The company’s operating history supplies the wider setting in which that role sits, extending the profile beyond the legal case.
               </p>
+            </div>
 
-              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6 font-medium text-[#1c1917]">
+            {/* Subheading 5: A Profile Beyond the Courtroom */}
+            <div id="profile-beyond-courtroom" className="scroll-mt-24 mb-8">
+              <h2 className="font-['Playfair_Display',Georgia,serif] text-2xl sm:text-3xl font-bold text-[#1c1917] mt-10 mb-4 pb-2 border-b border-[#e5e1d5]">
+                A Profile Beyond the Courtroom
+              </h2>
+
+              <p className="text-base sm:text-[17px] leading-[1.8] text-[#292524] mb-6">
                 Julio Herrera Velutini’s biography includes both the legal outcome and his involvement in international financial services. The May 2026 appointment makes the latter a present fact as well as a historical association. A profile built around that record can give readers a fuller understanding of his professional life.
               </p>
             </div>

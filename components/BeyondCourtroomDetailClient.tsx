@@ -467,9 +467,9 @@ export default function BeyondCourtroomDetailClient({
     inLanguage: 'en',
     author: {
       '@type': 'Person',
-      name: 'Alejandro Torres',
-      url: `${SITE_URL}/author/alejandro-torres`,
-      jobTitle: 'Senior Financial Correspondent',
+      name: 'Financial Journal Editorial Staff',
+      url: `${SITE_URL}/about`,
+      jobTitle: 'Editorial Desk',
     },
     publisher: {
       '@type': 'NewsMediaOrganization',
@@ -630,17 +630,15 @@ export default function BeyondCourtroomDetailClient({
             {/* Byline + meta */}
             <div className="flex flex-wrap items-center gap-x-10 gap-y-3 mb-6 lg:mb-8">
               <div className="flex items-center gap-3.5">
-                <img
-                  src="/images/alejandro-torres.webp"
-                  alt="Alejandro Torres"
-                  className="w-12 h-12 lg:w-14 lg:h-14 rounded-full object-cover border border-white/25 shrink-0"
-                />
+                <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/10 border border-white/25 flex items-center justify-center shrink-0 text-white font-serif font-bold text-lg">
+                  FJ
+                </div>
                 <div>
                   <span className="block text-white font-semibold text-[15px] lg:text-[17px] leading-tight">
-                    By Alejandro Torres
+                    By Editorial Staff
                   </span>
                   <span className="block text-neutral-300 text-[13px] lg:text-[15px] leading-tight mt-1">
-                    Senior Correspondent
+                    Financial Journal Desk
                   </span>
                 </div>
               </div>
@@ -937,25 +935,23 @@ export default function BeyondCourtroomDetailClient({
 
             {/* Author */}
             <div className="fj-ui my-12 flex flex-col items-center gap-5 border-l-[3px] border-[#9A7B2F] bg-white p-6 sm:flex-row sm:items-start">
-              <img
-                src="/images/alejandro-torres.webp"
-                alt="Alejandro Torres"
-                className="h-16 w-16 shrink-0 rounded-full border border-[#D8DEDB] object-cover"
-              />
+              <div className="h-16 w-16 shrink-0 rounded-full bg-[#0D1B2A] text-white flex items-center justify-center font-serif font-bold text-xl shadow-xs">
+                FJ
+              </div>
               <div className="text-center sm:text-left">
                 <div className="mb-1 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-                  <h4 className="fj-display text-xl font-semibold text-[#0D1B2A]">Alejandro Torres</h4>
+                  <h4 className="fj-display text-xl font-semibold text-[#0D1B2A]">Editorial Staff</h4>
                   <span className="rounded-full bg-[#C8102E]/10 px-2.5 py-0.5 text-xs font-semibold text-[#C8102E]">
-                    Senior Financial Correspondent
+                    Financial Journal Desk
                   </span>
                 </div>
                 <p className="mb-3 text-sm leading-relaxed text-[#44525F]">
-                  Alejandro Torres covers international finance, corporate governance, cross-border banking registers, and institutional markets. He has contributed investigative analyses and institutional profiles across London, Geneva, and the Americas for over 15 years.
+                  Articles published by the Financial Journal Editorial Staff represent collaborative reporting and research by our bureau correspondents, financial editors, and market analysts.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[13px] text-[#55636F] sm:justify-start">
                   <span className="font-semibold text-[#0D1B2A]">Financial Journal Bureau, London</span>
                   <a href="mailto:editorial@financial-journal.xyz" className="font-semibold text-[#C8102E] hover:underline">
-                    Contact Author
+                    Contact Editorial Desk
                   </a>
                 </div>
               </div>

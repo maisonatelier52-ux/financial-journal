@@ -9,10 +9,10 @@
     "image": "/images/monochrome-power-beneath-the-flag.webp",
     "tag": "Business",
     "tagColor": "#b42318",
-    "author": "Alejandro Torres",
-    "authorRole": "Senior Financial Correspondent",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
     "authorAvatar": "/images/img-home.webp",
-    "authorSlug": "alejandro-torres",
+    "authorSlug": "editorial-staff",
     "time": "Updated 22 October 2026",
     "readTime": "6 min read",
     "comments": 14,
@@ -88,10 +88,10 @@
     "image": "/images/pillars/trasnocho-cultural.png",
     "tag": "CULTURE",
     "tagColor": "purple",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Cultural Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
-    "authorSlug": "eleanor-whitfield",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
+    "authorSlug": "editorial-staff",
     "time": "09/10/2026",
     "readTime": "6 min read",
     "comments": 0,
@@ -183,9 +183,9 @@
     "image": "/images/pillars/banco-caracas.png",
     "tag": "ORGANISATIONS",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "10 min read",
     "comments": 0,
@@ -228,7 +228,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/organisations/banco-caracas",
     "isOpinion": false,
     "categorySlug": "organisations",
-    "charCount": 4097
+    "charCount": 4097,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -240,9 +241,9 @@
     "image": "/images/pillars/belen-clarisa-clementina-velutini.png",
     "tag": "PEOPLE",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "7 min read",
     "comments": 0,
@@ -286,7 +287,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/people/belen-clarisa-clementina-velutini",
     "isOpinion": false,
     "categorySlug": "people",
-    "charCount": 3352
+    "charCount": 3352,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -298,9 +300,9 @@
     "image": "/images/pillars/britannia-financial-group.png",
     "tag": "ORGANISATIONS",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "7 min read",
     "comments": 0,
@@ -344,7 +346,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/organisations/britannia-financial-group",
     "isOpinion": false,
     "categorySlug": "organisations",
-    "charCount": 3339
+    "charCount": 3339,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -356,9 +359,9 @@
     "image": "/images/pillars/corsica.png",
     "tag": "PLACES",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "9 min read",
     "comments": 0,
@@ -401,7 +404,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/places/corsica",
     "isOpinion": false,
     "categorySlug": "places",
-    "charCount": 3601
+    "charCount": 3601,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -413,9 +417,9 @@
     "image": "/images/pillars/from-merchant-credit-to-chartered-banks.png",
     "tag": "EVENTS",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "9 min read",
     "comments": 0,
@@ -458,7 +462,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/events/from-merchant-credit-to-chartered-banks",
     "isOpinion": false,
     "categorySlug": "events",
-    "charCount": 3651
+    "charCount": 3651,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -470,9 +475,9 @@
     "image": "/images/pillars/hacienda-la-vega.png",
     "tag": "PLACES",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "6 min read",
     "comments": 0,
@@ -517,7 +522,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/places/hacienda-la-vega",
     "isOpinion": false,
     "categorySlug": "places",
-    "charCount": 3247
+    "charCount": 3247,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -529,9 +535,9 @@
     "image": "/images/pillars/jose-antonio-velutini-ron.png",
     "tag": "PEOPLE",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "9 min read",
     "comments": 0,
@@ -574,7 +580,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/people/jose-antonio-velutini-ron",
     "isOpinion": false,
     "categorySlug": "people",
-    "charCount": 3860
+    "charCount": 3860,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -586,9 +593,9 @@
     "image": "/images/pillars/juan-bautista-velutini.webp",
     "tag": "PEOPLE",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "8 min read",
     "comments": 0,
@@ -631,7 +638,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/people/juan-bautista-velutini",
     "isOpinion": false,
     "categorySlug": "people",
-    "charCount": 3158
+    "charCount": 3158,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -643,9 +651,9 @@
     "image": "/images/pillars/julio-herrera-velutini.png",
     "tag": "PEOPLE",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "9 min read",
     "comments": 0,
@@ -690,7 +698,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/people/julio-herrera-velutini",
     "isOpinion": false,
     "categorySlug": "people",
-    "charCount": 3627
+    "charCount": 3627,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -702,9 +711,9 @@
     "image": "/images/pillars/naples-in-the-18th-century.png",
     "tag": "PLACES",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "9 min read",
     "comments": 0,
@@ -747,7 +756,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/places/naples-in-the-18th-century",
     "isOpinion": false,
     "categorySlug": "places",
-    "charCount": 3694
+    "charCount": 3694,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -759,9 +769,9 @@
     "image": "/images/pillars/political-instability-latin-america.png",
     "tag": "INCIDENTS",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "8 min read",
     "comments": 0,
@@ -803,7 +813,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/incidents/political-instability-as-a-commercial-risk-in-19th-century-latin-america",
     "isOpinion": false,
     "categorySlug": "incidents",
-    "charCount": 3398
+    "charCount": 3398,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -815,9 +826,9 @@
     "image": "/images/pillars/the-kingdom-of-naples.png",
     "tag": "PLACES",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "9 min read",
     "comments": 0,
@@ -860,7 +871,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/places/the-kingdom-of-naples",
     "isOpinion": false,
     "categorySlug": "places",
-    "charCount": 3856
+    "charCount": 3856,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -872,9 +884,9 @@
     "image": "/images/pillars/trasnocho-cultural.png",
     "tag": "ORGANISATIONS",
     "tagColor": "amber",
-    "author": "Eleanor Whitfield",
-    "authorRole": "Senior Family Historian",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "07/10/2026",
     "readTime": "6 min read",
     "comments": 0,
@@ -920,7 +932,8 @@
     "canonicalUrl": "https://www.financial-journal.xyz/organisations/trasnocho-cultural",
     "isOpinion": false,
     "categorySlug": "organisations",
-    "charCount": 3253
+    "charCount": 3253,
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -932,9 +945,9 @@
     "image": "/assets/upload/news/news-us-shipbuilding-renaissance-defense-accord-2026.webp",
     "tag": "US POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/10/2026",
     "readTime": "7 min",
     "comments": 0,
@@ -977,7 +990,8 @@
     "targetKeyword": "US shipbuilding renaissance accord 2026, maritime defense act, naval drydock modernization, bipartisan defense industrial base, Financial Journal US politics",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/white-house-congress-110-billion-bipartisan-shipbuilding-defense-accord-2026",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -989,9 +1003,9 @@
     "image": "/assets/upload/news/news-sec-cftc-digital-asset-rulebook-2026.webp",
     "tag": "US ECONOMY",
     "tagColor": "blue",
-    "author": "Elena Morales Vega",
-    "authorRole": "Economy Editor",
-    "authorAvatar": "/assets/upload/authors/elena-morales-vega.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/10/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1034,7 +1048,8 @@
     "targetKeyword": "SEC CFTC digital asset rulebook 2026, crypto market structure regulation, tokenized securities custody, Wall Street blockchain trading, Financial Journal economy",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/sec-cftc-unified-digital-asset-market-structure-rulebook-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1046,9 +1061,9 @@
     "image": "/assets/upload/news/news-fcc-terahertz-satellite-broadband-corridor-2026.webp",
     "tag": "US TECHNOLOGY",
     "tagColor": "emerald",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Technology Correspondent",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/10/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1090,7 +1105,8 @@
     "targetKeyword": "FCC sub-terahertz spectrum satellite 2026, direct-to-device orbital broadband, LEO constellation telecommunications, US Space Force spectrum sharing, Financial Journal tech",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/fcc-dod-authorize-terahertz-spectrum-direct-to-device-satellite-broadband-2026",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1102,9 +1118,9 @@
     "image": "/assets/upload/news/news-nih-fda-universal-mrna-cancer-vaccine-2026.webp",
     "tag": "US HEALTH",
     "tagColor": "green",
-    "author": "Valentina Castro Ruiz",
-    "authorRole": "Health Editor",
-    "authorAvatar": "/assets/upload/authors/valentina-castro-ruiz.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/10/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1146,7 +1162,8 @@
     "targetKeyword": "NIH FDA mRNA cancer vaccine 2026, personalized oncology biomanufacturing, cancer moonshot modular foundries, neoantigen immunotherapy, Financial Journal health",
     "canonicalUrl": "https://www.financial-journal.xyz/health/nih-fda-launch-28-billion-universal-mrna-cancer-vaccine-manufacturing-2026",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1158,9 +1175,9 @@
     "image": "/assets/upload/news/news-us-senate-critical-minerals-refining-act-2026.webp",
     "tag": "US POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "29/09/2026",
     "readTime": "7 min",
     "comments": 0,
@@ -1203,7 +1220,8 @@
     "targetKeyword": "US Senate critical minerals act 2026, domestic rare earth refining, strategic mineral reserve, bipartisan supply chain security, Financial Journal US politics",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/us-senate-bipartisan-critical-minerals-domestic-refining-security-act-2026",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1215,9 +1233,9 @@
     "image": "/assets/upload/news/news-fed-treasury-nonbank-liquidity-framework-2026.webp",
     "tag": "US ECONOMY",
     "tagColor": "blue",
-    "author": "Elena Morales Vega",
-    "authorRole": "Economy Editor",
-    "authorAvatar": "/assets/upload/authors/elena-morales-vega.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "29/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1259,7 +1277,8 @@
     "targetKeyword": "Federal Reserve non-bank liquidity framework 2026, private credit regulation, shadow banking stability, Treasury standing repo facility, Financial Journal economy",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/fed-treasury-non-bank-financial-liquidity-modernization-framework-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1271,9 +1290,9 @@
     "image": "/assets/upload/news/news-us-sub2nm-semiconductor-foundry-corridor-2026.webp",
     "tag": "US TECHNOLOGY",
     "tagColor": "emerald",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Technology Correspondent",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "29/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1316,7 +1335,8 @@
     "targetKeyword": "US CHIPS Act sub-2nm foundry 2026, High-NA EUV silicon corridor, advanced semiconductor packaging, domestic AI microelectronics, Financial Journal tech",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/us-commerce-department-expands-sub2nm-semiconductor-foundry-corridor-2026",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1328,9 +1348,9 @@
     "image": "/assets/upload/news/news-us-doe-western-clean-hydrogen-pipeline-2026.webp",
     "tag": "US ENVIRONMENT",
     "tagColor": "green",
-    "author": "Andrés Silva Vargas",
-    "authorRole": "Environment Editor",
-    "authorAvatar": "/assets/upload/authors/andres-silva-vargas.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "29/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1373,7 +1393,8 @@
     "targetKeyword": "US clean hydrogen pipeline 2026, Western green hydrogen network, carbon capture sequestration DOE, industrial decarbonization infrastructure, Financial Journal environment",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/us-department-of-energy-western-clean-hydrogen-pipeline-carbon-capture-2026",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1385,9 +1406,9 @@
     "image": "/assets/upload/news/news-democratic-security-alliance-electoral-defense-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "28/09/2026",
     "readTime": "7 min",
     "comments": 0,
@@ -1429,7 +1450,8 @@
     "targetKeyword": "democratic security alliance 2026, electoral cyber defense, Vienna accord voting security, AI disinformation treaty, Financial Journal politics",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/global-democratic-security-alliance-framework-electoral-cyber-defense-2026",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1441,9 +1463,9 @@
     "image": "/assets/upload/news/news-clean-aviation-fuel-freight-logistics-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Elena Morales Vega",
-    "authorRole": "Economy Editor",
-    "authorAvatar": "/assets/upload/authors/elena-morales-vega.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "28/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1485,7 +1507,8 @@
     "targetKeyword": "sustainable aviation fuel compact 2026, clean freight corridor, green logistics trade accord, synthetic e-kerosene finance, Financial Journal economy",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/international-trade-commission-clean-aviation-fuel-freight-corridor-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1497,9 +1520,9 @@
     "image": "/assets/upload/news/news-quantum-satellite-telecom-encryption-network-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "emerald",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Technology Correspondent",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "28/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1541,7 +1564,8 @@
     "targetKeyword": "quantum satellite encryption 2026, Helios-Q quantum key distribution, unhackable telecom network, post-quantum cryptography, Financial Journal tech",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/transatlantic-quantum-telecommunications-satellite-encryption-network-2026",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1553,9 +1577,9 @@
     "image": "/assets/upload/news/news-intercontinental-supergrid-offshore-wind-solar-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "green",
-    "author": "Andrés Silva Vargas",
-    "authorRole": "Environment Editor",
-    "authorAvatar": "/assets/upload/authors/andres-silva-vargas.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "28/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1597,7 +1621,8 @@
     "targetKeyword": "intercontinental clean supergrid 2026, HVDC subsea cable, renewable grid intermittency, North Sea offshore wind solar, Financial Journal environment",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/global-renewable-grid-coalition-intercontinental-supergrid-offshore-wind-2026",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1609,9 +1634,9 @@
     "image": "/assets/upload/news/news-g20-summit-sovereign-debt-consensus-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "6 min",
     "comments": 0,
@@ -1654,7 +1679,8 @@
     "targetKeyword": "G20 summit 2026, sovereign debt restructuring, climate finance compact, IMF World Bank reforms, Financial Journal politics",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/g20-leaders-reach-consensus-sovereign-debt-climate-financing-2026",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1666,9 +1692,9 @@
     "image": "/assets/upload/news/news-transpacific-maritime-logistics-compact-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "red",
-    "author": "Elena Morales Vega",
-    "authorRole": "Economy Editor",
-    "authorAvatar": "/assets/upload/authors/elena-morales-vega.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -1712,7 +1738,8 @@
     "targetKeyword": "trans-pacific trade corridor 2026, maritime logistics, green shipping ports, global supply chain infrastructure, Financial Journal economy",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/trans-pacific-trade-corridor-85-billion-maritime-compact-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1724,9 +1751,9 @@
     "image": "/assets/upload/news/news-clean-energy-ai-data-hubs-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "gray",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Technology Editor",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -1768,7 +1795,8 @@
     "targetKeyword": "AI data centers clean energy 2026, SMR nuclear cloud hubs, geothermal datacenters, hyperscale AI infrastructure, Financial Journal technology",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/global-cloud-alliances-deploy-clean-energy-data-hubs-2026",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1780,9 +1808,9 @@
     "image": "/assets/upload/news/news-subsea-telecom-cables-maritime-security-2026.webp",
     "tag": "SECURITY",
     "tagColor": "red",
-    "author": "Gabriel Fuentes Romero",
-    "authorRole": "Security Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-fuentes-romero.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -1824,7 +1852,8 @@
     "targetKeyword": "subsea cable security 2026, maritime defense grid, autonomous underwater vehicles, telecom infrastructure protection, Financial Journal security",
     "canonicalUrl": "https://www.financial-journal.xyz/security/maritime-security-taskforce-autonomous-defense-subsea-cables-2026",
     "isOpinion": false,
-    "categorySlug": "security"
+    "categorySlug": "security",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1836,9 +1865,9 @@
     "image": "/assets/upload/news/news-un-general-assembly-ai-sovereignty-treaty-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -1881,7 +1910,8 @@
     "targetKeyword": "UN AI treaty 2026, digital sovereignty accord, global cybersecurity regulations, United Nations General Assembly, Financial Journal politics",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/un-general-assembly-adopts-landmark-treaty-ai-sovereignty-2026",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1893,9 +1923,9 @@
     "image": "/assets/upload/news/news-semiconductor-transatlantic-quantum-packaging-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "gray",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Technology Editor",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -1936,7 +1966,8 @@
     "targetKeyword": "semiconductor advanced packaging 2026, quantum chips, EUV lithography, chip manufacturing corridor, Financial Journal technology",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/semiconductor-giants-unveil-transatlantic-packaging-quantum-corridors-2026",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -1948,9 +1979,9 @@
     "image": "/assets/upload/news/news-global-ocean-treaty-conservation-fund-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "green",
-    "author": "Andrés Silva Vargas",
-    "authorRole": "Environment Editor",
-    "authorAvatar": "/assets/upload/authors/andres-silva-vargas.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -1992,7 +2023,8 @@
     "targetKeyword": "high seas treaty 2026, global ocean conservation, blue economy, seabed mining moratorium, Financial Journal environment",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/historic-high-seas-conservation-compact-global-ocean-fund-2026",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2004,9 +2036,9 @@
     "image": "/assets/upload/news/news-who-global-pathogen-surveillance-accord-2026.webp",
     "tag": "HEALTH",
     "tagColor": "blue",
-    "author": "Valentina Castro Ruiz",
-    "authorRole": "Health Editor",
-    "authorAvatar": "/assets/upload/authors/valentina-castro-ruiz.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "10/09/2026",
     "readTime": "5 min",
     "comments": 0,
@@ -2048,7 +2080,8 @@
     "targetKeyword": "WHO pandemic treaty 2026, global pathogen surveillance, vaccine manufacturing hubs, World Health Assembly, Financial Journal health",
     "canonicalUrl": "https://www.financial-journal.xyz/health/who-global-health-coalition-ratifies-pathogen-surveillance-accord-2026",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2060,9 +2093,9 @@
     "image": "/assets/upload/news/news-global-central-banks-rate-cuts-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "red",
-    "author": "Elena Morales Vega",
-    "authorRole": "Economy Editor",
-    "authorAvatar": "/assets/upload/authors/elena-morales-vega.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "09/09/2026",
     "readTime": "3 min",
     "comments": 0,
@@ -2100,7 +2133,8 @@
     "targetKeyword": "global central banks, interest rate cuts 2026, monetary policy, Federal Reserve ECB, global economic outlook, Financial Journal",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/global-central-banks-signal-coordinated-policy-shift-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2112,9 +2146,9 @@
     "image": "/assets/upload/news/news-colombia-elecciones-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/02/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -2148,7 +2182,8 @@
     "targetKeyword": "Colombia elections 2026, Keiko Fujimori, Roberto Sánchez, Colombian presidential campaign, Gustavo Petro",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/colombia-lanza-campana-presidencial-rumbo-a-mayo",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2160,9 +2195,9 @@
     "image": "/assets/upload/news/news-fintech-latam-crecimiento-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "gray",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Tech Correspondent",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/18/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -2196,7 +2231,8 @@
     "targetKeyword": "fintech Latin America, digital payments, Nubank, Mercado Pago, digital banking, AI fintech LATAM",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/fintech-latinoamericana-crece-18-porciento-anual-hacia-2028",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2208,9 +2244,9 @@
     "image": "/assets/upload/news/news-costa-rica-ecoturismo-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/08/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -2244,7 +2280,8 @@
     "targetKeyword": "Costa Rica ecotourism, nature tourism Central America, Costa Rica national parks, ICT tourism 2026",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/costa-rica-mantiene-su-liderazgo-en-ecoturismo-regional",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2256,9 +2293,9 @@
     "image": "/assets/upload/news/news-resistencia-antimicrobiana-latam-2026.webp",
     "tag": "HEALTH",
     "tagColor": "gray",
-    "author": "María Elena Castro",
-    "authorRole": "Health Reporter",
-    "authorAvatar": "/assets/upload/authors/maria-elena-castro.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/15/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2292,7 +2329,8 @@
     "targetKeyword": "antibiotic resistance Latin America, PAHO AMR, resistant bacteria, Latin America public health, antibiotics without prescription",
     "canonicalUrl": "https://www.financial-journal.xyz/health/ops-alerta-sobre-resistencia-antimicrobiana-en-latam",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2304,9 +2342,9 @@
     "image": "/assets/upload/news/news-ia-medios-espanol-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "gray",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Tech Correspondent",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/08/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2340,7 +2378,8 @@
     "targetKeyword": "artificial intelligence media, journalism AI, disinformation AI, El País AI, digital media Latin America",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/ia-generativa-revoluciona-los-medios-en-espanol",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2352,9 +2391,9 @@
     "image": "/assets/upload/news/news-fmi-banco-mundial-perspectivas-latinoamerica-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/18/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2387,7 +2426,8 @@
     "targetKeyword": "IMF Latin America outlook 2026, World Bank LAC report, Iran war oil impact, regional inflation, Brazil Mexico interest rates",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/fmi-y-bm-advierten-impacto-de-guerra-en-iran-en-latam",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2399,9 +2439,9 @@
     "image": "/assets/upload/news/news-startups-ia-latam-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "gray",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Tech Correspondent",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/10/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -2435,7 +2475,8 @@
     "targetKeyword": "AI startups Latin America, venture capital investment LATAM, artificial intelligence Mexico Brazil, fintech AI",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/startups-de-ia-en-latam-atraen-inversion-record-en-el-q1",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2447,9 +2488,9 @@
     "image": "/assets/upload/news/news-argentina-reforma-laboral-mercosur-ue-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/27/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2482,7 +2523,8 @@
     "targetKeyword": "Argentina Milei labor reform 2026, Mercosur EU agreement ratification, Argentina Senate 2026, Argentina labor informality, Mercosur Europe trade deal",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/argentina-aprueba-reforma-laboral-y-acuerdo-mercosur-ue",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2494,9 +2536,9 @@
     "image": "/assets/upload/news/news-brasil-economia-tensiones-elecciones-octubre-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/24/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2529,7 +2571,8 @@
     "targetKeyword": "Brazil elections 2026, Lula fourth term, Flávio Bolsonaro candidate, Trump Brazil tariffs 50%, BVSP Brazil economy",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/brasil-enfrenta-presiones-economicas-ante-las-elecciones",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2541,9 +2584,9 @@
     "image": "/assets/upload/news/news-usmca-revision-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/10/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -2576,7 +2619,8 @@
     "targetKeyword": "USMCA review, USMCA 2026, Mexico United States Canada trade, World Cup economy, tariffs",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/tmec-enfrenta-revision-crucial-con-el-mundial-en-juego",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2588,9 +2632,9 @@
     "image": "/assets/upload/news/news-bolivia-crisis-economica-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/30/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2624,7 +2668,8 @@
     "targetKeyword": "Bolivia economic crisis, Rodrigo Paz Bolivia, Bolivia international reserves, natural gas Bolivia, IMF Bolivia",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/bolivia-enfrenta-crisis-economica-bajo-rodrigo-paz",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2636,9 +2681,9 @@
     "image": "/assets/upload/news/news-guatemala-turismo-maya-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/15/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2672,7 +2717,8 @@
     "targetKeyword": "Guatemala Maya tourism, Tikal, Ruta Maya 2030, archaeological tourism, UNESCO Guatemala",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/guatemala-apuesta-por-turismo-maya-como-motor-de-desarrollo",
     "isOpinion": false,
-    "categorySlug": "culture"
+    "categorySlug": "culture",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2684,9 +2730,9 @@
     "image": "/assets/upload/news/news-ibovespa-200k-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/15/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2720,7 +2766,8 @@
     "targetKeyword": "Ibovespa 200000, Brazil stock market record April 2026, emerging equity market, Brazil investment",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/ibovespa-de-brasil-se-acerca-a-los-200000-puntos",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2732,9 +2779,9 @@
     "image": "/assets/upload/news/news-ficci-65-cartagena-2026.webp",
     "tag": "CULTURE",
     "tagColor": "purple",
-    "author": "Valeria Santos Rojas",
-    "authorRole": "Culture Reporter",
-    "authorAvatar": "/assets/upload/authors/valeria-santos-rojas.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/09/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2768,7 +2815,8 @@
     "targetKeyword": "FICCI 65, Cartagena Film Festival, Latin American cinema 2026, Colombia culture, film festival",
     "canonicalUrl": "https://www.financial-journal.xyz/culture/festival-de-cine-de-cartagena-celebra-su-edicion-65",
     "isOpinion": false,
-    "categorySlug": "culture"
+    "categorySlug": "culture",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2780,9 +2828,9 @@
     "image": "/assets/upload/news/news-caravanas-centroamerica-2026.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/05/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -2816,7 +2864,8 @@
     "targetKeyword": "migrant caravans, Central America migration, Tapachula Mexico, Honduras El Salvador Guatemala migration, Mexico asylum",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/caravanas-de-centroamerica-buscan-ruta-ante-restricciones",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2828,9 +2877,9 @@
     "image": "/assets/upload/news/news-cuba-reforma-salud-2026.webp",
     "tag": "HEALTH",
     "tagColor": "gray",
-    "author": "María Elena Castro",
-    "authorRole": "Health Reporter",
-    "authorAvatar": "/assets/upload/authors/maria-elena-castro.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/18/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2864,7 +2913,8 @@
     "targetKeyword": "Cuba health, Cuba reform 2026, private clinics Cuba, Cuban doctors, medical missions Venezuela",
     "canonicalUrl": "https://www.financial-journal.xyz/health/cuba-reforma-su-sistema-de-salud-en-busca-mejor-atencion",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2876,9 +2926,9 @@
     "image": "/assets/upload/news/news-el-salvador-cadena-perpetua-menores-2026.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/15/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2911,7 +2961,8 @@
     "targetKeyword": "El Salvador life sentences minors, Bukele state of emergency, El Salvador human rights, CECOT, IACHR El Salvador",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/el-salvador-aprueba-cadena-perpetua-para-menores-de-12",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2923,9 +2974,9 @@
     "image": "/assets/upload/news/news-mexico-salud-mental-jovenes-2026.webp",
     "tag": "HEALTH",
     "tagColor": "gray",
-    "author": "María Elena Castro",
-    "authorRole": "Health Reporter",
-    "authorAvatar": "/assets/upload/authors/maria-elena-castro.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/12/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -2959,7 +3010,8 @@
     "targetKeyword": "mental health Mexico, youth depression, adolescent suicide Latin America, National Mental Health Plan, UNAM",
     "canonicalUrl": "https://www.financial-journal.xyz/health/mexico-aprueba-nueva-estrategia-salud-mental-para-jovenes",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -2971,9 +3023,9 @@
     "image": "/assets/upload/news/news-argentina-mundial-2026.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/10/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3007,7 +3059,8 @@
     "targetKeyword": "Argentina World Cup 2026, Messi World Cup, Argentine national team, back-to-back championship, Scaloni Argentina",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/argentina-busca-su-segunda-estrella-en-el-mundial-2026",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3019,9 +3072,9 @@
     "image": "/assets/upload/news/news-argentina-divisas-reservas-milei-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/22/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3054,7 +3107,8 @@
     "targetKeyword": "Argentina foreign currency 2026, Milei Central Bank reserves, Vaca Muerta exports, RIGI Argentina investment, Argentina April inflation",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/argentina-recibe-divisas-record-y-refuerza-sus-reservas",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3066,9 +3120,9 @@
     "image": "/assets/upload/news/news-triangulo-litio-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/22/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3102,7 +3156,8 @@
     "targetKeyword": "lithium triangle Argentina Bolivia Chile, lithium mining 2026, energy transition, electric vehicle batteries, Salar Uyuni",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/triangulo-del-litio-argentina-bolivia-y-chile",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3114,9 +3169,9 @@
     "image": "/assets/upload/news/news-venezuela-eeuu-minerales-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/03/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3150,7 +3205,8 @@
     "targetKeyword": "Venezuela minerals, Orinoco Mining Arc, US Venezuela agreement, coltan Venezuela, Venezuela sanctions",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/venezuela-y-eeuu-negocian-acuerdo-sobre-minerales-criticos",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3162,9 +3218,9 @@
     "image": "/assets/upload/news/news-teotihuacan-tirador-turista-canadiense-2026.webp",
     "tag": "SECURITY",
     "tagColor": "gray",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Security Reporter",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/20/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3198,7 +3254,8 @@
     "targetKeyword": "Teotihuacan shooting 2026, Moon Pyramid Mexico, Canadian tourist killed, FIFA World Cup 2026 security, Sheinbaum security",
     "canonicalUrl": "https://www.financial-journal.xyz/security/tirador-mata-a-turista-en-teotihuacan-y-deja-13-heridos",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3210,9 +3267,9 @@
     "image": "/assets/upload/news/news-derrame-petroleo-golfo-mexico-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/27/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3245,7 +3302,8 @@
     "targetKeyword": "oil spill Gulf of Mexico 2026, coral reef damage, dead marine wildlife, Pemex spill, Mexico coast pollution",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/derrame-activo-en-el-golfo-de-mexico-dana-arrecifes-y-fauna",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3257,9 +3315,9 @@
     "image": "/assets/upload/news/news-mexico-mencho-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/22/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3293,7 +3351,8 @@
     "targetKeyword": "El Mencho CJNG, drug trafficking Mexico, Jalisco Cartel, Mexico security 2026, Claudia Sheinbaum",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/mexico-elimina-al-lider-del-cjng-el-mencho",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3305,9 +3364,9 @@
     "image": "/assets/upload/news/news-colombia-juegos-suramericanos-2026.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/29/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3341,7 +3400,8 @@
     "targetKeyword": "South American Games 2026, Colombia athletes, Latin America athletics, Colombia cycling, South American medal table",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/colombia-lidera-medallero-en-los-juegos-suramericanos-2026",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3353,9 +3413,9 @@
     "image": "/assets/upload/news/news-mexico-mundial-tres-veces-2026.webp",
     "tag": "CULTURE",
     "tagColor": "purple",
-    "author": "Valeria Santos Rojas",
-    "authorRole": "Culture Reporter",
-    "authorAvatar": "/assets/upload/authors/valeria-santos-rojas.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/01/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3388,7 +3448,8 @@
     "targetKeyword": "Mexico 2026 World Cup, Azteca Stadium, World Cup three times, Mexico Copa tourism, FIFA history",
     "canonicalUrl": "https://www.financial-journal.xyz/culture/mexico-sera-sede-del-mundial-por-tercera-vez-en-historia",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3400,9 +3461,9 @@
     "image": "/assets/upload/news/news-paraguay-triple-frontera-2026.webp",
     "tag": "SECURITY",
     "tagColor": "gray",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Security Reporter",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/20/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3436,7 +3497,8 @@
     "targetKeyword": "Paraguay Triple Frontier, Ciudad del Este crime, money laundering Paraguay, FATF Paraguay, narcotrafficking South America",
     "canonicalUrl": "https://www.financial-journal.xyz/security/paraguay-combate-el-crimen-organizado-en-la-triple-frontera",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3448,9 +3510,9 @@
     "image": "/assets/upload/news/news-panama-canal-infraestructura-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/25/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3484,7 +3546,8 @@
     "targetKeyword": "Panama Canal investment, Central America port infrastructure, Panama Canal 2026, maritime logistics, cargo record",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/panama-lidera-inversion-en-infraestructura-portuaria",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3496,9 +3559,9 @@
     "image": "/assets/upload/news/news-estadio-azteca-copa-mundo-2026-inauguracion.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/24/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3531,7 +3594,8 @@
     "targetKeyword": "Estadio Azteca World Cup 2026, FIFA Cup 48 teams, Azteca opening third time, Mexico Canada USA World Cup host, FIFA Sheinbaum",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/el-azteca-inaugura-una-copa-del-mundo-por-tercera-vez",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3543,9 +3607,9 @@
     "image": "/assets/upload/news/news-uruguay-turismo-sostenible-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "01/15/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3579,7 +3643,8 @@
     "targetKeyword": "Uruguay tourism 2026, sustainable tourism, Punta del Este, Colonia del Sacramento UNESCO, Uruguay wine tourism",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/uruguay-consolida-su-liderazgo-en-turismo-sostenible",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3591,9 +3656,9 @@
     "image": "/assets/upload/news/news-latam-envejecimiento-2026.webp",
     "tag": "HEALTH",
     "tagColor": "gray",
-    "author": "María Elena Castro",
-    "authorRole": "Health Reporter",
-    "authorAvatar": "/assets/upload/authors/maria-elena-castro.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/22/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3627,7 +3692,8 @@
     "targetKeyword": "aging Latin America, health demographics, pensions Latin America, silver economy, Latin America fertility",
     "canonicalUrl": "https://www.financial-journal.xyz/health/america-latina-envejece-mas-rapido-que-cualquier-otra-region",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3639,9 +3705,9 @@
     "image": "/assets/upload/news/news-bad-bunny-gira-2026.webp",
     "tag": "HEALTH",
     "tagColor": "gray",
-    "author": "María Elena Castro",
-    "authorRole": "Health Reporter",
-    "authorAvatar": "/assets/upload/authors/maria-elena-castro.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "12/4/2026",
     "readTime": "2 min read",
     "comments": 0,
@@ -3684,7 +3750,8 @@
       }
     ],
     "relatedArticles": [],
-    "categorySlug": "culture"
+    "categorySlug": "culture",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3696,9 +3763,9 @@
     "image": "/assets/upload/news/news-colombia-bosques-paz-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/07/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3732,7 +3799,8 @@
     "targetKeyword": "Colombia bosques paz, Colombia reforestation, FARC zones deforestation, Caquetá environment, carbon credits",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/colombia-reforesta-zonas-de-conflicto-tras-acuerdo-de-paz",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3744,9 +3812,9 @@
     "image": "/assets/upload/news/news-dominicana-haiti-migracion-2026.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/01/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3780,7 +3848,8 @@
     "targetKeyword": "Dominican Republic Haiti migration, Dominican border, Haiti crisis, Dominican deportation, Abinader Haiti",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/rep-dominicana-aprieta-controles-migratorios-con-haiti",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3792,9 +3861,9 @@
     "image": "/assets/upload/news/news-colombia-elecciones-presidenciales-mayo-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/25/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3827,7 +3896,8 @@
     "targetKeyword": "Colombia elections 2026, Ivan Cepeda candidate, Paloma Valencia candidate, De la Espriella, Colombia second round June",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/colombia-se-prepara-para-elecciones-marcadas-por-violencia",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3839,9 +3909,9 @@
     "image": "/assets/upload/news/news-mercados-latinoamerica-superan-wall-street-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/21/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3874,7 +3944,8 @@
     "targetKeyword": "Latin America stock markets 2026, BVSP Brazil gains, emerging markets Colombia Ecuador, MSCI Latin America, investors flee Wall Street",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/mercados-latinoamericanos-superan-a-wall-street-en-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3886,9 +3957,9 @@
     "image": "/assets/upload/news/news-argentina-milei-israel-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/05/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -3922,7 +3993,8 @@
     "targetKeyword": "Milei Israel, Argentina foreign policy, Argentina US alliance, Milei Jerusalem, Argentina 2026",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/milei-reafirma-alianza-con-eeuu-e-israel-en-jerusalem",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3934,9 +4006,9 @@
     "image": "/assets/upload/news/news-turismo-aereo-latam-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/12/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -3970,7 +4042,8 @@
     "targetKeyword": "air tourism Colombia, ASUR passengers 2026, Latin America airports, Mexico aviation, Cancún tourism",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/colombia-y-mexico-lideran-recuperacion-del-turismo-aereo",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -3982,9 +4055,9 @@
     "image": "/assets/upload/news/news-mexico-seguridad-mundial-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/22/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4017,7 +4090,8 @@
     "targetKeyword": "Mexico World Cup 2026 security, National Guard tourism, Teotihuacan reopening, FIFA Mexico security, Sheinbaum FIFA World Cup",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/mexico-despliega-100000-efectivos-para-el-mundial-2026",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4029,9 +4103,9 @@
     "image": "/assets/upload/news/news-peru-elecciones-presidenciales-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/13/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4064,7 +4138,8 @@
     "targetKeyword": "Peru elections 2026, Keiko Fujimori first round, Peru second round June, ONPE irregularities, Peru bicameral congress",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/peru-celebra-elecciones-con-fujimori-al-frente",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4076,9 +4151,9 @@
     "image": "/assets/upload/news/news-peru-crisis-politica-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/19/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -4112,7 +4187,8 @@
     "targetKeyword": "Peru interim president, Peru political crisis, José María Balcázar, Peru instability, Peru elections 2026",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/peru-designa-nuevo-presidente-interino-tras-crisis-politica",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4124,9 +4200,9 @@
     "image": "/assets/upload/news/news-mexico-coatlicue-supercomputador-2026.webp",
     "tag": "TECHNOLOGY",
     "tagColor": "gray",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Tech Correspondent",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/05/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -4160,7 +4236,8 @@
     "targetKeyword": "supercomputer Mexico, Coatlicue AI, artificial intelligence Latin America, Mexico technology, digital sovereignty",
     "canonicalUrl": "https://www.financial-journal.xyz/technology/mexico-planifica-el-supercomputador-coatlicue-de-ia",
     "isOpinion": false,
-    "categorySlug": "technology"
+    "categorySlug": "technology",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4172,9 +4249,9 @@
     "image": "/assets/upload/news/news-espana-regularizacion-2026.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/18/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -4208,7 +4285,8 @@
     "targetKeyword": "Spain migrant regularization, Latin American immigrants Spain, Colombia Venezuela Ecuador Spain, regularization 2026",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/espana-regulariza-a-300000-inmigrantes-latinoamericanos",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4220,9 +4298,9 @@
     "image": "/assets/upload/news/news-honduras-reforma-policial-2026.webp",
     "tag": "SECURITY",
     "tagColor": "gray",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Security Reporter",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/08/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4256,7 +4334,8 @@
     "targetKeyword": "Honduras police reform, Honduras security, MS-13 gangs, Xiomara Castro security, Central America organized crime",
     "canonicalUrl": "https://www.financial-journal.xyz/security/honduras-busca-salir-de-la-crisis-con-reforma-policial",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4268,9 +4347,9 @@
     "image": "/assets/upload/news/news-el-salvador-ninos-padres-presos-regimen-excepcion.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/27/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4301,7 +4380,8 @@
     "targetKeyword": "El Salvador emergency regime children, Bukele human rights, detained families El Salvador, MOVIR, minors impact state of emergency",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/excepcion-en-el-salvador-deja-miles-de-ninos-sin-padres",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4313,9 +4393,9 @@
     "image": "/assets/upload/news/news-colombia-ecuador-bonos-petroleo-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/12/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -4348,7 +4428,8 @@
     "targetKeyword": "Colombia dollar bonds 2026, Ecuador sovereign debt, oil price 116 dollars, Latin America emerging markets, Noboa Colombia investment",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/colombia-y-ecuador-lideran-bonos-en-dolares-por-el-petroleo",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4360,9 +4441,9 @@
     "image": "/assets/upload/news/news-mariposa-monarca-mexico-recuperacion-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/27/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4395,7 +4476,8 @@
     "targetKeyword": "monarch butterfly Mexico 2026, Michoacan sanctuary, monarch endangered species recovery, monarch migration, oyamel forest conservation",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/mariposas-monarca-en-mexico-crecen-64-invierno-2025-26",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4407,9 +4489,9 @@
     "image": "/assets/upload/news/news-peru-machupicchu-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/10/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4443,7 +4525,8 @@
     "targetKeyword": "Machu Picchu tourism 2026, Peru Machu Picchu restrictions, UNESCO heritage, Cusco tourism, Peru tourism recovery",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/peru-recupera-turismo-en-machu-picchu-con-nuevas-reglas",
     "isOpinion": false,
-    "categorySlug": "culture"
+    "categorySlug": "culture",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4455,9 +4538,9 @@
     "image": "/assets/upload/news/news-latam-crecimiento-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/09/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4491,7 +4574,8 @@
     "targetKeyword": "Latin America economic growth, World Bank 2026, Latin America GDP, regional economy, private investment",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/america-latina-crecera-solo-2-1-porciento-en-2026",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4503,9 +4587,9 @@
     "image": "/assets/upload/news/news-brazil-bolsa-record-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/15/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4538,7 +4622,8 @@
     "targetKeyword": "Ibovespa record, Brazil stock market 2026, Latin America markets, foreign investment Brazil, emerging capital",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/bolsa-de-brasil-marca-record-con-capital-extranjero",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4550,9 +4635,9 @@
     "image": "/assets/upload/news/news-morgan-stanley-latam-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/20/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4586,7 +4671,8 @@
     "targetKeyword": "Morgan Stanley Latin America, LATAM stocks 2026, MSCI Latin America, emerging investment, lithium copper mining",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/morgan-stanley-ve-alza-de-90-en-acciones-latinoamericanas",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4598,9 +4684,9 @@
     "image": "/assets/upload/news/news-venezuela-clasico-mundial-2026.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/19/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4634,7 +4720,8 @@
     "targetKeyword": "World Baseball Classic 2026, Venezuela champion, Latin America baseball, Tokyo 2026, Venezuela sport",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/venezuela-gana-el-clasico-mundial-de-beisbol-ante-eeuu",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4646,9 +4733,9 @@
     "image": "/assets/upload/news/news-amazonia-deforestacion-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "01/20/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4682,7 +4769,8 @@
     "targetKeyword": "Amazon deforestation 2025, INPE Brazil, climate change Amazon, Brazil environment, point of no return",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/amazonia-pierde-superficie-record-en-2025",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4694,9 +4782,9 @@
     "image": "/assets/upload/news/news-exodo-venezolano-retorno-2026.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/25/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4730,7 +4818,8 @@
     "targetKeyword": "Venezuelan migrants, Venezuela exodus, UNHCR return, Latin America migration crisis, Venezuela diaspora",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/exodo-venezolano-llega-a-7-millones-con-miras-al-retorno",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4742,9 +4831,9 @@
     "image": "/assets/upload/news/news-nicaragua-elecciones-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/25/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -4778,7 +4867,8 @@
     "targetKeyword": "Nicaragua elections 2026, Ortega Nicaragua, human rights Nicaragua, opposition exile, political repression",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/nicaragua-celebra-elecciones-cuestionadas-bajo-observadores",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4790,9 +4880,9 @@
     "image": "/assets/upload/news/news-fmi-banco-mundial-venezuela-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/17/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4825,7 +4915,8 @@
     "targetKeyword": "IMF Venezuela 2026, World Bank Venezuela, Delcy Rodriguez IMF, Venezuela economy crisis, Venezuela sanctions Trump",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/fmi-y-banco-mundial-retoman-relaciones-con-venezuela",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4837,9 +4928,9 @@
     "image": "/assets/upload/news/news-venezuela-exportaciones-petroleo-recuperacion-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/20/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4872,7 +4963,8 @@
     "targetKeyword": "Venezuela oil exports 2026, PDVSA Chevron, Delcy Rodriguez sanctions lifted, OPEC Venezuela barrels, Venezuela IMF economy",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/exportaciones-de-petroleo-venezolano-repuntan-tras-sanciones",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4884,9 +4976,9 @@
     "image": "/assets/upload/news/news-chile-kast-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/11/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4922,7 +5014,8 @@
     "targetKeyword": "José Antonio Kast, Chile president, Republican Party, Chile government 2026, Chilean politics",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/chile-inaugura-el-gobierno-de-kast-con-agenda-conservadora",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4934,9 +5027,9 @@
     "image": "/assets/upload/news/news-venezuela-amnistia-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "02/20/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -4971,7 +5064,8 @@
     "targetKeyword": "Venezuela amnesty, Delcy Rodríguez, political prisoners, Venezuela transition, Maduro capture",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/venezuela-aprueba-ley-de-amnistia-bajo-rodriguez",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -4983,9 +5077,9 @@
     "image": "/assets/upload/news/news-fox-tigo-centroamerica-2026.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/14/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5019,7 +5113,8 @@
     "targetKeyword": "Fox Channel Central America, Tigo Sports, sports rights, Premier League Latin America, sports streaming",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/fox-adquiere-tigo-sports-y-lanza-canal-en-centroamerica",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5031,9 +5126,9 @@
     "image": "/assets/upload/news/news-elsalvador-seguridad-turismo-2026.webp",
     "tag": "TOURISM",
     "tagColor": "gray",
-    "author": "Gabriel Torres Ibarra",
-    "authorRole": "Tourism Correspondent",
-    "authorAvatar": "/assets/upload/authors/gabriel-torres-ibarra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/28/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5067,7 +5162,8 @@
     "targetKeyword": "El Salvador tourism 2026, El Salvador security, Bukele state of exception, Central America tourism, surf adventure",
     "canonicalUrl": "https://www.financial-journal.xyz/tourism/el-salvador-sube-al-nivel-1-seguridad-del-depto-estado",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5079,9 +5175,9 @@
     "image": "/assets/upload/news/news-colombia-elecciones-legislativas-congreso-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/08/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5114,7 +5210,8 @@
     "targetKeyword": "Colombia March 2026 elections, Colombia Congress, Paloma Valencia primary, Ivan Cepeda left, ELN Colombia US relations",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/colombia-elige-nuevo-congreso-en-jornada-marcada-por-tension",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5126,9 +5223,9 @@
     "image": "/assets/upload/news/news-chile-ipsa-alza-bursatil-cobre-litio-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Sofía Herrera Luna",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/sofia-herrera-luna.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/21/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5161,7 +5258,8 @@
     "targetKeyword": "Chile IPSA stock 2025 2026, Chile copper price, Atacama lithium, Chile emerging market, Kast mining investment",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/chile-lidera-alza-bursatil-global-en-2025-con-56-2-porciento",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5173,9 +5271,9 @@
     "image": "/assets/upload/news/news-copa-mundo-2026.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/15/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5209,7 +5307,8 @@
     "targetKeyword": "2026 World Cup, FIFA, Mexico World Cup host, Argentina champion, Brazil World Cup, Uruguay Colombia qualified",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/copa-del-mundo-fifa-2026-en-mexico-eeuu-y-canada",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5221,9 +5320,9 @@
     "image": "/assets/upload/news/news-ecuador-glaciares-crisis-2026.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/15/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -5257,7 +5356,8 @@
     "targetKeyword": "Ecuador glaciers retreat, Ecuador water crisis, climate change Andes, Cotopaxi glacier, Quito water",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/ecuador-enfrenta-crisis-hidrica-por-glaciares-en-retroceso",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5269,9 +5369,9 @@
     "image": "/assets/upload/news/news-ecuador-narco-seguridad-2026.webp",
     "tag": "SECURITY",
     "tagColor": "gray",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Security Reporter",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/02/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5305,7 +5405,8 @@
     "targetKeyword": "Ecuador drug trafficking, Ecuador security, Noboa organized crime, DEA Ecuador, Colombia drug trafficking border",
     "canonicalUrl": "https://www.financial-journal.xyz/security/ecuador-intensifica-lucha-antidroga-con-eeuu-y-colombia",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5317,9 +5418,9 @@
     "image": "/assets/upload/news/news-farc-campaña-colombia-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/07/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5353,7 +5454,8 @@
     "targetKeyword": "FARC Colombia peace, former guerrillas elections, Colombia peace agreement 10 years, Comunes political party, reintegration",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/former-farc-commander-enters-electoral-campaign-in-colombias",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5365,9 +5467,9 @@
     "image": "/assets/upload/news/news-milei-pide-paciencia-economia-argentina-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/09/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5400,7 +5502,8 @@
     "targetKeyword": "Milei approval 36% 2026, Argentina February 2026 inflation, Argentine economy slowdown, Milei adjustment social cost, IMF Argentina growth",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/milei-pide-paciencia-mientras-cae-su-aprobacion",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5412,9 +5515,9 @@
     "image": "/assets/upload/news/news-amnistia-mundial-2026-derechos-humanos-aficionados.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/30/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5447,7 +5550,8 @@
     "targetKeyword": "Amnesty International World Cup 2026, soccer fan human rights, FIFA World Cup USA, fan deportations, Estadio Azteca opening",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/amnistia-alerta-riesgos-derechos-humanos-en-el-mundial",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5459,9 +5563,9 @@
     "image": "/assets/upload/news/news-delcy-rodriguez-venezuela-presidenta-interina-consolidacion-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/19/2026",
     "readTime": "1 min",
     "comments": 0,
@@ -5494,7 +5598,8 @@
     "targetKeyword": "Delcy Rodriguez Venezuela president, IMF Venezuela relations, Venezuela World Bank 2026, Venezuela Trump sanctions lifted, Maduro arrested US",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/rodriguez-consolida-posicion-como-presidenta-interina",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5506,9 +5611,9 @@
     "image": "/assets/upload/news/news-trump-cumbre-escudo-americas-cuba-carteles-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "03/07/2026",
     "readTime": "3 min",
     "comments": 0,
@@ -5542,7 +5647,8 @@
     "targetKeyword": "Trump Shield of the Americas, Cuba Trump threat 2026, anti-cartel coalition Latin America, Bukele Trump cartels, maximum pressure Cuba Venezuela",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/trump-lanza-coalicion-anticartel-y-advierte-a-cuba",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5554,9 +5660,9 @@
     "image": "/assets/upload/news/news-ciudad-mexico-festivales-gratuitos-aficionados-mundial-2026.webp",
     "tag": "SPORTS",
     "tagColor": "orange",
-    "author": "Andrés Ruiz Castellanos",
-    "authorRole": "Sports Editor",
-    "authorAvatar": "/assets/upload/authors/andres-ruiz-castellanos.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/29/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5591,7 +5697,8 @@
     "targetKeyword": "Mexico City fan festival World Cup 2026, FIFA Fan Fest Zocalo, free soccer festivals CDMX, Clara Brugada World Cup, Azteca Stadium Cup opening",
     "canonicalUrl": "https://www.financial-journal.xyz/sports/cdmx-instala-18-festivales-gratuitos-para-el-mundial-2026",
     "isOpinion": false,
-    "categorySlug": "sports"
+    "categorySlug": "sports",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5603,9 +5710,9 @@
     "image": "/assets/upload/news/news-china-buques-panama-canal-retaliacion-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Lucía Vargas del Río",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/lucia-vargas-del-rio.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/29/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5640,7 +5747,8 @@
     "targetKeyword": "Panama Canal China dispute 2026, Panama ships detained China, CK Hutchison Panama, Rubio Panama sovereignty, FMC Panama retaliation",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/china-detiene-buques-panamenos-y-latam-condena-represalia",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5652,9 +5760,9 @@
     "image": "/assets/upload/news/news-maduro-tribunal-nueva-york-narcoterrorismo-2026.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "01/05/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5688,7 +5796,8 @@
     "targetKeyword": "Maduro trial New York, narcoterrorism Venezuela, Maduro US capture, Cilia Flores charges, Cartel of the Suns Venezuela",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/maduro-se-declara-inocente-ante-tribunal-de-nueva-york",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5700,9 +5809,9 @@
     "image": "/assets/upload/news/news-venezuela-earthquake-aftermath-health-crisis-humanitarian-aid-2026.webp",
     "tag": "HEALTH",
     "tagColor": "gray",
-    "author": "María Elena Castro",
-    "authorRole": "Health Reporter",
-    "authorAvatar": "/assets/upload/authors/maria-elena-castro.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "2d ago",
     "readTime": "4 min",
     "comments": 0,
@@ -5776,7 +5885,8 @@
     "targetKeyword": "Venezuela earthquake humanitarian crisis, Venezuela earthquake, humanitarian aid, health crisis, La Guaira, United Nations, Nicolás Maduro, disaster response, infectious diseases",
     "canonicalUrl": "https://www.financial-journal.xyz/health/venezuela-earthquake-aftermath-health-crisis-humanitarian-aid-2026",
     "isOpinion": false,
-    "categorySlug": "health"
+    "categorySlug": "health",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5788,9 +5898,9 @@
     "image": "/assets/upload/news/news-venezuela-earthquake-death-toll-3685.webp",
     "tag": "ENVIRONMENT",
     "tagColor": "gray",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Environment Reporter",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "5d ago",
     "readTime": "4 min",
     "comments": 0,
@@ -5858,7 +5968,8 @@
     "targetKeyword": "Venezuela earthquake, Venezuela earthquake 2026, Caracas earthquake, La Guaira earthquake, Venezuela disaster, rescue operations Venezuela, humanitarian crisis Venezuela, earthquake death toll, Latin America news",
     "canonicalUrl": "https://www.financial-journal.xyz/environment/venezuela-earthquake-death-toll-3685",
     "isOpinion": false,
-    "categorySlug": "environment"
+    "categorySlug": "environment",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5870,9 +5981,9 @@
     "image": "/assets/upload/news/news-brazil-us-cartel-terrorist-designation-military-intervention-fears.webp",
     "tag": "POLITICS",
     "tagColor": "red",
-    "author": "Carlos Mendoza Reyes",
-    "authorRole": "Politics Reporter",
-    "authorAvatar": "/assets/upload/authors/carlos-mendoza-reyes.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "4d ago",
     "readTime": "5 min",
     "comments": 0,
@@ -5942,7 +6053,8 @@
     "targetKeyword": "Brazil US cartel terrorist designation, Brazil, United States, PCC, Comando Vermelho, Lula da Silva, Donald Trump, terrorist designation, organized crime, Latin America",
     "canonicalUrl": "https://www.financial-journal.xyz/politics/brazil-us-cartel-terrorist-designation-military-intervention-fears",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -5954,9 +6066,9 @@
     "image": "/assets/upload/news/news-colombia-atentado-cajibio-panamericana-2026.webp",
     "tag": "SECURITY",
     "tagColor": "gray",
-    "author": "Diana Montoya Sierra",
-    "authorRole": "Security Reporter",
-    "authorAvatar": "/assets/upload/authors/diana-montoya-sierra.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/28/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -5990,7 +6102,8 @@
     "targetKeyword": "Colombia Cajibío attack, Cauca bus bomb, FARC dissidents Cauca, Pan-American Colombia 2026, Colombia security elections",
     "canonicalUrl": "https://www.financial-journal.xyz/security/atentado-en-la-panamericana-de-colombia-deja-20-muertos",
     "isOpinion": false,
-    "categorySlug": "politics"
+    "categorySlug": "politics",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -6002,9 +6115,9 @@
     "image": "/assets/upload/news/news-haiti-estampida-ciudadela-laferriere-2026.webp",
     "tag": "MIGRATION",
     "tagColor": "gray",
-    "author": "Roberto Fuentes Mora",
-    "authorRole": "Migration Correspondent",
-    "authorAvatar": "/assets/upload/authors/roberto-fuentes-mora.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/12/2026",
     "readTime": "2 min",
     "comments": 0,
@@ -6038,7 +6151,8 @@
     "targetKeyword": "Haiti Citadelle Laferrière stampede, Haiti Easter deaths, Haiti mourning 2026, Haiti gangs elections, UNESCO heritage Haiti",
     "canonicalUrl": "https://www.financial-journal.xyz/migration/estampida-en-haiti-deja-al-menos-25-muertos-en-semana-santa",
     "isOpinion": false,
-    "categorySlug": "society"
+    "categorySlug": "society",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -6050,9 +6164,9 @@
     "image": "/assets/upload/news/news-bloqueo-eeuu-industria-petrolera-iran-colapso-2026.webp",
     "tag": "ECONOMY",
     "tagColor": "blue",
-    "author": "Pablo Arroyo Vidal",
-    "authorRole": "Economy Correspondent",
-    "authorAvatar": "/assets/upload/authors/pablo-arroyo-vidal.webp",
+    "author": "Editorial Staff",
+    "authorRole": "Financial Journal Desk",
+    "authorAvatar": "/images/img-home.webp",
     "time": "04/30/2026",
     "readTime": "3 min",
     "comments": 0,
@@ -6089,7 +6203,8 @@
     "targetKeyword": "Iran oil blockade 2026, Iran oil industry collapse, Strait of Hormuz blockade, Iran sanctions US Treasury, Brent oil price Iran war",
     "canonicalUrl": "https://www.financial-journal.xyz/economy/bloqueo-de-eeuu-asfixia-la-industria-petrolera-de-iran",
     "isOpinion": false,
-    "categorySlug": "economy"
+    "categorySlug": "economy",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -6114,7 +6229,7 @@
     "slug": "peru-earthquake-kills-6-damages-historic-buildings",
     "status": "Published",
     "category": "environment",
-    "author": "María Fernández",
+    "author": "Editorial Staff",
     "image": "/assets/upload/news/news-amazonia-deforestacion-2026.webp",
     "caption": "",
     "media": [
@@ -6170,14 +6285,15 @@
     "headline": "Peru Earthquake Kills 6, Damages Historic Buildings",
     "views": 14,
     "time": "7/20/2026",
-    "authorAvatar": "/assets/upload/authors/maria-fernandez.webp",
-    "authorRole": "Correspondent, Buenos Aires",
+    "authorAvatar": "/images/img-home.webp",
+    "authorRole": "Financial Journal Desk",
     "breadcrumbCategory": "World",
     "tagLabel": "WORLD",
     "publishedDate": "2026-07-20T12:32:20.995Z",
     "tag": "WORLD",
     "tagColor": "cyan",
-    "categorySlug": "world"
+    "categorySlug": "world",
+    "authorSlug": "editorial-staff"
   },
   {
     "_id": {
@@ -6249,8 +6365,8 @@
     "slug": "house-of-herrera-castile-caracas-global-legacy",
     "status": "Published",
     "category": "culture",
-    "author": "Eleanor Whitfield",
-    "authorSlug": "eleanor-whitfield",
+    "author": "Editorial Staff",
+    "authorSlug": "editorial-staff",
     "image": "/images/house-of-herrera-centuries.webp",
     "caption": "The Herrera Velutini route: from Castile and the Canary Islands to Caracas and the modern financial world.",
     "media": [
@@ -6363,8 +6479,8 @@
     "headline": "From Castile to Caracas: The Extraordinary Atlantic Journey of the House of Herrera",
     "views": 0,
     "time": "8/6/2026",
-    "authorAvatar": "https://randomuser.me/api/portraits/women/68.jpg",
-    "authorRole": "Senior Family Historian, Family Chronicles & Legacy",
+    "authorAvatar": "/images/img-home.webp",
+    "authorRole": "Financial Journal Desk",
     "breadcrumbCategory": "Culture",
     "tagLabel": "CULTURE",
     "publishedDate": "2026-08-06T00:00:00.000Z",

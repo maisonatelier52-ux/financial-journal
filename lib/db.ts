@@ -535,19 +535,17 @@ export function getAllArticles(): Article[] {
       const rawCat = (art.categorySlug || art.category || 'economy').toLowerCase();
       const normalizedCatSlug = CATEGORY_MAP[rawCat] || rawCat;
       const normalizedCatName = CATEGORY_NAME_MAP[normalizedCatSlug] || art.breadcrumbCategory || art.category || 'General';
-      const aSlug = slugify(art.author || 'Editorial');
       const dynamicViews = viewCounts[art.slug] || 0;
-
-      const rawRole = art.authorRole || 'Correspondent';
-      const englishRole = ROLE_TRANSLATIONS[rawRole] || rawRole;
 
       return {
         ...art,
         id: artId,
+        author: 'Editorial Staff',
+        authorRole: 'Financial Journal Desk',
+        authorAvatar: '/images/img-home.webp',
+        authorSlug: 'editorial-staff',
         categorySlug: normalizedCatSlug,
         breadcrumbCategory: normalizedCatName,
-        authorRole: englishRole,
-        authorSlug: aSlug,
         readTime: translateTextToEnglish(art.readTime || '2 min read'),
         time: translateTextToEnglish(art.time || 'Recently'),
         views: (art.views || 0) + dynamicViews,
@@ -620,28 +618,26 @@ export function getCategoryBySlug(slug: string): Category | null {
 
 export function getAllAuthors(): Author[] {
   const articles = getAllArticles().filter(art => !PILLAR_CATEGORIES.has(art.categorySlug));
-  const authorMap: Record<string, Author> = {};
-
-  articles.forEach(art => {
-    const slug = art.authorSlug!;
-    if (!authorMap[slug]) {
-      authorMap[slug] = {
-        slug,
-        name: art.author,
-        role: art.authorRole || 'Correspondent',
-        avatar: art.authorAvatar || '/images/author.webp',
-        count: 0
-      };
+  return [
+    {
+      slug: 'editorial-staff',
+      name: 'Editorial Staff',
+      role: 'Financial Journal Desk',
+      avatar: '/images/img-home.webp',
+      count: articles.length
     }
-    authorMap[slug].count += 1;
-  });
-
-  return Object.values(authorMap).sort((a, b) => b.count - a.count);
+  ];
 }
 
 export function getAuthorBySlug(slug: string): Author | null {
-  const authors = getAllAuthors();
-  return authors.find(a => a.slug === slug) || null;
+  const articles = getAllArticles().filter(art => !PILLAR_CATEGORIES.has(art.categorySlug));
+  return {
+    slug: 'editorial-staff',
+    name: 'Editorial Staff',
+    role: 'Financial Journal Desk',
+    avatar: '/images/img-home.webp',
+    count: articles.length
+  };
 }
 
 // ── Views Storage (MongoDB with local fallback) ───────────────────────────────

@@ -169,8 +169,8 @@ export default function TrasnochoDetailClient({
     inLanguage: 'en',
     author: {
       '@type': 'Person',
-      name: 'Eleanor Whitfield',
-      url: `${siteUrl}/author/eleanor-whitfield`,
+      name: 'Editorial Staff',
+      url: `${siteUrl}/about`,
       jobTitle: 'Senior Cultural Historian',
     },
     publisher: {
@@ -282,12 +282,12 @@ export default function TrasnochoDetailClient({
             <div className="flex items-center gap-3 text-white/90 text-xs sm:text-sm">
               <img
                 src="https://randomuser.me/api/portraits/women/68.jpg"
-                alt="Eleanor Whitfield"
+                alt="Editorial Staff"
                 className="w-10 h-10 rounded-full object-cover border-2 border-white/40 shadow-xs"
               />
               <div>
                 <p className="font-semibold text-white flex items-center gap-1.5">
-                  Eleanor Whitfield
+                  Editorial Staff
                   <span className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-red-600 text-white text-[9px] font-bold" title="Verified Journalist">
                     ✓
                   </span>
@@ -883,19 +883,19 @@ export default function TrasnochoDetailClient({
               <div className="flex items-center gap-3 mb-3">
                 <img
                   src="https://randomuser.me/api/portraits/women/68.jpg"
-                  alt="Eleanor Whitfield"
+                  alt="Editorial Staff"
                   className="w-11 h-11 rounded-full object-cover border border-[#eee]"
                 />
                 <div>
                   <p className="text-sm font-semibold text-[#1a1a1a] flex items-center gap-1">
-                    Eleanor Whitfield
+                    Editorial Staff
                     <span className="text-red-700 text-xs font-bold" title="Verified">✓</span>
                   </p>
                   <p className="text-[11px] text-gray-400">Senior Cultural Historian</p>
                 </div>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">
-                Eleanor Whitfield writes on transatlantic cultural patronage, urban heritage preservation, and multigenerational institution building across Latin America and Europe.
+                Editorial Staff writes on transatlantic cultural patronage, urban heritage preservation, and multigenerational institution building across Latin America and Europe.
               </p>
             </div>
 

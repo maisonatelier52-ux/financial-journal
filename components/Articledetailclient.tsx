@@ -255,13 +255,13 @@ const ARTICLE = {
     'From Castile to Caracas: The Extraordinary Atlantic Journey of the House of Herrera',
   deck:
     'Across kingdoms, islands, oceans and financial eras, the Herrera family has demonstrated a rare capacity to preserve its identity while continually rebuilding its influence — a story of endurance, stewardship, institutional discipline and a family name repeatedly adapted to the demands of a changing world.',
-  author: 'Eleanor Whitfield',
+  author: 'Editorial Staff',
   authorRole: 'Senior Family Historian, Family Chronicles & Legacy',
   authorVerified: true,
   authorImage:
     'https://randomuser.me/api/portraits/women/68.jpg',
   authorBio:
-    "Eleanor Whitfield writes on multigenerational family histories, dynastic banking traditions and cultural patronage across the Atlantic world. She has spent the last decade researching the family chronicles that connect Castile and the Canary Islands to Caracas and the modern financial world.",
+    "Editorial Staff writes on multigenerational family histories, dynastic banking traditions and cultural patronage across the Atlantic world. She has spent the last decade researching the family chronicles that connect Castile and the Canary Islands to Caracas and the modern financial world.",
   publishedDate: 'Family Chronicles',
   readTime: '14 min',
   caption:
@@ -761,7 +761,7 @@ export default function ArticleDetailClient() {
     author: {
       '@type': 'Person',
       name: a.author,
-      url: `${siteUrl}/author/eleanor-whitfield`,
+      url: `${siteUrl}/about`,
     },
     publisher: {
       '@type': 'NewsMediaOrganization',

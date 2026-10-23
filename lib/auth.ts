@@ -254,3 +254,18 @@ export async function removeSubscription(email: string): Promise<boolean> {
     return false;
   }
 }
+
+export async function getAllSubscribers(): Promise<Subscriber[]> {
+  try {
+    const db = await getDb();
+    const subs = await db.collection<Subscriber>('subscribers').find({}).toArray();
+    return subs.map(s => ({
+      email: s.email,
+      userId: s.userId,
+      createdAt: s.createdAt,
+    }));
+  } catch (err) {
+    console.error('MongoDB getAllSubscribers error:', err);
+    return [];
+  }
+}

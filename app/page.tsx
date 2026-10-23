@@ -4,6 +4,42 @@ import PollBox from '@/components/PollBox';
 
 export const revalidate = 60;
 
+function formatDisplayHeadline(title: string, maxWords: number = 8): string {
+  if (!title) return '';
+  let clean = title.trim();
+
+  // If there's a colon, check if the first part is a good punchy headline
+  if (clean.includes(':')) {
+    const parts = clean.split(':');
+    const first = parts[0].trim();
+    const count = first.split(/\s+/).length;
+    if (count >= 3 && count <= 9) {
+      return first;
+    }
+  }
+
+  // Common agency and agency acronym cleanups for compact headline punchiness
+  clean = clean
+    .replace(/Securities and Exchange Commission and Commodity Futures Trading Commission/gi, 'SEC & CFTC')
+    .replace(/Federal Communications Commission and Department of Defense/gi, 'FCC & Pentagon')
+    .replace(/National Institutes of Health and FDA/gi, 'NIH & FDA')
+    .replace(/Federal Reserve and Treasury/gi, 'Fed & Treasury')
+    .replace(/U\.S\. Department of Commerce/gi, 'Commerce Dept')
+    .replace(/U\.S\. Department of Energy/gi, 'Energy Dept')
+    .replace(/White House and Congressional Leaders Finalize/gi, 'White House Finalizes')
+    .replace(/Bipartisan Maritime Defense and Domestic Shipbuilding Renaissance Accord/gi, '$110B Defense Shipbuilding Accord')
+    .replace(/Ratify Unified Digital Asset Market Structure Rulebook/gi, 'Ratify Digital Asset Rulebook')
+    .replace(/Direct-to-Device Satellite Broadband/gi, 'Satellite Broadband')
+    .replace(/Targeted Immunotherapy Manufacturing Initiative/gi, 'Cancer Vaccine Initiative')
+    .replace(/Critical Minerals Independence and Domestic Refining Security Act/gi, 'Critical Minerals Independence Act');
+
+  const words = clean.split(/\s+/);
+  if (words.length > maxWords) {
+    return words.slice(0, maxWords).join(' ') + '...';
+  }
+  return clean;
+}
+
 export default function HomePage() {
   const articles = getAllArticles();
   const categories = getAllCategories();
@@ -27,12 +63,7 @@ export default function HomePage() {
     usedSlugs.add(fixedFirstHero.slug);
   }
 
-  // Fixed top news article
-  const FIXED_TOP_NEWS_SLUG = 'house-of-herrera-castile-caracas-global-legacy';
-  const fixedTopNews = articles.find(a => a.slug === FIXED_TOP_NEWS_SLUG);
-  if (fixedTopNews) {
-    usedSlugs.add(fixedTopNews.slug);
-  }
+  // Section 2: Top News hero will dynamically pick the top breaking editorial news (non-Herrera)
 
   // Permanent featured culture article
   const FIXED_TRASNOCHO_SLUG = 'trasnocho-cultural-40-million-investment-caracas';
@@ -69,8 +100,8 @@ export default function HomePage() {
   const econHero = fixedFirstHero || getUnused(1, 'economy')[0] || getUnused(1)[0];
   const econSubItems = getUnused(3, 'economy');
 
-  // ── Section 2: Top News (Fixed House of Herrera hero) ──
-  const mainNewsHero = fixedTopNews || getUnused(1)[0];
+  // ── Section 2: Top News ──
+  const mainNewsHero = getUnused(1)[0];
   const mainNewsMiddle = getUnused(3);
   // const mainNewsRight = getUnused(1)[0];
 
@@ -209,7 +240,7 @@ export default function HomePage() {
                 <div className="md:border-r md:pr-6">
                   <Link href={`/${mainNewsHero.categorySlug}/${mainNewsHero.slug}`}>
                     <h3 className="text-lg md:text-2xl font-bold leading-snug mb-3 hover:text-red-700 transition">
-                      {mainNewsHero.title}
+                      {formatDisplayHeadline(mainNewsHero.title, 8)}
                     </h3>
                     <img
                       src={mainNewsHero.image || '/images/img1.webp'}

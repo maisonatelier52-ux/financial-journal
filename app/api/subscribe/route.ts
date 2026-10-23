@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser, addSubscription, removeSubscription, isSubscribed } from '@/lib/auth';
+import { sendWelcomeEmail } from '@/lib/mail';
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,6 +38,11 @@ export async function POST(req: NextRequest) {
     }
 
     await addSubscription(user.email, user.id);
+
+    // Asynchronously dispatch the welcome email without blocking response
+    sendWelcomeEmail(user.email, user.username).catch((err) => {
+      console.error('Background welcome email error:', err);
+    });
 
     return NextResponse.json({
       success: true,

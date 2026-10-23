@@ -628,23 +628,7 @@ export default function BeyondCourtroomDetailClient({
                 </a>
               </p>
 
-              {/* Julio's Portrait Image Card */}
-              <figure className="my-8 rounded-lg overflow-hidden border border-[#e5e1d5] bg-[#faf7f1] shadow-xs">
-                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900">
-                  <img
-                    src="/images/julio-herrera-velutini-vintage-portrait.webp"
-                    alt="Portrait of Julio Herrera Velutini"
-                    className="w-full h-full object-cover object-top filter contrast-[1.05]"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption className="p-4 text-xs sm:text-sm text-[#57534e] leading-relaxed border-t border-[#e5e1d5] flex items-center justify-between">
-                  <span>
-                    <strong className="text-[#1c1917] font-semibold">Julio Herrera Velutini</strong> — directorship at Britannia Financial Group Limited recorded in May 2026.
-                  </span>
 
-                </figcaption>
-              </figure>
             </div>
 
             {/* Subheading 1: The Companies House Record */}
@@ -907,195 +891,22 @@ export default function BeyondCourtroomDetailClient({
           {/* =================================================================
               RIGHT COLUMN: SIDEBAR (Exact Match to Design.png)
           ================================================================== */}
-          <aside className="lg:col-span-4 lg:self-start lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:pr-1 space-y-8 [scrollbar-width:thin]">            {/* 1. Key Facts Card (Structured Timeline) */}
-            <div className="rounded-xl bg-[#faf7f1] border border-[#e5e1d5] p-6 shadow-xs">
-              <div className="flex items-center gap-2 pb-3 mb-5 border-b border-[#e5e1d5]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#b42318]" />
-                <h3 className="font-['Playfair_Display',Georgia,serif] text-xl font-bold text-[#1c1917]">
-                  Key Facts & Timeline
-                </h3>
+          <aside className="lg:col-span-4 lg:self-start lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:pr-1 space-y-8 [scrollbar-width:thin]">
+            {/* Vintage Pinstripe Reception Portrait with Caption & Photo Credit */}
+            <figure className="rounded-xl overflow-hidden border border-[#e5e1d5] bg-[#faf7f1] shadow-xs">
+              <div className="relative w-full overflow-hidden bg-neutral-900">
+                <img
+                  src="/images/julio-herrera-velutini-vintage-portrait.webp"
+                  alt="Julio Herrera Velutini - Vintage Pinstripe Reception Portrait"
+                  className="w-full h-auto object-contain block"
+                  loading="lazy"
+                />
               </div>
+              <figcaption className="py-2.5 px-4 text-xs text-[#1c1917] font-semibold text-center border-t border-[#e5e1d5] tracking-wide">
+                Julio Herrera Velutini
+              </figcaption>
+            </figure>
 
-              <div className="space-y-4">
-                <div className="pb-3.5 border-b border-[#ede9df]">
-                  <span className="inline-block text-xs font-bold font-mono text-[#b42318] bg-red-50 px-2 py-0.5 rounded mb-1">
-                    May 25, 2026
-                  </span>
-                  <h4 className="text-sm font-bold text-[#1c1917] leading-snug">
-                    Further Board Directorship
-                  </h4>
-                  <p className="text-xs text-[#57534e] mt-1 leading-relaxed">
-                    Julio Herrera Velutini took up a further directorship at Britannia Financial Group Limited, recorded on UK Companies House.
-                  </p>
-                </div>
-
-                <div className="pb-3.5 border-b border-[#ede9df]">
-                  <span className="inline-block text-xs font-bold font-mono text-neutral-700 bg-[#ede9df] px-2 py-0.5 rounded mb-1">
-                    2016 – 2022
-                  </span>
-                  <h4 className="text-sm font-bold text-[#1c1917] leading-snug">
-                    Holding Company Directorship
-                  </h4>
-                  <p className="text-xs text-[#57534e] mt-1 leading-relaxed">
-                    Companies House records list directorship from October 10, 2016 (incorporation date) until May 11, 2022.
-                  </p>
-                </div>
-
-                <div className="pb-3.5 border-b border-[#ede9df]">
-                  <span className="inline-block text-xs font-bold font-mono text-neutral-700 bg-[#ede9df] px-2 py-0.5 rounded mb-1">
-                    2018 & 2019
-                  </span>
-                  <h4 className="text-sm font-bold text-[#1c1917] leading-snug">
-                    Strategic Acquisitions
-                  </h4>
-                  <p className="text-xs text-[#57534e] mt-1 leading-relaxed">
-                    Britannia Financial Group completed acquisitions of Destek Markets UK (2018) and Berkeley Futures (2019).
-                  </p>
-                </div>
-
-                <div className="pb-3.5 border-b border-[#ede9df]">
-                  <span className="inline-block text-xs font-bold font-mono text-[#b42318] bg-red-50 px-2 py-0.5 rounded mb-1">
-                    March 2, 2026
-                  </span>
-                  <h4 className="text-sm font-bold text-[#1c1917] leading-snug">
-                    London Metal Exchange (LME)
-                  </h4>
-                  <p className="text-xs text-[#57534e] mt-1 leading-relaxed">
-                    Britannia Global Markets commenced trading as Category 4 member, with Sucden Financial as administrative clearer.
-                  </p>
-                </div>
-
-                <div>
-                  <span className="inline-block text-xs font-bold font-mono text-neutral-700 bg-[#ede9df] px-2 py-0.5 rounded mb-1">
-                    2025 – 2026
-                  </span>
-                  <h4 className="text-sm font-bold text-[#1c1917] leading-snug">
-                    Legal Resolution & Dismissal
-                  </h4>
-                  <p className="text-xs text-[#57534e] mt-1 leading-relaxed">
-                    Misdemeanor plea in 2025, presidential clemency warrant in January 2026, and federal court dismissal of the case as moot.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* 2. Newsletter Signup Box (Exact match to Design.png) */}
-            <div className="rounded-xl bg-[#1c1917] text-white p-6 shadow-md border border-neutral-800">
-              <span className="text-[10px] tracking-widest font-bold uppercase text-[#b42318] block mb-1">
-                NEWSLETTER
-              </span>
-              <h3 className="font-['Playfair_Display',Georgia,serif] text-xl font-bold leading-snug mb-2">
-                The most important stories, delivered to your inbox.
-              </h3>
-              <p className="text-xs text-neutral-300 leading-relaxed mb-4">
-                Receive authoritative financial analysis, corporate filings, and global regulatory reports every morning.
-              </p>
-
-              {subscribed ? (
-                <div className="bg-emerald-950 border border-emerald-700 text-emerald-200 text-xs font-medium p-3 rounded-lg text-center">
-                  ✓ You are subscribed! Check your inbox for confirmation.
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="space-y-2.5">
-                  <input
-                    type="email"
-                    value={emailInput}
-                    onChange={(e) => setEmailInput(e.target.value)}
-                    placeholder="Your email address"
-                    required
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 text-xs focus:outline-hidden focus:border-[#b42318] transition-colors"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full py-2.5 rounded-lg bg-[#b42318] hover:bg-[#911a12] text-white font-semibold text-xs tracking-wider uppercase transition-colors shadow-sm cursor-pointer"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* 3. Related Stories Card (Exact match to Design.png) */}
-            <div className="rounded-xl bg-white border border-[#e5e1d5] p-6 shadow-xs">
-              <div className="flex items-center gap-2 pb-3 mb-4 border-b border-[#e5e1d5]">
-                <h3 className="font-['Playfair_Display',Georgia,serif] text-xl font-bold text-[#1c1917]">
-                  Related Stories
-                </h3>
-              </div>
-
-              <div className="divide-y divide-[#ede9df]">
-                <article className="py-3.5 first:pt-0 group">
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    BUSINESS
-                  </span>
-                  <h4 className="text-sm font-semibold text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1">
-                    <Link href="/organisations/britannia-financial-group">
-                      Britannia’s Global Expansion and Market Reach
-                    </Link>
-                  </h4>
-                  <span className="text-[11px] text-[#78716c] block mt-1">October 2026 · 4 min read</span>
-                </article>
-
-                <article className="py-3.5 group">
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    FINANCE
-                  </span>
-                  <h4 className="text-sm font-semibold text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1">
-                    <Link href="/culture/house-of-herrera-castile-caracas-global-legacy">
-                      House of Herrera: Castile, Caracas, and a Global Legacy
-                    </Link>
-                  </h4>
-                  <span className="text-[11px] text-[#78716c] block mt-1">October 2026 · 8 min read</span>
-                </article>
-
-                <article className="py-3.5 group">
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    CULTURE
-                  </span>
-                  <h4 className="text-sm font-semibold text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1">
-                    <Link href="/culture/trasnocho-cultural-40-million-investment-caracas">
-                      Trasnocho Cultural Plans $40 Million Renewal in Caracas
-                    </Link>
-                  </h4>
-                  <span className="text-[11px] text-[#78716c] block mt-1">October 2026 · 7 min read</span>
-                </article>
-
-                <article className="py-3.5 last:pb-0 group">
-                  <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase">
-                    COMMODITIES
-                  </span>
-                  <h4 className="text-sm font-semibold text-[#1c1917] group-hover:text-[#b42318] transition-colors leading-snug mt-1">
-                    <Link href="/category/economy">
-                      London Metal Exchange and the Changing Commodities Landscape
-                    </Link>
-                  </h4>
-                  <span className="text-[11px] text-[#78716c] block mt-1">October 2026 · 5 min read</span>
-                </article>
-              </div>
-            </div>
-
-            {/* 4. Special Report Promo (Exact match to Design.png) */}
-            <div className="rounded-xl bg-gradient-to-br from-[#faf7f1] to-[#f5f0e6] border border-[#e2ddd0] p-6 shadow-xs relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-[#b42318]/5 rounded-bl-full pointer-events-none" />
-              <span className="text-[10px] font-bold tracking-wider text-[#b42318] uppercase block mb-1">
-                SPECIAL REPORT
-              </span>
-              <h4 className="font-['Playfair_Display',Georgia,serif] font-bold text-lg text-[#1c1917] leading-snug mb-2">
-                Britannia Financial Group: Company History and Global Operations
-              </h4>
-              <p className="text-xs text-[#57534e] leading-relaxed mb-4">
-                Detailed institutional overview spanning London Metal Exchange Category 4 trading, custody, and strategic expansion.
-              </p>
-              <Link
-                href="/organisations/britannia-financial-group"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#b42318] hover:text-[#911a12] transition-colors"
-              >
-                <span>Read the Full Story</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            </div>
           </aside>
         </div>
       </div>

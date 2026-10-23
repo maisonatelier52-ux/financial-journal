@@ -1,6 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import { cookies } from 'next/headers';
+import { getDb } from '@/lib/mongodb';
 
 export interface User {
   id: string;
@@ -24,29 +23,8 @@ export interface Subscriber {
   createdAt: string;
 }
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const USERS_PATH = path.join(DATA_DIR, 'users.json');
-const SESSIONS_PATH = path.join(DATA_DIR, 'sessions.json');
-const SUBSCRIBERS_PATH = path.join(DATA_DIR, 'subscribers.json');
-
-// Ensure directory and JSON files exist
-function ensureFiles() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(USERS_PATH)) {
-    fs.writeFileSync(USERS_PATH, JSON.stringify([], null, 2), 'utf-8');
-  }
-  if (!fs.existsSync(SESSIONS_PATH)) {
-    fs.writeFileSync(SESSIONS_PATH, JSON.stringify([], null, 2), 'utf-8');
-  }
-  if (!fs.existsSync(SUBSCRIBERS_PATH)) {
-    fs.writeFileSync(SUBSCRIBERS_PATH, JSON.stringify([], null, 2), 'utf-8');
-  }
-}
-
 // Simple fast hash for passwords (server side)
-function hashPassword(password: string): string {
+export function hashPassword(password: string): string {
   let hash = 0;
   for (let i = 0; i < password.length; i++) {
     const char = password.charCodeAt(i);
@@ -56,24 +34,54 @@ function hashPassword(password: string): string {
   return 'h_' + Math.abs(hash).toString(36) + '_' + password.length;
 }
 
-export function getAllUsers(): User[] {
-  ensureFiles();
+// ── User Management ─────────────────────────────────────────────────────────
+
+export async function getAllUsers(): Promise<User[]> {
   try {
-    const content = fs.readFileSync(USERS_PATH, 'utf-8');
-    return JSON.parse(content || '[]');
-  } catch {
+    const db = await getDb();
+    const users = await db.collection<User>('users').find({}).toArray();
+    return users.map(u => ({
+      id: u.id,
+      username: u.username,
+      email: u.email,
+      passwordHash: u.passwordHash,
+      createdAt: u.createdAt,
+    }));
+  } catch (err) {
+    console.error('MongoDB getAllUsers error:', err);
     return [];
   }
 }
 
-export function getUserByEmailOrUsername(identifier: string): User | null {
-  const users = getAllUsers();
-  const clean = identifier.trim().toLowerCase();
-  return users.find(u => u.email.toLowerCase() === clean || u.username.toLowerCase() === clean) || null;
+export async function getUserByEmailOrUsername(identifier: string): Promise<User | null> {
+  try {
+    const db = await getDb();
+    const clean = identifier.trim().toLowerCase();
+    const user = await db.collection<User>('users').findOne({
+      $or: [
+        { email: clean },
+        { username: { $regex: new RegExp(`^${clean}$`, 'i') } }
+      ]
+    });
+    if (!user) return null;
+    return {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      passwordHash: user.passwordHash,
+      createdAt: user.createdAt,
+    };
+  } catch (err) {
+    console.error('MongoDB getUserByEmailOrUsername error:', err);
+    return null;
+  }
 }
 
-export function registerUser(username: string, email: string, password: string): { user?: User; error?: string } {
-  ensureFiles();
+export async function registerUser(
+  username: string,
+  email: string,
+  password: string
+): Promise<{ user?: User; error?: string }> {
   const cleanUsername = username.trim();
   const cleanEmail = email.trim().toLowerCase();
 
@@ -87,29 +95,40 @@ export function registerUser(username: string, email: string, password: string):
     return { error: 'Password must be at least 4 characters.' };
   }
 
-  const users = getAllUsers();
-  if (users.some(u => u.email.toLowerCase() === cleanEmail)) {
-    return { error: 'An account with this email already exists.' };
-  }
-  if (users.some(u => u.username.toLowerCase() === cleanUsername.toLowerCase())) {
-    return { error: 'This username is already taken.' };
-  }
+  try {
+    const db = await getDb();
+    const usersCol = db.collection<User>('users');
 
-  const newUser: User = {
-    id: 'u_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
-    username: cleanUsername,
-    email: cleanEmail,
-    passwordHash: hashPassword(password),
-    createdAt: new Date().toISOString()
-  };
+    const existingEmail = await usersCol.findOne({ email: cleanEmail });
+    if (existingEmail) {
+      return { error: 'An account with this email already exists.' };
+    }
 
-  users.push(newUser);
-  fs.writeFileSync(USERS_PATH, JSON.stringify(users, null, 2), 'utf-8');
-  return { user: newUser };
+    const existingUser = await usersCol.findOne({
+      username: { $regex: new RegExp(`^${cleanUsername}$`, 'i') }
+    });
+    if (existingUser) {
+      return { error: 'This username is already taken.' };
+    }
+
+    const newUser: User = {
+      id: 'u_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
+      username: cleanUsername,
+      email: cleanEmail,
+      passwordHash: hashPassword(password),
+      createdAt: new Date().toISOString()
+    };
+
+    await usersCol.insertOne(newUser as any);
+    return { user: newUser };
+  } catch (err) {
+    console.error('MongoDB registerUser error:', err);
+    return { error: 'Database error registering user.' };
+  }
 }
 
-export function verifyUser(identifier: string, password: string): User | null {
-  const user = getUserByEmailOrUsername(identifier);
+export async function verifyUser(identifier: string, password: string): Promise<User | null> {
+  const user = await getUserByEmailOrUsername(identifier);
   if (!user) return null;
   if (user.passwordHash === hashPassword(password)) {
     return user;
@@ -118,19 +137,8 @@ export function verifyUser(identifier: string, password: string): User | null {
 }
 
 // ── Session Management ────────────────────────────────────────────────────────
-export function getAllSessions(): Session[] {
-  ensureFiles();
-  try {
-    const content = fs.readFileSync(SESSIONS_PATH, 'utf-8');
-    return JSON.parse(content || '[]');
-  } catch {
-    return [];
-  }
-}
 
 export async function createSession(user: User): Promise<string> {
-  ensureFiles();
-  const sessions = getAllSessions();
   const token = 'sess_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
 
   const newSession: Session = {
@@ -141,8 +149,12 @@ export async function createSession(user: User): Promise<string> {
     createdAt: new Date().toISOString()
   };
 
-  sessions.push(newSession);
-  fs.writeFileSync(SESSIONS_PATH, JSON.stringify(sessions, null, 2), 'utf-8');
+  try {
+    const db = await getDb();
+    await db.collection<Session>('sessions').insertOne(newSession as any);
+  } catch (err) {
+    console.error('MongoDB createSession error:', err);
+  }
 
   // Set HTTP-only Cookie
   const cookieStore = await cookies();
@@ -158,17 +170,16 @@ export async function createSession(user: User): Promise<string> {
 }
 
 export async function getCurrentUser(): Promise<{ id: string; username: string; email: string; isSubscribed: boolean } | null> {
-  ensureFiles();
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('bs_session')?.value;
     if (!token) return null;
 
-    const sessions = getAllSessions();
-    const session = sessions.find(s => s.token === token);
+    const db = await getDb();
+    const session = await db.collection<Session>('sessions').findOne({ token });
     if (!session) return null;
 
-    const subscribed = isSubscribed(session.email);
+    const subscribed = await isSubscribed(session.email);
 
     return {
       id: session.userId,
@@ -176,19 +187,19 @@ export async function getCurrentUser(): Promise<{ id: string; username: string; 
       email: session.email,
       isSubscribed: subscribed
     };
-  } catch {
+  } catch (err) {
+    console.error('MongoDB getCurrentUser error:', err);
     return null;
   }
 }
 
 export async function destroySession(): Promise<void> {
-  ensureFiles();
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('bs_session')?.value;
     if (token) {
-      const sessions = getAllSessions().filter(s => s.token !== token);
-      fs.writeFileSync(SESSIONS_PATH, JSON.stringify(sessions, null, 2), 'utf-8');
+      const db = await getDb();
+      await db.collection<Session>('sessions').deleteOne({ token });
     }
     cookieStore.delete('bs_session');
   } catch (err) {
@@ -197,42 +208,49 @@ export async function destroySession(): Promise<void> {
 }
 
 // ── Subscriptions ─────────────────────────────────────────────────────────────
-export function getAllSubscribers(): Subscriber[] {
-  ensureFiles();
+
+export async function isSubscribed(email: string): Promise<boolean> {
   try {
-    const content = fs.readFileSync(SUBSCRIBERS_PATH, 'utf-8');
-    return JSON.parse(content || '[]');
-  } catch {
-    return [];
+    const db = await getDb();
+    const cleanEmail = email.trim().toLowerCase();
+    const sub = await db.collection<Subscriber>('subscribers').findOne({ email: cleanEmail });
+    return !!sub;
+  } catch (err) {
+    console.error('MongoDB isSubscribed error:', err);
+    return false;
   }
 }
 
-export function isSubscribed(email: string): boolean {
-  const subscribers = getAllSubscribers();
-  const cleanEmail = email.trim().toLowerCase();
-  return subscribers.some(s => s.email.toLowerCase() === cleanEmail);
-}
-
-export function addSubscription(email: string, userId?: string): boolean {
-  ensureFiles();
-  const subscribers = getAllSubscribers();
-  const cleanEmail = email.trim().toLowerCase();
-  if (!subscribers.some(s => s.email.toLowerCase() === cleanEmail)) {
-    subscribers.push({
-      email: cleanEmail,
-      userId,
-      createdAt: new Date().toISOString()
-    });
-    fs.writeFileSync(SUBSCRIBERS_PATH, JSON.stringify(subscribers, null, 2), 'utf-8');
+export async function addSubscription(email: string, userId?: string): Promise<boolean> {
+  try {
+    const db = await getDb();
+    const cleanEmail = email.trim().toLowerCase();
+    await db.collection<Subscriber>('subscribers').updateOne(
+      { email: cleanEmail },
+      {
+        $setOnInsert: {
+          email: cleanEmail,
+          userId,
+          createdAt: new Date().toISOString()
+        }
+      },
+      { upsert: true }
+    );
+    return true;
+  } catch (err) {
+    console.error('MongoDB addSubscription error:', err);
+    return false;
   }
-  return true;
 }
 
-export function removeSubscription(email: string): boolean {
-  ensureFiles();
-  const subscribers = getAllSubscribers();
-  const cleanEmail = email.trim().toLowerCase();
-  const filtered = subscribers.filter(s => s.email.toLowerCase() !== cleanEmail);
-  fs.writeFileSync(SUBSCRIBERS_PATH, JSON.stringify(filtered, null, 2), 'utf-8');
-  return true;
+export async function removeSubscription(email: string): Promise<boolean> {
+  try {
+    const db = await getDb();
+    const cleanEmail = email.trim().toLowerCase();
+    await db.collection<Subscriber>('subscribers').deleteOne({ email: cleanEmail });
+    return true;
+  } catch (err) {
+    console.error('MongoDB removeSubscription error:', err);
+    return false;
+  }
 }

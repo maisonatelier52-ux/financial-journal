@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { username, email, password } = body;
 
-    const result = registerUser(username, email, password);
+    const result = await registerUser(username, email, password);
 
     if (result.error || !result.user) {
       return NextResponse.json({ message: result.error || 'Failed to register' }, { status: 400 });

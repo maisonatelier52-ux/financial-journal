@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === 'cancel' || action === 'unsubscribe') {
-      removeSubscription(user.email);
+      await removeSubscription(user.email);
       return NextResponse.json({
         success: true,
         message: 'Subscription cancelled successfully.',
@@ -28,14 +28,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    if (isSubscribed(user.email)) {
+    const alreadySub = await isSubscribed(user.email);
+    if (alreadySub) {
       return NextResponse.json({
         message: 'You are already subscribed to Financial Journal newsletter.',
         isSubscribed: true
       }, { status: 409 });
     }
 
-    addSubscription(user.email, user.id);
+    await addSubscription(user.email, user.id);
 
     return NextResponse.json({
       success: true,

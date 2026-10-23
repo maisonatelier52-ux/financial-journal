@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Username/Email and password are required' }, { status: 400 });
     }
 
-    const user = verifyUser(identifier, password);
+    const user = await verifyUser(identifier, password);
 
     if (!user) {
       return NextResponse.json({ message: 'Invalid credentials. Please check your username/email and password.' }, { status: 401 });

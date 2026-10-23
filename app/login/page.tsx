@@ -31,7 +31,11 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        router.push('/');
+        if (data.user?.username === 'financialjournaladmin' || identifier.trim().toLowerCase() === 'financialjournaladmin') {
+          router.push('/admin/newsletter');
+        } else {
+          router.push('/');
+        }
         router.refresh();
       } else {
         setError(data.message || 'Login failed. Please check your credentials.');

